@@ -8,7 +8,7 @@ public class AnimateHandOnInput : MonoBehaviour
 {
     //I always write headers to seperate my code between References and Attributes. Here the references are specified because it is clearer towards other people.
     //References are always to other objects (often in the scene), while attributes are number that you can tweek on the object itself (like movementSpeed)
-    [Title("VR Controller Input References"), DisableInPlayMode, InfoBox("These values work output a float, which is used for the hand animation. Changing these references might affect the animation.")]
+    [Title("VR Controller Input References"), DisableInPlayMode, InfoBox("These inputs output a float, which is used for the hand animation. Changing these references might affect the animation.")]
     public InputActionProperty pinchAnimationAction;
     [DisableInPlayMode]
     public InputActionProperty gripAnimationAction;
