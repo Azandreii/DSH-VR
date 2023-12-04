@@ -11,8 +11,8 @@ public class UITextTest : MonoBehaviour
     public TextMeshProUGUI choice1;
     public TextMeshProUGUI choice2;
     public TextMeshProUGUI TopText;
-    public TMP_Dropdown dropdown1;
-    public PanelSettings panel1;
+    //public TMP_Dropdown dropdown1;
+    //public Image panel1;
     //private TextMesh changeto1 = "abc";
     //private TextMeshProUGUI changeto2 = "xyz";
 
@@ -25,15 +25,15 @@ public class UITextTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(dropdown1.value)
+        /* switch(dropdown1.value)
         {
             case 1:
-                panel1.colorClearValue = Color.red; break;
+                panel1.tintColor = Color.red; break;
             case 2:
-                panel1.colorClearValue = Color.green; break;
+                panel1.tintColor = Color.green; break;
             case 3:
-                panel1.colorClearValue = Color.white; break;
-        }
+                panel1.tintColor = Color.white; break;
+        } */
     }
 
     public void change1()
@@ -48,7 +48,7 @@ public class UITextTest : MonoBehaviour
         TopText.text = "test2";
     }
 
-    public void reset()
+    public void reset2()
     {
         choice1.text = "Option 1";
         choice2.text = "Option 2";
