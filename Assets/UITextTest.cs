@@ -38,14 +38,16 @@ public class UITextTest : MonoBehaviour
 
     public void change1()
     {
-        choice1.text = "abc";
-        TopText.text = "test2";
+        choice1.text = "Clicked";
+        choice2.text = "Option 2";
+        TopText.text = "Option 1";
     }
 
     public void change2()
     {
-        choice2.text = "xyz";
-        TopText.text = "test2";
+        choice2.text = "Clicked";
+        choice1.text = "Option 1";
+        TopText.text = "Option 2";
     }
 
     public void reset2()
