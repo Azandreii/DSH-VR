@@ -23,8 +23,7 @@ public class InternObjectUI : MonoBehaviour
         {
             if (internManager.GetInternState() == InternManager.State.Available)
             {
-                internManager.SetProgressTimerMax(3f);
-                internManager.SetInternState(InternManager.State.WorkingOnTask);
+                internManager.SetTask(InternManager.State.WorkingOnTask, 3f);
             }
         });
         approveButton.onClick.AddListener(() =>
@@ -48,6 +47,5 @@ public class InternObjectUI : MonoBehaviour
         {
             assignText.color = Color.white;
         }
-        
     }
 }

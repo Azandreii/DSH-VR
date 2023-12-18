@@ -21,7 +21,6 @@ public class InternUI : MonoBehaviour
     private void GameManager_OnPauseAction(object sender, System.EventArgs e)
     {
         ChangePauseState();
-        Debug.Log("InternUI aquired OnPauseAction");
     }
 
     private void ChangePauseState()

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static InternObjectUI;
 using UnityEngine.UIElements;
 
 public class InternManager : MonoBehaviour
@@ -19,6 +18,11 @@ public class InternManager : MonoBehaviour
     {
         public float progressNormalized;
     }
+    public event EventHandler<OnEnergyChangedEventArgs> OnEnergyChanged;
+    public class OnEnergyChangedEventArgs : EventArgs
+    {
+        public float energyNormalized;
+    }
 
     public enum State
     {
@@ -29,6 +33,8 @@ public class InternManager : MonoBehaviour
     }
 
     [Header("Attributes")]
+    [SerializeField] private float energyMax = 300f;
+    [SerializeField] private float currentEnergy;
     [SerializeField] private float progressMax = 3f;
     private float progress;
     [SerializeField] private State state;
@@ -38,38 +44,36 @@ public class InternManager : MonoBehaviour
         switch (state) {
             case State.Available:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
+                if (currentEnergy <= energyMax){ AddEnergy(15 * Time.deltaTime); }
             break;
             case State.WorkingOnTask:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 progress -= Time.deltaTime;
+                if (currentEnergy >= 0){ RemoveEnergy(25 * Time.deltaTime); }
+                else { state = State.Unavailable; }
                 if (progress < 0)
                 {
                     state = State.WaitingForApproval;
 
                     OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 }
-                Debug.Log("Get Normalized Value = " + progress / progressMax);
-                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
-                {
-                    progressNormalized = 1 - progress / progressMax
-                });
-                break;
+                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs{ progressNormalized = 1 - progress / progressMax });
+            break;
             case State.WaitingForApproval:
-                Debug.Log("Waiting for Approval");
+                if (currentEnergy >= 0){ RemoveEnergy(3 * Time.deltaTime); }
+                else { state = State.Unavailable; }
             break;
             case State.Unavailable:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
+                if (currentEnergy <= energyMax) { AddEnergy(10 * Time.deltaTime); }
+                else { state = State.Available; }
             break;  
         }
     }
 
-    public void SetInternState (State _state)
+    public void SetTask(State _state, float _value)
     {
         this.state = _state;
-    }
-
-    public void SetProgressTimerMax (float _value)
-    {
         progressMax = _value;
         progress = _value;
     }
@@ -85,5 +89,23 @@ public class InternManager : MonoBehaviour
         {
             state = State.Available;
         }
+    }
+
+    public void AddEnergy(float _value)
+    {
+        currentEnergy += _value;
+        OnEnergyChanged?.Invoke(this, new OnEnergyChangedEventArgs { energyNormalized = currentEnergy / energyMax });
+    }
+
+    public void RemoveEnergy(float _value)
+    {
+        currentEnergy -= _value;
+        OnEnergyChanged?.Invoke(this, new OnEnergyChangedEventArgs { energyNormalized = currentEnergy / energyMax });
+    }
+
+    public void SetEnergy(float _value)
+    {
+        currentEnergy = _value;
+        OnEnergyChanged?.Invoke(this, new OnEnergyChangedEventArgs { energyNormalized = currentEnergy / energyMax });
     }
 }

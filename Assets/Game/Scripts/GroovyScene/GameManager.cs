@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public event EventHandler OnPauseAction;
 
+    private List<Transform> internList;
+
     private void Awake()
     {
         if (Instance == null)
@@ -26,7 +28,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             OnPauseAction?.Invoke(this, EventArgs.Empty);
-            Debug.Log("OnPauseAction Initiated");
         }
     }
 }
