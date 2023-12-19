@@ -34,22 +34,24 @@ public class InternManager : MonoBehaviour
 
     [Header("Attributes")]
     [SerializeField] private float energyMax = 300f;
-    [SerializeField] private float currentEnergy;
+    [SerializeField] private float currentEnergy = 200f;
     [SerializeField] private float progressMax = 3f;
     private float progress;
     [SerializeField] private State state;
+    private float energyEfficiency = 1f;
+    private float processEfficiency = 1f;
 
     private void Update()
     {
         switch (state) {
             case State.Available:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
-                if (currentEnergy <= energyMax){ AddEnergy(15 * Time.deltaTime); }
+                if (currentEnergy <= energyMax){ AddEnergy(15, energyEfficiency); }
             break;
             case State.WorkingOnTask:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
-                progress -= Time.deltaTime;
-                if (currentEnergy >= 0){ RemoveEnergy(25 * Time.deltaTime); }
+                progress -= Time.deltaTime * processEfficiency;
+                if (currentEnergy >= 0){ RemoveEnergy(25, energyEfficiency); }
                 else { state = State.Unavailable; }
                 if (progress < 0)
                 {
@@ -60,12 +62,12 @@ public class InternManager : MonoBehaviour
                 OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs{ progressNormalized = 1 - progress / progressMax });
             break;
             case State.WaitingForApproval:
-                if (currentEnergy >= 0){ RemoveEnergy(3 * Time.deltaTime); }
+                if (currentEnergy >= 0){ RemoveEnergy(3, energyEfficiency); }
                 else { state = State.Unavailable; }
             break;
             case State.Unavailable:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
-                if (currentEnergy <= energyMax) { AddEnergy(10 * Time.deltaTime); }
+                if (currentEnergy <= energyMax) { AddEnergy(10, energyEfficiency); }
                 else { state = State.Available; }
             break;  
         }
@@ -91,15 +93,29 @@ public class InternManager : MonoBehaviour
         }
     }
 
-    public void AddEnergy(float _value)
+    public void AddEnergy(float _value, float _energyEfficiency, bool _withTimeDelta = true)
     {
-        currentEnergy += _value;
+        if (_withTimeDelta)
+        {
+            currentEnergy += _value * Time.deltaTime * _energyEfficiency;
+        }
+        else
+        {
+            currentEnergy += _value * _energyEfficiency;
+        }
         OnEnergyChanged?.Invoke(this, new OnEnergyChangedEventArgs { energyNormalized = currentEnergy / energyMax });
     }
 
-    public void RemoveEnergy(float _value)
+    public void RemoveEnergy(float _value, float _energyEfficiency, bool _withTimeDelta = true)
     {
-        currentEnergy -= _value;
+        if (_withTimeDelta)
+        {
+            currentEnergy -= _value * Time.deltaTime * _energyEfficiency;
+        }
+        else
+        {
+            currentEnergy -= _value * _energyEfficiency;
+        }
         OnEnergyChanged?.Invoke(this, new OnEnergyChangedEventArgs { energyNormalized = currentEnergy / energyMax });
     }
 
@@ -107,5 +123,11 @@ public class InternManager : MonoBehaviour
     {
         currentEnergy = _value;
         OnEnergyChanged?.Invoke(this, new OnEnergyChangedEventArgs { energyNormalized = currentEnergy / energyMax });
+    }
+
+    public void SetEfficiency(float _energyEfficiency, float _processEfficiency)
+    {
+        energyEfficiency = _energyEfficiency;
+        processEfficiency = _processEfficiency;
     }
 }

@@ -10,6 +10,7 @@ public class InternObjectUI : MonoBehaviour
     [Header("References")]
     [SerializeField] private Button assignButton;
     [SerializeField] private TextMeshProUGUI assignText;
+    [SerializeField] private TextMeshProUGUI internName;
     [SerializeField] private Button approveButton;
     [SerializeField] private Slider energyBar;
     [SerializeField] private Slider progressBar;
@@ -35,6 +36,12 @@ public class InternObjectUI : MonoBehaviour
         });
 
         internManager.OnStateChanged += InternManager_OnStateChanged;
+    }
+
+
+    public void SetName(string _name)
+    {
+        internName.text = _name;
     }
 
     private void InternManager_OnStateChanged(object sender, InternManager.OnStateChangedEventArgs e)
