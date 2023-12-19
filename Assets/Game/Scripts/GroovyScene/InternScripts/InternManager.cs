@@ -45,14 +45,32 @@ public class InternManager : MonoBehaviour
     private float workingEnergyEfficiency = -25f;
     private float awaitApprovalEnergyEfficiency = -3f;
     private float unavaiableEnergyEfficiency = 10f;
+    private bool isWorking;
+
+    private void Start()
+    {
+        //TaskManager.Instance.OnTaskAdded += TaskManager_OnTaskAdded;
+    }
+
+    /*private void TaskManager_OnTaskAdded(object sender, TaskManager.OnTaskAddedEventArgs e)
+    {
+        if (!isWorking)
+        {
+            DifficultySwitch(e.difficulty);
+        }
+    }*/
 
     private void Update()
     {
         switch (state) {
             case State.Available:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
-                if (currentEnergy <= energyMax){ AdjustEnergy(availableEnergyEfficiency, energyEfficiency); }
-            break;
+                if (currentEnergy <= energyMax){ AdjustEnergy(availableEnergyEfficiency, energyEfficiency);
+                    if (currentEnergy >= energyMax) { currentEnergy = energyMax; }
+                }
+                else { currentEnergy = energyMax; }
+                if (currentEnergy <= 0) { state = State.Unavailable; } 
+                break;
             case State.WorkingOnTask:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 progress -= Time.deltaTime * processEfficiency;
@@ -73,7 +91,7 @@ public class InternManager : MonoBehaviour
             case State.Unavailable:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 if (currentEnergy <= energyMax) { AdjustEnergy(unavaiableEnergyEfficiency, energyEfficiency); }
-                else { state = State.Available; }
+                else { currentEnergy = energyMax; state = State.Available; }
             break;  
         }
     }
@@ -83,11 +101,12 @@ public class InternManager : MonoBehaviour
         this.state = _state;
     }
 
-    public void SetTask(State _state, float _value)
+    public void SetTask(State _state)
     {
+        DifficultySwitch(TaskManager.Instance.GetCurrentTaskDifficulty());
+        progress = progressMax;
         this.state = _state;
-        progressMax = _value;
-        progress = _value;
+        isWorking = true;
     }
 
     public State GetInternState()
@@ -130,9 +149,28 @@ public class InternManager : MonoBehaviour
 
     public void SetStateEfficiency(float _available, float _working, float _awaitingApproval, float _unavailable)
     {
-        _available = availableEnergyEfficiency;
-        _working = workingEnergyEfficiency;
-        _awaitingApproval = awaitApprovalEnergyEfficiency;
-        _unavailable = unavaiableEnergyEfficiency;
+        availableEnergyEfficiency = _available;
+        workingEnergyEfficiency = _working ;
+        awaitApprovalEnergyEfficiency = _awaitingApproval;
+        unavaiableEnergyEfficiency = _unavailable;
+    }
+
+    private void DifficultySwitch(float _difficultyGrade)
+    {
+        switch (_difficultyGrade)
+        {
+            case 1:
+                float easyTaskTime = 3f;
+                progressMax = easyTaskTime;
+                break;
+            case 2:
+                float mediumTaskTime = 7f;
+                progressMax = mediumTaskTime;
+                break;
+            case 3:
+                float hardTaskTime = 11f;
+                progressMax = hardTaskTime;
+                break;
+        }
     }
 }

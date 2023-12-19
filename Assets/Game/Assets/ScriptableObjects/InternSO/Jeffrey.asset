@@ -15,11 +15,11 @@ MonoBehaviour:
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
   internName: Jeffrey
   startEnergy: 280
-  processEfficiency: 1
+  processEfficiency: 4
   MaxPrEfficiency: 10
-  energyEfficiency: 1.5
+  energyEfficiency: 1.7
   MaxEnEfficiency: 10
-  availableEfficiency: 15
-  workingEfficiency: -25
-  awaitApprovalEfficiency: -3
-  unavailableEfficiency: 10
+  availableEfficiency: 12
+  workingEfficiency: -180
+  awaitApprovalEfficiency: -7
+  unavailableEfficiency: 7

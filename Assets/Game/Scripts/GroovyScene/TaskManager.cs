@@ -12,6 +12,7 @@ public class TaskManager : MonoBehaviour
     public class OnTaskAddedEventArgs : EventArgs
     {
         public bool hasTasks;
+        public float difficulty;
     }
 
     [SerializeField] private TaskSO[] taskArraySO;
@@ -20,7 +21,8 @@ public class TaskManager : MonoBehaviour
     [SerializeField] private int taskAmountMax = 2;
     private float timeTillNextTask;
     [SerializeField] private float taskTimerMax = 10f;
-    private List<Transform> currentTasksList;
+    private List<TaskSO> currentTasksList;
+    private List<Transform> currentTasksObjectList;
 
     private void Awake()
     {
@@ -36,7 +38,8 @@ public class TaskManager : MonoBehaviour
 
     private void Start()
     {
-        currentTasksList = new List<Transform>();
+        currentTasksList = new List<TaskSO>();
+        currentTasksObjectList = new List<Transform>();
         taskTemplate.gameObject.SetActive(false);
         GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
     }
@@ -45,8 +48,9 @@ public class TaskManager : MonoBehaviour
     {
         if (currentTasksList.Count > 0)
         {
-            GameObject.Destroy(currentTasksList[0].gameObject);
+            GameObject.Destroy(currentTasksObjectList[0].gameObject);
             currentTasksList.Remove(currentTasksList[0]);
+            currentTasksObjectList.Remove(currentTasksObjectList[0]);
         }
         if (currentTasksList.Count == 0)
         {
@@ -78,10 +82,12 @@ public class TaskManager : MonoBehaviour
             toUI.SetTaskDescription(GetTaskDescription(_TaskSO));
             toUI.SetTaskDifficulty(GetTaskDifficulty(_TaskSO));
             _taskObjectUI.gameObject.SetActive(true);
-            currentTasksList.Add(_taskObjectUI);
+            currentTasksList.Add(_TaskSO);
+            currentTasksObjectList.Add(_taskObjectUI);
             OnTaskAdded?.Invoke(this, new OnTaskAddedEventArgs
             {
-                hasTasks = true
+                hasTasks = true,
+                difficulty = GetTaskDifficulty(_TaskSO)
             });
         }
     }
@@ -109,5 +115,10 @@ public class TaskManager : MonoBehaviour
     public bool HasTasks()
     {
         return currentTasksList.Count > 0;
+    }
+
+    public int GetCurrentTaskDifficulty()
+    {
+        return GetTaskDifficulty(currentTasksList[0]);
     }
 }

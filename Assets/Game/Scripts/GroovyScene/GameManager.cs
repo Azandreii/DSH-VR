@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     private List<Transform> internList;
     private int TasksCompleted = 0;
+    private bool isPaused = false;
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             OnAlternateAction?.Invoke(this, EventArgs.Empty);
+            TogglePause();
         }
     }
 
@@ -49,5 +51,19 @@ public class GameManager : MonoBehaviour
         {
             totalTasks = TasksCompleted
         }) ;
+    }
+
+    public void TogglePause()
+    {
+        isPaused = !isPaused;
+        switch (isPaused)
+        {
+            case true:
+                Time.timeScale = 0f;
+                break;
+            case false:
+                Time.timeScale = 1f;
+                break;
+        }
     }
 }

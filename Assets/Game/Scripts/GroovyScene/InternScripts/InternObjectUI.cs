@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 
 public class InternObjectUI : MonoBehaviour
 {
+
     [Title("References")]
     [SerializeField] private InternManager internManager;
     [FoldoutGroup("Buttons"), InfoBox("The buttons of the InternObjectUI are referenced here")]
@@ -35,7 +36,7 @@ public class InternObjectUI : MonoBehaviour
         {
             if (internManager.GetInternState() == InternManager.State.Available && taskAvailable)
             {
-                internManager.SetTask(InternManager.State.WorkingOnTask, 3f);
+                internManager.SetTask(InternManager.State.WorkingOnTask);
             }
         });
         approveButton.onClick.AddListener(() =>

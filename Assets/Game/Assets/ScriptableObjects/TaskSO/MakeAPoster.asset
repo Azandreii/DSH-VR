@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MakeAPoster
   m_EditorClassIdentifier: 
   taskObjectUI: {fileID: 0}
-  taskName: 
-  taskDescription: 
-  taskDifficulty: 1
+  taskName: Poster
+  taskDescription: Make a poster for the next DSH vacancy festival
+  taskDifficulty: 2
