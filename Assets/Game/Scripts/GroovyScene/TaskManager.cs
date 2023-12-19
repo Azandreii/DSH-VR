@@ -64,7 +64,7 @@ public class TaskManager : MonoBehaviour
         if (timeTillNextTask < 0)
         {
             timeTillNextTask = taskTimerMax;
-            CreateTask(taskArraySO[0]);
+            CreateTask(taskArraySO[UnityEngine.Random.Range(0, taskArraySO.Length)]);
         }
     }
 
