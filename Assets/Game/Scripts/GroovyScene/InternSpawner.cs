@@ -43,13 +43,7 @@ public class InternSpawner : MonoBehaviour
     {
         if (internCount < internArraySO.Length)
         {
-            Transform _internUI = Instantiate(internTemplate, internUI);
-            _internUI.gameObject.SetActive(true);
-            InternManager im = _internUI.GetComponent<InternManager>();
-            im.SetEfficiency(internArraySO[internCount].energyEfficiency, internArraySO[internCount].processEfficiency);
-            im.SetEnergy(internArraySO[internCount].startEnergy);
-            InternObjectUI ioUI = _internUI.GetComponent<InternObjectUI>();
-            ioUI.SetName(internArraySO[internCount].name);
+            CreateNewIntern(internArraySO[internCount]);
             internCount++;
         }
     }
@@ -63,5 +57,64 @@ public class InternSpawner : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
+    }
+
+    public void CreateNewIntern(InternSO _internSO)
+    {
+        Transform _internUI = Instantiate(internTemplate, internUI);
+        _internUI.gameObject.SetActive(true);
+        //Set the InternManager values
+        InternManager im = _internUI.GetComponent<InternManager>();
+        im.SetEfficiency(GetEnergyEfficiency(_internSO), GetProcessEfficiency(_internSO));
+        im.SetEnergy(GetStartEnergy(_internSO));
+        im.SetStateEfficiency(GetAvailableEfficiency(_internSO), GetWorkingEfficiency(_internSO), GetAwaitOpprovalEfficiency(_internSO), GetUnavailableEfficiency(_internSO));
+        //Set the InternObjectUI name
+        InternObjectUI ioUI = _internUI.GetComponent<InternObjectUI>();
+        ioUI.SetName(GetInternName(_internSO));
+    }
+
+    public Transform GetInternObjectUI(InternSO _internSO)
+    {
+        return _internSO.internObjectUI;
+    }
+
+    public string GetInternName(InternSO _internSO)
+    {
+        return _internSO.internName;
+    }
+
+    public float GetStartEnergy(InternSO _internSO)
+    {
+        return _internSO.startEnergy;
+    }
+
+    public float GetProcessEfficiency(InternSO _internSO)
+    {
+        return _internSO.processEfficiency;
+    }
+
+    public float GetEnergyEfficiency(InternSO _internSO)
+    {
+        return _internSO.energyEfficiency;
+    }
+
+    public float GetAvailableEfficiency(InternSO _internSO)
+    {
+        return _internSO.availableEfficiency;
+    }
+
+    public float GetWorkingEfficiency(InternSO _internSO)
+    {
+        return _internSO.workingEfficiency;
+    }
+
+    public float GetAwaitOpprovalEfficiency(InternSO _internSO)
+    {
+        return _internSO.awaitApprovalEfficiency;
+    }
+
+    public float GetUnavailableEfficiency(InternSO _internSO)
+    {
+        return _internSO.unavailableEfficiency;
     }
 }

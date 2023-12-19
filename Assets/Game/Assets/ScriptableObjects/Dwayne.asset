@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
   internName: Dwayne
-  startEnergy: 200
-  processEfficiency: 1
+  startEnergy: 0
+  processEfficiency: 2.5
   MaxPrEfficiency: 10
-  energyEfficiency: 1
+  energyEfficiency: 1.8
   MaxEnEfficiency: 10
   availableEfficiency: 15
   workingEfficiency: -25

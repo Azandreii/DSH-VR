@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
   internName: Vienna
-  energyEfficiency: 1
-  processEfficiency: 1
-  startEnergy: 200
+  startEnergy: 80
+  processEfficiency: 0.9
+  MaxPrEfficiency: 10
+  energyEfficiency: 1.1
+  MaxEnEfficiency: 10
+  availableEfficiency: 25
+  workingEfficiency: -25
+  awaitApprovalEfficiency: -3
+  unavailableEfficiency: 50

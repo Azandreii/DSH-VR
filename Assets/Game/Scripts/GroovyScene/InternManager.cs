@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -40,17 +41,17 @@ public class InternManager : MonoBehaviour
     [SerializeField] private State state;
     private float energyEfficiency = 1f;
     private float processEfficiency = 1f;
-    private float rechargeEnergyEfficiency = 15f;
+    private float availableEnergyEfficiency = 15f;
     private float workingEnergyEfficiency = -25f;
     private float awaitApprovalEnergyEfficiency = -3f;
-    private float unavaiableRechargeEnergyEfficiency = 10f;
+    private float unavaiableEnergyEfficiency = 10f;
 
     private void Update()
     {
         switch (state) {
             case State.Available:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
-                if (currentEnergy <= energyMax){ AdjustEnergy(rechargeEnergyEfficiency, energyEfficiency); }
+                if (currentEnergy <= energyMax){ AdjustEnergy(availableEnergyEfficiency, energyEfficiency); }
             break;
             case State.WorkingOnTask:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
@@ -71,7 +72,7 @@ public class InternManager : MonoBehaviour
             break;
             case State.Unavailable:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
-                if (currentEnergy <= energyMax) { AdjustEnergy(unavaiableRechargeEnergyEfficiency, energyEfficiency); }
+                if (currentEnergy <= energyMax) { AdjustEnergy(unavaiableEnergyEfficiency, energyEfficiency); }
                 else { state = State.Available; }
             break;  
         }
@@ -122,5 +123,13 @@ public class InternManager : MonoBehaviour
     {
         energyEfficiency = _energyEfficiency;
         processEfficiency = _processEfficiency;
+    }
+
+    public void SetStateEfficiency(float _available, float _working, float _awaitingApproval, float _unavailable)
+    {
+        _available = availableEnergyEfficiency;
+        _working = workingEnergyEfficiency;
+        _awaitingApproval = awaitApprovalEnergyEfficiency;
+        _unavailable = unavaiableEnergyEfficiency;
     }
 }
