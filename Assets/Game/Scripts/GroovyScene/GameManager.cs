@@ -8,8 +8,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public event EventHandler OnPauseAction;
+    public event EventHandler OnAlternateAction;
+    public event EventHandler<OnTaskCompletedEventArgs> OnTaskCompleted;
+    public class OnTaskCompletedEventArgs : EventArgs
+    {
+        public int totalTasks;
+    }
 
     private List<Transform> internList;
+    private int TasksCompleted = 0;
 
     private void Awake()
     {
@@ -29,5 +36,18 @@ public class GameManager : MonoBehaviour
         {
             OnPauseAction?.Invoke(this, EventArgs.Empty);
         }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            OnAlternateAction?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    public void AddTaskCompleted()
+    {
+        TasksCompleted++;
+        OnTaskCompleted?.Invoke(this, new OnTaskCompletedEventArgs
+        {
+            totalTasks = TasksCompleted
+        }) ;
     }
 }

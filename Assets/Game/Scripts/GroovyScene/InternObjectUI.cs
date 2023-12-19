@@ -41,6 +41,7 @@ public class InternObjectUI : MonoBehaviour
             if (internManager.GetInternState() == InternManager.State.WaitingForApproval)
             {
                 internManager.PlayerApproved();
+                GameManager.Instance.AddTaskCompleted();
             }
         });
 
