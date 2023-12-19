@@ -24,14 +24,16 @@ public class InternObjectUI : MonoBehaviour
     [SerializeField] private Slider progressBar;
     [FoldoutGroup("GameObjects"), InfoBox("The gameObject references are referenced here")]
     [SerializeField] private GameObject progressBarObject;
+    private bool taskAvailable = false;
 
     //[Header("Attributes")]
 
     private void Start()
     {
+        taskAvailable = TaskManager.Instance.HasTasks();
         assignButton.onClick.AddListener(() =>
         {
-            if (internManager.GetInternState() == InternManager.State.Available)
+            if (internManager.GetInternState() == InternManager.State.Available && taskAvailable)
             {
                 internManager.SetTask(InternManager.State.WorkingOnTask, 3f);
             }
@@ -45,9 +47,18 @@ public class InternObjectUI : MonoBehaviour
             }
         });
 
+        TaskManager.Instance.OnTaskAdded += TaskManager_OnTaskAdded;
         internManager.OnStateChanged += InternManager_OnStateChanged;
     }
 
+    private void TaskManager_OnTaskAdded(object sender, TaskManager.OnTaskAddedEventArgs e)
+    {
+        taskAvailable = e.hasTasks;
+        if (!e.hasTasks && internManager.GetInternState() != InternManager.State.Unavailable)
+        {
+            internManager.SetState(InternManager.State.Available);
+        }
+    }
 
     public void SetName(string _name)
     {

@@ -76,8 +76,11 @@ public class InternManager : MonoBehaviour
                 else { state = State.Available; }
             break;  
         }
+    }
 
-        Debug.Log(state);
+    public void SetState(State _state)
+    {
+        this.state = _state;
     }
 
     public void SetTask(State _state, float _value)

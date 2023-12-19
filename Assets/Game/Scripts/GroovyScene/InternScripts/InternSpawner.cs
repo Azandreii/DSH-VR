@@ -62,17 +62,18 @@ public class InternSpawner : MonoBehaviour
     public void CreateNewIntern(InternSO _internSO)
     {
         Transform _internUI = Instantiate(internTemplate, internUI);
-        _internUI.gameObject.SetActive(true);
-        
+
         //Set the InternManager values
         InternManager im = _internUI.GetComponent<InternManager>();
         im.SetEfficiency(GetEnergyEfficiency(_internSO), GetProcessEfficiency(_internSO));
         im.SetEnergy(GetStartEnergy(_internSO));
-        im.SetStateEfficiency(GetAvailableEfficiency(_internSO), GetWorkingEfficiency(_internSO), GetAwaitOpprovalEfficiency(_internSO), GetUnavailableEfficiency(_internSO));
+        im.SetStateEfficiency(GetAvailableEfficiency(_internSO), GetWorkingEfficiency(_internSO), GetAwaitApprovalEfficiency(_internSO), GetUnavailableEfficiency(_internSO));
         
         //Set the InternObjectUI name
         InternObjectUI ioUI = _internUI.GetComponent<InternObjectUI>();
         ioUI.SetName(GetInternName(_internSO));
+
+        _internUI.gameObject.SetActive(true);
     }
 
     public Transform GetInternObjectUI(InternSO _internSO)
@@ -110,7 +111,7 @@ public class InternSpawner : MonoBehaviour
         return _internSO.workingEfficiency;
     }
 
-    public float GetAwaitOpprovalEfficiency(InternSO _internSO)
+    public float GetAwaitApprovalEfficiency(InternSO _internSO)
     {
         return _internSO.awaitApprovalEfficiency;
     }
