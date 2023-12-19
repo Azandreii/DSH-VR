@@ -45,7 +45,6 @@ public class InternSpawner : MonoBehaviour
         {
             Transform _internUI = Instantiate(internTemplate, internUI);
             _internUI.gameObject.SetActive(true);
-            Debug.Log("willPushEvent");
             InternManager im = _internUI.GetComponent<InternManager>();
             im.SetEfficiency(internArraySO[internCount].energyEfficiency, internArraySO[internCount].processEfficiency);
             im.SetEnergy(internArraySO[internCount].startEnergy);

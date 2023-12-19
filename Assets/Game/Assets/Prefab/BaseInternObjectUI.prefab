@@ -673,6 +673,7 @@ MonoBehaviour:
   approveButton: {fileID: 1690694140169216987}
   energyBar: {fileID: 8611160943605716003}
   progressBar: {fileID: 6324493607314522620}
+  progressBarObject: {fileID: 5059501946399951547}
   internManager: {fileID: 2102578197331325840}
 --- !u!114 &2102578197331325840
 MonoBehaviour:

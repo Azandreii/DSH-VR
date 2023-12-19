@@ -40,18 +40,22 @@ public class InternManager : MonoBehaviour
     [SerializeField] private State state;
     private float energyEfficiency = 1f;
     private float processEfficiency = 1f;
+    private float rechargeEnergyEfficiency = 15f;
+    private float workingEnergyEfficiency = -25f;
+    private float awaitApprovalEnergyEfficiency = -3f;
+    private float unavaiableRechargeEnergyEfficiency = 10f;
 
     private void Update()
     {
         switch (state) {
             case State.Available:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
-                if (currentEnergy <= energyMax){ AddEnergy(15, energyEfficiency); }
+                if (currentEnergy <= energyMax){ AdjustEnergy(rechargeEnergyEfficiency, energyEfficiency); }
             break;
             case State.WorkingOnTask:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 progress -= Time.deltaTime * processEfficiency;
-                if (currentEnergy >= 0){ RemoveEnergy(25, energyEfficiency); }
+                if (currentEnergy >= 0){ AdjustEnergy(workingEnergyEfficiency, energyEfficiency); }
                 else { state = State.Unavailable; }
                 if (progress < 0)
                 {
@@ -62,15 +66,17 @@ public class InternManager : MonoBehaviour
                 OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs{ progressNormalized = 1 - progress / progressMax });
             break;
             case State.WaitingForApproval:
-                if (currentEnergy >= 0){ RemoveEnergy(3, energyEfficiency); }
+                if (currentEnergy >= 0){ AdjustEnergy(awaitApprovalEnergyEfficiency, energyEfficiency); }
                 else { state = State.Unavailable; }
             break;
             case State.Unavailable:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
-                if (currentEnergy <= energyMax) { AddEnergy(10, energyEfficiency); }
+                if (currentEnergy <= energyMax) { AdjustEnergy(unavaiableRechargeEnergyEfficiency, energyEfficiency); }
                 else { state = State.Available; }
             break;  
         }
+
+        Debug.Log(state);
     }
 
     public void SetTask(State _state, float _value)
@@ -93,7 +99,7 @@ public class InternManager : MonoBehaviour
         }
     }
 
-    public void AddEnergy(float _value, float _energyEfficiency, bool _withTimeDelta = true)
+    public void AdjustEnergy(float _value, float _energyEfficiency, bool _withTimeDelta = true)
     {
         if (_withTimeDelta)
         {
@@ -102,19 +108,6 @@ public class InternManager : MonoBehaviour
         else
         {
             currentEnergy += _value * _energyEfficiency;
-        }
-        OnEnergyChanged?.Invoke(this, new OnEnergyChangedEventArgs { energyNormalized = currentEnergy / energyMax });
-    }
-
-    public void RemoveEnergy(float _value, float _energyEfficiency, bool _withTimeDelta = true)
-    {
-        if (_withTimeDelta)
-        {
-            currentEnergy -= _value * Time.deltaTime * _energyEfficiency;
-        }
-        else
-        {
-            currentEnergy -= _value * _energyEfficiency;
         }
         OnEnergyChanged?.Invoke(this, new OnEnergyChangedEventArgs { energyNormalized = currentEnergy / energyMax });
     }
