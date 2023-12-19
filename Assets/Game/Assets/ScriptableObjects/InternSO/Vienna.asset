@@ -20,6 +20,6 @@ MonoBehaviour:
   energyEfficiency: 2
   MaxEnEfficiency: 10
   availableEfficiency: -4
-  workingEfficiency: -8
+  workingEfficiency: -16
   awaitApprovalEfficiency: -1
   unavailableEfficiency: 45
