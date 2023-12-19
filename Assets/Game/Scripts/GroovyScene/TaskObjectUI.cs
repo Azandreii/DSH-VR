@@ -16,7 +16,6 @@ public class TaskObjectUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI taskDescriptionText;
     [FoldoutGroup("Texts")]
     [SerializeField] private TextMeshProUGUI taskDifficultyText;
-    private int taskDifficulty;
 
     public void SetTaskName(string _taskName)
     {
@@ -43,7 +42,5 @@ public class TaskObjectUI : MonoBehaviour
                 taskDifficultyText.color = Color.red;
                 break;
         }
-        
-        
     }
 }

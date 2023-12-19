@@ -48,7 +48,7 @@ public class TaskManager : MonoBehaviour
     {
         if (currentTasksList.Count > 0)
         {
-            GameObject.Destroy(currentTasksObjectList[0].gameObject);
+            Destroy(currentTasksObjectList[0].gameObject);
             currentTasksList.Remove(currentTasksList[0]);
             currentTasksObjectList.Remove(currentTasksObjectList[0]);
         }

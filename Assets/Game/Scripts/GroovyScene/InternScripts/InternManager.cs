@@ -45,20 +45,6 @@ public class InternManager : MonoBehaviour
     private float workingEnergyEfficiency = -25f;
     private float awaitApprovalEnergyEfficiency = -3f;
     private float unavaiableEnergyEfficiency = 10f;
-    private bool isWorking;
-
-    private void Start()
-    {
-        //TaskManager.Instance.OnTaskAdded += TaskManager_OnTaskAdded;
-    }
-
-    /*private void TaskManager_OnTaskAdded(object sender, TaskManager.OnTaskAddedEventArgs e)
-    {
-        if (!isWorking)
-        {
-            DifficultySwitch(e.difficulty);
-        }
-    }*/
 
     private void Update()
     {
@@ -106,7 +92,6 @@ public class InternManager : MonoBehaviour
         DifficultySwitch(TaskManager.Instance.GetCurrentTaskDifficulty());
         progress = progressMax;
         this.state = _state;
-        isWorking = true;
     }
 
     public State GetInternState()
