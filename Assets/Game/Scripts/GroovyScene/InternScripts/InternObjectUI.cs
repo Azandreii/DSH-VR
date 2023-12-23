@@ -36,15 +36,19 @@ public class InternObjectUI : MonoBehaviour
         {
             if (internManager.GetInternState() == InternManager.State.Available && taskAvailable)
             {
-                internManager.SetTask(InternManager.State.WorkingOnTask);
+                if (GameManager.Instance.hasTask())
+                {
+                    internManager.SetTask(GameManager.Instance.GetTaskSO(), GameManager.Instance.GetGameObjectTaskSO());
+                    GameManager.Instance.SetTaskSO(null);
+                }
             }
         });
         approveButton.onClick.AddListener(() =>
         {
             if (internManager.GetInternState() == InternManager.State.WaitingForApproval)
             {
+                GameManager.Instance.AddTaskCompleted(internManager.GetTaskSO(), internManager.GetGameObjectTaskSO());
                 internManager.PlayerApproved();
-                GameManager.Instance.AddTaskCompleted();
             }
         });
 
@@ -57,13 +61,8 @@ public class InternObjectUI : MonoBehaviour
         taskAvailable = e.hasTasks;
         if (!e.hasTasks && internManager.GetInternState() != InternManager.State.Unavailable)
         {
-            internManager.SetState(InternManager.State.Available);
+            internManager.SetInternState(InternManager.State.Available);
         }
-    }
-
-    public void SetName(string _name)
-    {
-        internName.text = _name;
     }
 
     private void InternManager_OnStateChanged(object sender, InternManager.OnStateChangedEventArgs e)
@@ -87,5 +86,10 @@ public class InternObjectUI : MonoBehaviour
                 progressBarObject.SetActive(false);
                 break;
         }
+    }
+
+    public void SetInternName()
+    {
+        internName.text = internManager.GetInternName();
     }
 }

@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector.Editor.Drawers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,11 +14,14 @@ public class GameManager : MonoBehaviour
     public class OnTaskCompletedEventArgs : EventArgs
     {
         public int totalTasks;
+        public TaskSO taskSO;
     }
 
     private List<Transform> internList;
     private int TasksCompleted = 0;
     private bool isPaused = false;
+    private TaskSO selectedTaskSO;
+    private GameObject selectedGameObjectTaskSO;
 
     private void Awake()
     {
@@ -44,12 +48,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddTaskCompleted()
+    public void AddTaskCompleted(TaskSO _taskSO, GameObject _gameObjectTaskSO)
     {
+        Destroy(_gameObjectTaskSO);
         TasksCompleted++;
         OnTaskCompleted?.Invoke(this, new OnTaskCompletedEventArgs
         {
-            totalTasks = TasksCompleted
+            totalTasks = TasksCompleted,
+            taskSO = _taskSO,
         }) ;
     }
 
@@ -65,5 +71,26 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1f;
                 break;
         }
+    }
+
+    public bool hasTask()
+    {
+        return selectedTaskSO != null;
+    }
+
+    public void SetTaskSO(TaskSO _taskSO, GameObject _gameObjectTaskSO = null)
+    {
+        selectedTaskSO = _taskSO;
+        selectedGameObjectTaskSO = _gameObjectTaskSO;
+    }
+
+    public TaskSO GetTaskSO()
+    {
+        return selectedTaskSO;
+    }
+
+    public GameObject GetGameObjectTaskSO()
+    {
+        return selectedGameObjectTaskSO;
     }
 }

@@ -15,7 +15,8 @@ MonoBehaviour:
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
   internName: Jade
   startEnergy: 30
-  processEfficiency: 0.7
+  maxEnergy: 100
+  processEfficiency: 0.85
   MaxPrEfficiency: 10
   energyEfficiency: 0.3
   MaxEnEfficiency: 10

@@ -9,6 +9,10 @@ using UnityEngine.UI;
 public class TaskObjectUI : MonoBehaviour
 {
     [Title("References")]
+    [FoldoutGroup("Images"), InfoBox("The images of the TaskObjectUI are referenced here")]
+    [SerializeField] private Image background;
+    [FoldoutGroup("Buttons"), InfoBox("The buttons of the TaskObjectUI are referenced here")]
+    [SerializeField] private Button selectedButton;
     //[SerializeField] private TaskManager taskManager;
     [FoldoutGroup("Texts"), InfoBox("The texts of the TaskObjectUI are referenced here")]
     [SerializeField] private TextMeshProUGUI taskNameText;
@@ -16,21 +20,44 @@ public class TaskObjectUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI taskDescriptionText;
     [FoldoutGroup("Texts")]
     [SerializeField] private TextMeshProUGUI taskDifficultyText;
+    private TaskSO taskSO;
 
-    public void SetTaskName(string _taskName)
+    private void Start()
     {
-        taskNameText.text = _taskName;
+        selectedButton.onClick.AddListener(() =>
+        {
+            GameManager.Instance.SetTaskSO(taskSO, gameObject);
+            selectedButton.Select();
+        });
     }
 
-    public void SetTaskDescription(string _taskDescription)
+    public void SetTaskSO(TaskSO _taskSO)
     {
-        taskDescriptionText.text = _taskDescription;
+        taskSO = _taskSO;
+        taskNameText.text = GetTaskName();
+        taskDescriptionText.text = GetTaskDescription();
+        SetTaskDifficulty(_taskSO);
+        gameObject.SetActive(true);
     }
 
-    public void SetTaskDifficulty(int _difficulty)
+    public string GetTaskName()
     {
-        taskDifficultyText.text = _difficulty.ToString();
-        switch (_difficulty)
+        return taskSO.taskName;
+    }
+
+    public string GetTaskDescription()
+    {
+        return taskSO.taskDescription;
+    }
+
+    public int GetTaskDifficulty()
+    {
+        return taskSO.taskDifficulty;
+    }
+
+    public void SetTaskDifficulty(TaskSO _taskSO)
+    {
+        switch (_taskSO.taskDifficulty)
         {
             case 1:
                 taskDifficultyText.color = Color.green;
@@ -42,5 +69,6 @@ public class TaskObjectUI : MonoBehaviour
                 taskDifficultyText.color = Color.red;
                 break;
         }
+        taskDifficultyText.text = _taskSO.taskDifficulty.ToString();
     }
 }

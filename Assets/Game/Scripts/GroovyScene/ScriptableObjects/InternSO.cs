@@ -10,6 +10,7 @@ public class InternSO : ScriptableObject
     public string internName;
     [Title("Attributes") ,Range(0, 300)]
     public float startEnergy = 200f;
+    public float maxEnergy = 300f;
     
     [PropertyRange(0, "MaxPrEfficiency"), FoldoutGroup("Process Efficiency"), Title("Processing Power")]
     public float processEfficiency = 1f;

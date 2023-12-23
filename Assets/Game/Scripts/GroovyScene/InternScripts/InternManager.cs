@@ -33,6 +33,12 @@ public class InternManager : MonoBehaviour
         Unavailable,
     }
 
+    [Header("References")]
+    [SerializeField] private InternObjectUI internObjectUI;
+    private InternSO internSO;
+    private GameObject gameObjectInternSO;
+    private TaskSO taskSO;
+
     [Header("Attributes")]
     [SerializeField] private float energyMax = 300f;
     [SerializeField] private float currentEnergy = 200f;
@@ -46,21 +52,35 @@ public class InternManager : MonoBehaviour
     private float awaitApprovalEnergyEfficiency = -3f;
     private float unavaiableEnergyEfficiency = 10f;
 
+    private void Start()
+    {
+        GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
+    }
+
+    private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)
+    {
+        if (taskSO == e.taskSO)
+        {
+            taskSO = null;
+            state = State.Available;
+        }
+    }
+
     private void Update()
     {
         switch (state) {
             case State.Available:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
-                if (currentEnergy <= energyMax){ AdjustEnergy(availableEnergyEfficiency, energyEfficiency);
+                if (currentEnergy <= energyMax) { AdjustEnergy(availableEnergyEfficiency, energyEfficiency);
                     if (currentEnergy >= energyMax) { currentEnergy = energyMax; }
                 }
                 else { currentEnergy = energyMax; }
-                if (currentEnergy <= 0) { state = State.Unavailable; } 
+                if (currentEnergy <= 0) { state = State.Unavailable; }
                 break;
             case State.WorkingOnTask:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 progress -= Time.deltaTime * processEfficiency;
-                if (currentEnergy >= 0){ AdjustEnergy(workingEnergyEfficiency, energyEfficiency); }
+                if (currentEnergy >= 0) { AdjustEnergy(workingEnergyEfficiency, energyEfficiency); }
                 else { state = State.Unavailable; }
                 if (progress < 0)
                 {
@@ -68,30 +88,48 @@ public class InternManager : MonoBehaviour
 
                     OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 }
-                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs{ progressNormalized = 1 - progress / progressMax });
-            break;
+                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs { progressNormalized = 1 - progress / progressMax });
+                break;
             case State.WaitingForApproval:
-                if (currentEnergy >= 0){ AdjustEnergy(awaitApprovalEnergyEfficiency, energyEfficiency); }
+                if (currentEnergy >= 0) { AdjustEnergy(awaitApprovalEnergyEfficiency, energyEfficiency); }
                 else { state = State.Unavailable; }
-            break;
+                break;
             case State.Unavailable:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 if (currentEnergy <= energyMax) { AdjustEnergy(unavaiableEnergyEfficiency, energyEfficiency); }
                 else { currentEnergy = energyMax; state = State.Available; }
-            break;  
+                break;
         }
     }
 
-    public void SetState(State _state)
+    public void SetInternSO(InternSO _internSO, bool _hide = true)
+    {
+        internSO = _internSO;
+        SetEfficiency(GetEnergyEfficiency(), GetProcessEfficiency());
+        SetEnergy(GetStartEnergy(), GetEnergyMax());
+        SetStateEfficiency(GetAvailableEfficiency(), GetWorkingEfficiency(), 
+            GetAwaitApprovalEfficiency(), GetUnavailableEfficiency());
+        internObjectUI.SetInternName();
+        gameObject.SetActive(_hide);
+    }
+
+    public InternSO GetInternSO()
+    {
+        return internSO;
+    }
+
+    public void SetInternState(State _state)
     {
         this.state = _state;
     }
 
-    public void SetTask(State _state)
+    public void SetTask(TaskSO _taskSO, GameObject _gameObjectTaskSO)
     {
-        DifficultySwitch(TaskManager.Instance.GetCurrentTaskDifficulty());
-        progress = progressMax;
-        this.state = _state;
+        //Need to work with TaskSO
+        taskSO = _taskSO;
+        DifficultySwitch(_taskSO.taskDifficulty);
+        gameObjectInternSO = _gameObjectTaskSO;
+        this.state = State.WorkingOnTask;
     }
 
     public State GetInternState()
@@ -101,9 +139,10 @@ public class InternManager : MonoBehaviour
 
     public void PlayerApproved()
     {
-        if(state == State.WaitingForApproval)
+        if (state == State.WaitingForApproval)
         {
             state = State.Available;
+            taskSO = null;
         }
     }
 
@@ -120,9 +159,10 @@ public class InternManager : MonoBehaviour
         OnEnergyChanged?.Invoke(this, new OnEnergyChangedEventArgs { energyNormalized = currentEnergy / energyMax });
     }
 
-    public void SetEnergy(float _value)
+    public void SetEnergy(float _currentEnergyValue, float _maxEnergyValue)
     {
-        currentEnergy = _value;
+        energyMax = _maxEnergyValue;
+        currentEnergy = _currentEnergyValue;
         OnEnergyChanged?.Invoke(this, new OnEnergyChangedEventArgs { energyNormalized = currentEnergy / energyMax });
     }
 
@@ -135,7 +175,7 @@ public class InternManager : MonoBehaviour
     public void SetStateEfficiency(float _available, float _working, float _awaitingApproval, float _unavailable)
     {
         availableEnergyEfficiency = _available;
-        workingEnergyEfficiency = _working ;
+        workingEnergyEfficiency = _working;
         awaitApprovalEnergyEfficiency = _awaitingApproval;
         unavaiableEnergyEfficiency = _unavailable;
     }
@@ -157,5 +197,66 @@ public class InternManager : MonoBehaviour
                 progressMax = hardTaskTime;
                 break;
         }
+        progress = progressMax;
+    }
+
+    public TaskSO GetTaskSO()
+    {
+        return taskSO;
+    }
+    
+    public GameObject GetGameObjectTaskSO()
+    {
+        return gameObjectInternSO;
+    }
+
+    public Transform GetInternObjectUI()
+    {
+        return internSO.internObjectUI;
+    }
+
+    public string GetInternName()
+    {
+        return internSO.internName;
+    }
+
+    public float GetStartEnergy()
+    {
+        return internSO.startEnergy;
+    }
+
+    public float GetEnergyMax()
+    {
+        return internSO.maxEnergy;
+    }
+
+    public float GetProcessEfficiency()
+    {
+        return internSO.processEfficiency;
+    }
+
+    public float GetEnergyEfficiency()
+    {
+        return internSO.energyEfficiency;
+    }
+
+    public float GetAvailableEfficiency()
+    {
+        return internSO.availableEfficiency;
+    }
+
+    public float GetWorkingEfficiency()
+    {
+        return internSO.workingEfficiency;
+    }
+
+    public float GetAwaitApprovalEfficiency()
+    {
+        return internSO.awaitApprovalEfficiency;
+    }
+
+    public float GetUnavailableEfficiency()
+    {
+        return internSO.unavailableEfficiency;
     }
 }
