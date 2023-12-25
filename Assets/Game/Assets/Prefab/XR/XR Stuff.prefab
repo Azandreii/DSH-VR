@@ -738,7 +738,7 @@ MonoBehaviour:
   m_TimeToAutoDeselect: 3
   m_EnableUIInteraction: 1
   m_BlockUIOnInteractableSelection: 1
-  m_AllowAnchorControl: 1
+  m_AllowAnchorControl: 0
   m_UseForceGrab: 1
   m_RotateSpeed: 180
   m_TranslateSpeed: 1
@@ -1037,8 +1037,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.3
-  m_Center: {x: 0, y: -2.1176, z: 0.5}
+  m_Radius: 0.065088585
+  m_Center: {x: 0.0063842162, y: -0.034758016, z: -0.0077825785}
 --- !u!1 &7876855894852601396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,7 +1185,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.75
-  m_Radius: 0.2
+  m_Radius: 0.01
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -1243,7 +1243,7 @@ GameObject:
   - component: {fileID: 3497228909631056978}
   - component: {fileID: 4397841847452956868}
   - component: {fileID: 8251648818859849567}
-  - component: {fileID: 5489925655376814801}
+  - component: {fileID: 2214599556600976436}
   m_Layer: 0
   m_Name: Left Controller
   m_TagString: Untagged
@@ -1607,7 +1607,7 @@ MonoBehaviour:
   m_TimeToAutoDeselect: 3
   m_EnableUIInteraction: 1
   m_BlockUIOnInteractableSelection: 1
-  m_AllowAnchorControl: 1
+  m_AllowAnchorControl: 0
   m_UseForceGrab: 1
   m_RotateSpeed: 180
   m_TranslateSpeed: 1
@@ -1887,7 +1887,7 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_SortAtRoot: 0
---- !u!135 &5489925655376814801
+--- !u!135 &2214599556600976436
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1906,8 +1906,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.3
-  m_Center: {x: 0, y: -2.1176, z: 0.5}
+  m_Radius: 0.0675714
+  m_Center: {x: -0.023415647, y: -0.042517662, z: -0.008476488}
 --- !u!1001 &1738346350280154292
 PrefabInstance:
   m_ObjectHideFlags: 0
