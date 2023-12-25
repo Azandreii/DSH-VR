@@ -18,6 +18,7 @@ public class InternManager : MonoBehaviour
     public class OnProgressChangedEventArgs : EventArgs
     {
         public float progressNormalized;
+        public TaskSO eventTaskSO;
     }
     public event EventHandler<OnEnergyChangedEventArgs> OnEnergyChanged;
     public class OnEnergyChangedEventArgs : EventArgs
@@ -86,7 +87,10 @@ public class InternManager : MonoBehaviour
 
                     OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 }
-                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs { progressNormalized = 1 - progress / progressMax });
+                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs { 
+                    progressNormalized = 1 - progress / progressMax,
+                    eventTaskSO = taskSO,
+                });
                 break;
             case State.WaitingForApproval:
                 if (currentEnergy >= 0) { AdjustEnergy(awaitApprovalEnergyEfficiency, energyEfficiency); }
@@ -130,7 +134,6 @@ public class InternManager : MonoBehaviour
 
     public void SetTask(TaskSO _taskSO, GameObject _gameObjectTaskSO)
     {
-        //Need to work with TaskSO
         taskSO = _taskSO;
         DifficultySwitch(_taskSO.taskDifficulty);
         gameObjectInternSO = _gameObjectTaskSO;

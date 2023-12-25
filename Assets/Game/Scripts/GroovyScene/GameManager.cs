@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     public event EventHandler OnPauseAction;
     public event EventHandler OnAlternateAction;
+    public event EventHandler OnDeselectTask;
     public event EventHandler<OnTaskCompletedEventArgs> OnTaskCompleted;
     public class OnTaskCompletedEventArgs : EventArgs
     {
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
 
     public bool hasTask()
     {
+        Debug.Log(selectedTaskSO != null);
         return selectedTaskSO != null;
     }
 
@@ -103,6 +105,7 @@ public class GameManager : MonoBehaviour
     {
         selectedTaskSO = _taskSO;
         selectedGameObjectTaskSO = _gameObjectTaskSO;
+        OnDeselectTask?.Invoke(this, EventArgs.Empty);
     }
 
     public TaskSO GetTaskSO()

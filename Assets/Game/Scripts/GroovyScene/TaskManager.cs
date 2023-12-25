@@ -106,7 +106,6 @@ public class TaskManager : MonoBehaviour
     private TaskSO RandomTask()
     {
         List<TaskSO> _availableTaskSOList = new List<TaskSO>();
-        Debug.Log(_availableTaskSOList.Count);
 
         foreach (TaskSO _taskSO in taskArraySO)
         {
@@ -120,7 +119,6 @@ public class TaskManager : MonoBehaviour
                 if (_availableTaskSO == _listTaskSO)
                 {
                     _availableTaskSOList.Remove(_availableTaskSO);
-                    Debug.Log(_availableTaskSOList.Count);
                 }
             }
         }
