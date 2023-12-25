@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static InteractHandsVR;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class GameManager : MonoBehaviour
     {
         public int totalTasks;
         public TaskSO taskSO;
+    }
+    public event EventHandler OnCollisionVRHands;
+    public class OnCollisionVRHandsEventArgs : EventArgs
+    {
+        public GameObject ObjectColided;
     }
 
     private List<Transform> internList;
@@ -48,6 +54,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void TriggerInteractVR(Collision _collision)
+    {
+        OnCollisionVRHands?.Invoke(this, new OnCollisionVRHandsEventArgs
+        {
+            ObjectColided = _collision.gameObject,
+        });
+        Debug.Log(_collision);
+        Debug.Log(_collision.gameObject);
+    }
+
+
     public void AddTaskCompleted(TaskSO _taskSO, GameObject _gameObjectTaskSO)
     {
         Destroy(_gameObjectTaskSO);
@@ -57,6 +74,10 @@ public class GameManager : MonoBehaviour
             totalTasks = TasksCompleted,
             taskSO = _taskSO,
         }) ;
+        if (selectedTaskSO == _taskSO && selectedTaskSO != null)
+        {
+            selectedTaskSO = null;
+        }
     }
 
     public void TogglePause()

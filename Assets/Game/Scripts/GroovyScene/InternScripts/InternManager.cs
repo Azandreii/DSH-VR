@@ -75,13 +75,11 @@ public class InternManager : MonoBehaviour
                     if (currentEnergy >= energyMax) { currentEnergy = energyMax; }
                 }
                 else { currentEnergy = energyMax; }
-                if (currentEnergy <= 0) { state = State.Unavailable; }
                 break;
             case State.WorkingOnTask:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 progress -= Time.deltaTime * processEfficiency;
                 if (currentEnergy >= 0) { AdjustEnergy(workingEnergyEfficiency, energyEfficiency); }
-                else { state = State.Unavailable; }
                 if (progress < 0)
                 {
                     state = State.WaitingForApproval;
@@ -92,13 +90,16 @@ public class InternManager : MonoBehaviour
                 break;
             case State.WaitingForApproval:
                 if (currentEnergy >= 0) { AdjustEnergy(awaitApprovalEnergyEfficiency, energyEfficiency); }
-                else { state = State.Unavailable; }
                 break;
             case State.Unavailable:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 if (currentEnergy <= energyMax) { AdjustEnergy(unavaiableEnergyEfficiency, energyEfficiency); }
                 else { currentEnergy = energyMax; state = State.Available; }
                 break;
+        }
+        if (currentEnergy <= 0 && state != State.Unavailable)
+        {
+            SetInternState(State.Unavailable);
         }
     }
 
@@ -121,6 +122,10 @@ public class InternManager : MonoBehaviour
     public void SetInternState(State _state)
     {
         this.state = _state;
+        if(_state == State.Unavailable)
+        {
+            taskSO = null;
+        }
     }
 
     public void SetTask(TaskSO _taskSO, GameObject _gameObjectTaskSO)

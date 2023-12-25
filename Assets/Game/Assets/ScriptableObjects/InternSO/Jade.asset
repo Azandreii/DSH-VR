@@ -15,12 +15,12 @@ MonoBehaviour:
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
   internName: Jade
   startEnergy: 30
-  maxEnergy: 100
+  maxEnergy: 150
   processEfficiency: 0.85
   MaxPrEfficiency: 10
   energyEfficiency: 0.3
   MaxEnEfficiency: 10
-  availableEfficiency: 24
+  availableEfficiency: 14
   workingEfficiency: -10
-  awaitApprovalEfficiency: -10
-  unavailableEfficiency: 5
+  awaitApprovalEfficiency: -8
+  unavailableEfficiency: 12

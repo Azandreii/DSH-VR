@@ -28,6 +28,7 @@ public class TaskObjectUI : MonoBehaviour
         {
             GameManager.Instance.SetTaskSO(taskSO, gameObject);
             selectedButton.Select();
+            Debug.Log("Help");
         });
     }
 

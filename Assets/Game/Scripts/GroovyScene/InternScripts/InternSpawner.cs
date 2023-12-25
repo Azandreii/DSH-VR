@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class InternSpawner : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private float internTimerMax = 5f;
     private float timeTillNextIntern;
-    private int internCount = 0;
+    private int internCount;
 
     private void Start()
     {
