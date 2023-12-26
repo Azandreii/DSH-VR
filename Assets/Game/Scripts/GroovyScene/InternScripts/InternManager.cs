@@ -132,7 +132,7 @@ public class InternManager : MonoBehaviour
         }
     }
 
-    public void SetTask(TaskSO _taskSO, GameObject _gameObjectTaskSO)
+    public void SetInternManagerTask(TaskSO _taskSO, GameObject _gameObjectTaskSO)
     {
         taskSO = _taskSO;
         DifficultySwitch(_taskSO.taskDifficulty);

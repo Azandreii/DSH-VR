@@ -171,7 +171,7 @@ public class InternObjectUI : MonoBehaviour
 
     private void SetTask()
     {
-        internManager.SetTask(GameManager.Instance.GetTaskSO(), GameManager.Instance.GetGameObjectTaskSO());
+        internManager.SetInternManagerTask(GameManager.Instance.GetTaskSO(), GameManager.Instance.GetGameObjectTaskSO());
         TaskSO _assignedTaskSO = GameManager.Instance.GetTaskSO();
         internTask.text = _assignedTaskSO.taskName;
         GameManager.Instance.SetTaskSO(null);

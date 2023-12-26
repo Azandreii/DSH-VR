@@ -54,7 +54,7 @@ public class TaskObjectUI : MonoBehaviour
     {
         if (e.clickState == ButtonVR.ClickState.ClickDown)
         {
-            UpdateSelectedButtonVisual(selectedButtonVR.isClicked());
+            UpdateSelectedButtonVisual(selectedButtonVR.GetClicked());
         }
     }
 
@@ -63,7 +63,7 @@ public class TaskObjectUI : MonoBehaviour
         if (e.clickState == ButtonVR.ClickState.ClickDown)
         {
             GameManager.Instance.SetTaskSO(taskSO, gameObject);
-            UpdateSelectedButtonVisual(selectedButtonVR.isClicked());
+            UpdateSelectedButtonVisual(selectedButtonVR.GetClicked());
         }
     }
 
@@ -114,25 +114,23 @@ public class TaskObjectUI : MonoBehaviour
         {
             case true:
                 SelectedTask();
-                break;
+            break;
             case false:
                 if (GameManager.Instance.GetTaskSO() != taskSO)
                 {
                     NotSelectedTask();
                 }
-                break;
+            break;
         }
     }
 
     public void SelectedTask()
     {
-        float _alpha = 0.3f;
-        selectedButtonVR.SetImage(Color.black, _alpha);
+        selectedButtonVR.SetImage(selectedButtonVR.GetSelectButtonColor(), selectedButtonVR.GetSelectButtonColor().a);
     }
 
     public void NotSelectedTask()
     {
-        float _alpha = 0.1f;
-        selectedButtonVR.SetImage(Color.green, _alpha);
+        selectedButtonVR.SetImage(selectedButtonVR.GetButtonColor(), selectedButtonVR.GetButtonColor().a);
     }
 }
