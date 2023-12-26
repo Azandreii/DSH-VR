@@ -105,7 +105,7 @@ public class InternObjectUI : MonoBehaviour
     {
         if (e.clickState == ButtonVR.ClickState.ClickDown)
         {
-            internManager.SetInternState(InternManager.State.Available);
+            StopTask();
         }
     }
 
@@ -119,7 +119,7 @@ public class InternObjectUI : MonoBehaviour
 
     private void AssignButtonVR_OnClick(object sender, ButtonVR.OnClickEventArgs e)
     {
-        if (e.clickState == ButtonVR.ClickState.ClickDown)
+        if (e.clickState == ButtonVR.ClickState.ClickDown && internManager.GetTaskSO() == null)
         {
             SetTask();
         }
@@ -184,5 +184,11 @@ public class InternObjectUI : MonoBehaviour
             GameManager.Instance.AddTaskCompleted(internManager.GetTaskSO(), internManager.GetGameObjectTaskSO());
             internManager.PlayerApproved();
         }
+    }
+
+    private void StopTask()
+    {
+        internManager.SetInternState(InternManager.State.Available);
+        internManager.ClearTaskSO();
     }
 }

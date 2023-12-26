@@ -267,4 +267,9 @@ public class InternManager : MonoBehaviour
     {
         return internSO.unavailableEfficiency;
     }
+
+    public void ClearTaskSO()
+    {
+        taskSO = null;
+    }
 }
