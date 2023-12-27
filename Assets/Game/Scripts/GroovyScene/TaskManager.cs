@@ -34,11 +34,11 @@ public class TaskManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        currentTasksList = new List<TaskSO>();
     }
 
     private void Start()
     {
-        currentTasksList = new List<TaskSO>();
         taskTemplate.gameObject.SetActive(false);
         GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
     }

@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,7 @@ public class InternUI : MonoBehaviour
     [SerializeField] private InternObjectUI internObjectUI;
 
     [Header("Attributes")]
-    [SerializeField] private float something;
     [SerializeField] private bool isPaused = false;
-
 
     private void Start()
     {

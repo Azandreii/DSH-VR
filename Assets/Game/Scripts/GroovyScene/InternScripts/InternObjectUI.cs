@@ -9,7 +9,6 @@ using System.Diagnostics.CodeAnalysis;
 
 public class InternObjectUI : MonoBehaviour
 {
-
     [Title("References")]
 
     private bool buttonToggle;
@@ -32,6 +31,14 @@ public class InternObjectUI : MonoBehaviour
     [SerializeField] private ButtonVR approveButtonVR;
     [FoldoutGroup("Buttons"), ShowIf("buttonToggle")]
     [SerializeField] private ButtonVR stopButtonVR;
+
+    [FoldoutGroup("Buttons"), ShowIf("buttonToggle")]
+    [SerializeField] private OnCollisionVR assignTriggerVR;
+    [FoldoutGroup("Buttons"), ShowIf("buttonToggle")]
+    [SerializeField] private OnCollisionVR approveTriggerLeftHandVR;
+    [FoldoutGroup("Buttons"), ShowIf("buttonToggle")]
+    [SerializeField] private OnCollisionVR approveTriggerRightHandVR;
+
     [FoldoutGroup("Texts"), InfoBox("The texts of the InternObjectUI are referenced here")]
     [SerializeField] private TextMeshProUGUI assignText;
     [FoldoutGroup("Texts")]
@@ -52,17 +59,34 @@ public class InternObjectUI : MonoBehaviour
 
     //[Header("Attributes")]
 
-    private void Start()
+    [Title("Set Intern Settings")]
+    [SerializeField] bool setInternOnAwake = false;
+    [SerializeField] InternSO setInternSO;
+
+    private void Awake()
     {
+        if (setInternOnAwake)
+        {
+            internManager.SetInternSO(setInternSO);
+            internStopButtonObject.gameObject.SetActive(false);
+            internTaskObject.gameObject.SetActive(false);
+        }
+    }
+
+    private void Start()
+
+    {
+        if (setInternOnAwake)
+        {
+            int aditionalIntern = 1;
+            InternSpawner.Instance.AdjustInternCount(aditionalIntern);
+        }
         taskAvailable = TaskManager.Instance.HasTasks();
         if (assignButton != null)
         {
             assignButton.onClick.AddListener(() =>
             {
-                if (internManager.GetInternState() == InternManager.State.Available && taskAvailable && GameManager.Instance.hasTask())
-                {
-                    SetTask();
-                }
+                SetTask();
             });
         }
 
@@ -99,6 +123,36 @@ public class InternObjectUI : MonoBehaviour
         {
             stopButtonVR.OnClick += StopButtonVR_OnClick;
         }
+
+        if (approveTriggerLeftHandVR != null) 
+        {
+            approveTriggerLeftHandVR.OnCollision += ApproveTriggerLeftHandVR_OnCollision;
+        }
+
+        if (approveTriggerRightHandVR != null)
+        {
+            approveTriggerRightHandVR.OnCollision += ApproveTriggerRightHandVR_OnCollision;
+        }
+
+        if (assignTriggerVR != null)
+        {
+            assignTriggerVR.OnCollision += AssignTriggerVR_OnCollision;
+        }
+    }
+
+    private void AssignTriggerVR_OnCollision(object sender, OnCollisionVR.SelectedObjectsEventArgs e)
+    {
+        SetTask();
+    }
+
+    private void ApproveTriggerRightHandVR_OnCollision(object sender, OnCollisionVR.SelectedObjectsEventArgs e)
+    {
+        ApproveTask();
+    }
+
+    private void ApproveTriggerLeftHandVR_OnCollision(object sender, OnCollisionVR.SelectedObjectsEventArgs e)
+    {
+        ApproveTask();
     }
 
     private void StopButtonVR_OnClick(object sender, ButtonVR.OnClickEventArgs e)
@@ -171,10 +225,13 @@ public class InternObjectUI : MonoBehaviour
 
     private void SetTask()
     {
-        internManager.SetInternManagerTask(GameManager.Instance.GetTaskSO(), GameManager.Instance.GetGameObjectTaskSO());
-        TaskSO _assignedTaskSO = GameManager.Instance.GetTaskSO();
-        internTask.text = _assignedTaskSO.taskName;
-        GameManager.Instance.SetTaskSO(null);
+        if (internManager.GetInternState() == InternManager.State.Available && taskAvailable && GameManager.Instance.hasTask())
+        {
+            internManager.SetInternManagerTask(GameManager.Instance.GetTaskSO(), GameManager.Instance.GetGameObjectTaskSO());
+            TaskSO _assignedTaskSO = GameManager.Instance.GetTaskSO();
+            internTask.text = _assignedTaskSO.taskName;
+            GameManager.Instance.SetTaskSO(null);
+        }
     }
 
     private void ApproveTask()

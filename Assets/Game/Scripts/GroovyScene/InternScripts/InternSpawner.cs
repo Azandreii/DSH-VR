@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class InternSpawner : MonoBehaviour
 {
-    public static InternSpawner Instance {  get; private set; }
+    public static InternSpawner Instance;
     
     [Header("References")]
     [SerializeField] private InternSO[] internArraySO;
@@ -19,6 +19,11 @@ public class InternSpawner : MonoBehaviour
     [SerializeField] private float internTimerMax = 5f;
     private float timeTillNextIntern;
     private int internCount;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -62,5 +67,10 @@ public class InternSpawner : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
+    }
+
+    public void AdjustInternCount(int _amount)
+    {
+        internCount += _amount;
     }
 }
