@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static InteractHandsVR;
 
 public class GameManager : MonoBehaviour
 {
@@ -54,17 +53,6 @@ public class GameManager : MonoBehaviour
             TogglePause();
         }
     }
-
-    public void TriggerInteractVR(Collision _collision)
-    {
-        OnCollisionVRHands?.Invoke(this, new OnCollisionVRHandsEventArgs
-        {
-            ObjectColided = _collision.gameObject,
-        });
-        Debug.Log(_collision);
-        Debug.Log(_collision.gameObject);
-    }
-
 
     public void AddTaskCompleted(TaskSO _taskSO, GameObject _gameObjectTaskSO)
     {

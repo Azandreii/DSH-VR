@@ -3,8 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractHandsVR : MonoBehaviour
+public class OnCollisionVR : MonoBehaviour
 {
+    public event EventHandler<SelectedObjectsEventArgs> OnCollision;
+    public class SelectedObjectsEventArgs : EventArgs
+    {
+        public GameObject collisionObject;
+    }
+
     [Header("References")]
     [SerializeField] private GameObject[] InteractableObjectsVR;
 
@@ -14,7 +20,10 @@ public class InteractHandsVR : MonoBehaviour
         {
             if (_collision.gameObject == InteractableVR)
             {
-                GameManager.Instance.TriggerInteractVR(_collision);
+                OnCollision?.Invoke(this, new SelectedObjectsEventArgs 
+                {
+                    collisionObject = InteractableVR,
+                });
             }
         }
     }
