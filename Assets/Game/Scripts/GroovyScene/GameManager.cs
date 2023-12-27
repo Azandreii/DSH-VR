@@ -85,7 +85,6 @@ public class GameManager : MonoBehaviour
 
     public bool hasTask()
     {
-        Debug.Log(selectedTaskSO != null);
         return selectedTaskSO != null;
     }
 

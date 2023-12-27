@@ -193,19 +193,31 @@ public class InternObjectUI : MonoBehaviour
         switch (e.state)
         {
             case InternManager.State.Available:
-                assignText.color = Color.white;
+                if (assignText != null)
+                {
+                    assignText.color = Color.white;
+                }
                 SetTaskVisibilityUI(false);
                 break;
             case InternManager.State.WorkingOnTask:
-                assignText.color = Color.white;
+                if (assignText != null)
+                {
+                    assignText.color = Color.white;
+                }
                 SetTaskVisibilityUI(true);
                 break;
             case InternManager.State.WaitingForApproval:
-                assignText.color = Color.white;
+                if (assignText != null)
+                {
+                    assignText.color = Color.white;
+                }
                 SetTaskVisibilityUI(true);
                 break;
             case InternManager.State.Unavailable:
-                assignText.color = Color.red;
+                if (assignText != null)
+                {
+                    assignText.color = Color.red;
+                }
                 SetTaskVisibilityUI(false);
                 break;
         }
