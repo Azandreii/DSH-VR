@@ -1658,10 +1658,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1499383163}
+        m_TargetAssemblyTypeName: StopItemVR, Assembly-CSharp
+        m_MethodName: EnterSocket
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1499383163}
+        m_TargetAssemblyTypeName: StopItemVR, Assembly-CSharp
+        m_MethodName: ExitSocket
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
   m_OnHoverEntered:
@@ -1911,7 +1935,7 @@ MonoBehaviour:
   m_AngularVelocityDamping: 1
   m_AngularVelocityScale: 1
   m_TrackPosition: 1
-  m_SmoothPosition: 1
+  m_SmoothPosition: 0
   m_SmoothPositionAmount: 8
   m_TightenPosition: 0.1
   m_TrackRotation: 1
@@ -4583,6 +4607,7 @@ GameObject:
   - component: {fileID: 1499383162}
   - component: {fileID: 1499383161}
   - component: {fileID: 1499383160}
+  - component: {fileID: 1499383163}
   m_Layer: 6
   m_Name: StopItem
   m_TagString: Untagged
@@ -4806,6 +4831,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1499383163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499383158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f74fcd577a52764980fbbc7b6c34b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  internObjectUI: {fileID: 0}
 --- !u!1001 &1500439408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8343,7 +8381,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -9796,7 +9834,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -10073,7 +10111,7 @@ MonoBehaviour:
   m_LineLength: 10
   m_AutoAdjustLineLength: 1
   m_MinLineLength: 0
-  m_UseDistanceToHitAsMaxLineLength: 1
+  m_UseDistanceToHitAsMaxLineLength: 0
   m_LineRetractionDelay: 0.01
   m_LineLengthChangeSpeed: 75
   m_WidthCurve:

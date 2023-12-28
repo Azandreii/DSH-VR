@@ -148,7 +148,7 @@ public class InternObjectUI : MonoBehaviour
 
     private void AssignBodyTriggerVR_OnCollisionGameObject(object sender, OnCollisionVR.SelectedObjectsEventArgs e)
     {
-        if (e.collisionObject == stopItem)
+        if (e.collisionObject == stopItem && !e.collisionObject.GetComponent<StopItemVR>().IsStashed())
         {
             StopTask();
         }
