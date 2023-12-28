@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7563529563299957017}
   - component: {fileID: 657870642159483936}
   - component: {fileID: 6793104426847899308}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Text (TMP) (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 7447097450554064439}
   - component: {fileID: 3829117648265819437}
   - component: {fileID: 60872280182884718}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 8427886048507572201}
   - component: {fileID: 977254243801155689}
   - component: {fileID: 4882102695834543615}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Text (TMP) (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,8 @@ GameObject:
   - component: {fileID: 6547762122107007146}
   - component: {fileID: 1076679141581140662}
   - component: {fileID: 2550604027064914815}
-  m_Layer: 0
+  - component: {fileID: 8285385404415368396}
+  m_Layer: 7
   m_Name: TriggerCubeVR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,8 +433,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.819, y: 1.517, z: -5.338}
-  m_LocalScale: {x: 0.33, y: 0.33, z: 0.33}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.2, y: 0.1, z: 0.2}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8199986066064818124}
   m_Father: {fileID: 0}
@@ -521,9 +522,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68466e56acf74344b016a748e07c5ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractableObjectsVR:
-  - {fileID: 0}
-  - {fileID: 0}
+--- !u!54 &8285385404415368396
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2592614829368854595}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1
 --- !u!1 &4693307000890304830
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,7 +560,7 @@ GameObject:
   - component: {fileID: 4137516165196493008}
   - component: {fileID: 1213990474961259675}
   - component: {fileID: 5658609473287077349}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -667,8 +692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8535032516389034241}
-  - component: {fileID: 76679146886689449}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TriggerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,19 +724,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &76679146886689449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5212244708176884487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b68466e56acf74344b016a748e07c5ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InteractableObjectsVR: []
 --- !u!1 &6096622734956070836
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,7 +736,7 @@ GameObject:
   - component: {fileID: 4472589103509436742}
   - component: {fileID: 6067765979077562391}
   - component: {fileID: 4872757423172288115}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TriggerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -826,7 +837,7 @@ GameObject:
   - component: {fileID: 3822599814346149636}
   - component: {fileID: 5663479351817493316}
   - component: {fileID: 2078479516746610987}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Text (TMP) (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -960,7 +971,7 @@ GameObject:
   - component: {fileID: 3201970761306392943}
   - component: {fileID: 9119987406319757921}
   - component: {fileID: 4358504227806094289}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,7 +9,7 @@ public class TaskManager : MonoBehaviour
 {
     public static TaskManager Instance;
 
-    public event EventHandler<OnTaskAddedEventArgs> OnTaskAdded;
+    public event EventHandler OnTaskAdded;
     public class OnTaskAddedEventArgs : EventArgs
     {
         public bool hasTasks;

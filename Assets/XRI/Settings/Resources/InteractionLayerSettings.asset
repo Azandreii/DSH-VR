@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LayerNames:
   - Default
-  - 
-  - 
-  - 
-  - 
-  - 
   - Interaction Layer
+  - Stop Item Layer
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

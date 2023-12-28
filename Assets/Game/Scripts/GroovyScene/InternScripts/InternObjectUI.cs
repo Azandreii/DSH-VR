@@ -33,7 +33,7 @@ public class InternObjectUI : MonoBehaviour
     [SerializeField] private ButtonVR stopButtonVR;
 
     [FoldoutGroup("Buttons"), ShowIf("buttonToggle")]
-    [SerializeField] private OnCollisionVR assignTriggerVR;
+    [SerializeField] private OnCollisionVR assignBodyTriggerVR;
     [FoldoutGroup("Buttons"), ShowIf("buttonToggle")]
     [SerializeField] private OnCollisionVR approveTriggerLeftHandVR;
     [FoldoutGroup("Buttons"), ShowIf("buttonToggle")]
@@ -55,6 +55,8 @@ public class InternObjectUI : MonoBehaviour
     [SerializeField] private GameObject internStopButtonObject;
     [FoldoutGroup("GameObjects")]
     [SerializeField] private GameObject internTaskObject;
+    [FoldoutGroup("GameObjects")]
+    [SerializeField] private GameObject stopItem;
     private bool taskAvailable = false;
 
     //[Header("Attributes")]
@@ -68,7 +70,10 @@ public class InternObjectUI : MonoBehaviour
         if (setInternOnAwake)
         {
             internManager.SetInternSO(setInternSO);
-            internStopButtonObject.gameObject.SetActive(false);
+            if (internStopButtonObject != null)
+            {
+                internStopButtonObject.gameObject.SetActive(false);
+            }
             internTaskObject.gameObject.SetActive(false);
         }
     }
@@ -109,7 +114,7 @@ public class InternObjectUI : MonoBehaviour
         TaskManager.Instance.OnTaskAdded += TaskManager_OnTaskAdded;
         internManager.OnStateChanged += InternManager_OnStateChanged;
         
-        if (assignButtonVR !=  null)
+        if (assignButtonVR != null)
         {
             assignButtonVR.OnClick += AssignButtonVR_OnClick;
         }
@@ -126,31 +131,49 @@ public class InternObjectUI : MonoBehaviour
 
         if (approveTriggerLeftHandVR != null) 
         {
-            approveTriggerLeftHandVR.OnCollision += ApproveTriggerLeftHandVR_OnCollision;
+            approveTriggerLeftHandVR.OnCollisionControler += ApproveTriggerLeftHandVR_OnCollision;
         }
 
         if (approveTriggerRightHandVR != null)
         {
-            approveTriggerRightHandVR.OnCollision += ApproveTriggerRightHandVR_OnCollision;
+            approveTriggerRightHandVR.OnCollisionControler += ApproveTriggerRightHandVR_OnCollision;
         }
 
-        if (assignTriggerVR != null)
+        if (assignBodyTriggerVR != null)
         {
-            assignTriggerVR.OnCollision += AssignTriggerVR_OnCollision;
+            assignBodyTriggerVR.OnCollisionControler += AssignTriggerVR_OnCollision;
+            assignBodyTriggerVR.OnCollisionGameObject += AssignBodyTriggerVR_OnCollisionGameObject;
         }
     }
 
-    private void AssignTriggerVR_OnCollision(object sender, OnCollisionVR.SelectedObjectsEventArgs e)
+    private void AssignBodyTriggerVR_OnCollisionGameObject(object sender, OnCollisionVR.SelectedObjectsEventArgs e)
+    {
+        if (e.collisionObject == stopItem)
+        {
+            StopTask();
+        }
+    }
+
+    private void TaskManager_OnTaskAdded(object sender, EventArgs e)
+    {
+        taskAvailable = TaskManager.Instance.HasTasks();
+        if (!TaskManager.Instance.HasTasks() && internManager.GetInternState() != InternManager.State.Unavailable)
+        {
+            internManager.SetInternState(InternManager.State.Available);
+        }
+    }
+
+    private void AssignTriggerVR_OnCollision(object sender, EventArgs e)
     {
         SetTask();
     }
 
-    private void ApproveTriggerRightHandVR_OnCollision(object sender, OnCollisionVR.SelectedObjectsEventArgs e)
+    private void ApproveTriggerRightHandVR_OnCollision(object sender, EventArgs e)
     {
         ApproveTask();
     }
 
-    private void ApproveTriggerLeftHandVR_OnCollision(object sender, OnCollisionVR.SelectedObjectsEventArgs e)
+    private void ApproveTriggerLeftHandVR_OnCollision(object sender, EventArgs e)
     {
         ApproveTask();
     }
@@ -179,45 +202,24 @@ public class InternObjectUI : MonoBehaviour
         }
     }
 
-    private void TaskManager_OnTaskAdded(object sender, TaskManager.OnTaskAddedEventArgs e)
-    {
-        taskAvailable = e.hasTasks;
-        if (!e.hasTasks && internManager.GetInternState() != InternManager.State.Unavailable)
-        {
-            internManager.SetInternState(InternManager.State.Available);
-        }
-    }
-
     private void InternManager_OnStateChanged(object sender, InternManager.OnStateChangedEventArgs e)
     {
         switch (e.state)
         {
             case InternManager.State.Available:
-                if (assignText != null)
-                {
-                    assignText.color = Color.white;
-                }
+                AssignTextColor(Color.white);
                 SetTaskVisibilityUI(false);
                 break;
             case InternManager.State.WorkingOnTask:
-                if (assignText != null)
-                {
-                    assignText.color = Color.white;
-                }
+                AssignTextColor(Color.white);
                 SetTaskVisibilityUI(true);
                 break;
             case InternManager.State.WaitingForApproval:
-                if (assignText != null)
-                {
-                    assignText.color = Color.white;
-                }
+                AssignTextColor(Color.white);
                 SetTaskVisibilityUI(true);
                 break;
             case InternManager.State.Unavailable:
-                if (assignText != null)
-                {
-                    assignText.color = Color.red;
-                }
+                AssignTextColor(Color.red);
                 SetTaskVisibilityUI(false);
                 break;
         }
@@ -231,7 +233,10 @@ public class InternObjectUI : MonoBehaviour
     private void SetTaskVisibilityUI(bool _visibility)
     {
         progressBarObject.SetActive(_visibility);
-        internStopButtonObject.SetActive(_visibility);
+        if (internStopButtonObject != null)
+        {
+            internStopButtonObject.SetActive(_visibility);
+        }
         internTaskObject.SetActive(_visibility);
     }
 
@@ -259,5 +264,14 @@ public class InternObjectUI : MonoBehaviour
     {
         internManager.SetInternState(InternManager.State.Available);
         internManager.ClearTaskSO();
+    }
+
+    private void AssignTextColor(Color _color)
+    {
+        if (assignText != null)
+        {
+            assignText.color = _color;
+        }
+        
     }
 }
