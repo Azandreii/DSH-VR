@@ -71,19 +71,19 @@ public class TaskManager : MonoBehaviour
         }
     }
 
-    private void CreateTask(TaskSO _TaskSO)
+    private void CreateTask(TaskSO _taskSO)
     {
         if (currentTasksList.Count < taskAmountMax)
         {
-            Transform _taskObjectUI = Instantiate(taskTemplate, taskUI);
+            Transform _taskObjectUI = Instantiate(_taskSO.taskObjectUI, taskUI);
             TaskObjectUI toUI = _taskObjectUI.GetComponent<TaskObjectUI>();
-            toUI.SetTaskSO(_TaskSO);
+            toUI.SetTaskSO(_taskSO);
             
-            currentTasksList.Add(_TaskSO);
+            currentTasksList.Add(_taskSO);
             OnTaskAdded?.Invoke(this, new OnTaskAddedEventArgs
             {
                 hasTasks = true,
-                difficulty = GetTaskDifficulty(_TaskSO)
+                difficulty = GetTaskDifficulty(_taskSO)
             });
         }
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6f396d7ad30e146bd8a27d43695598, type: 3}
   m_Name: UploadReel
   m_EditorClassIdentifier: 
-  taskObjectUI: {fileID: 0}
+  taskObjectUI: {fileID: 4682855087238135539, guid: 69aa0c98fcc821147b9c34e92dbe23e5, type: 3}
   taskName: Socials
   taskDescription: DSH needs to post on LinkedIn, Instagram and the Hanze website.
     Get an intern on it!

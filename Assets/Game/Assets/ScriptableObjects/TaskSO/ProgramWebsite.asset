@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6f396d7ad30e146bd8a27d43695598, type: 3}
   m_Name: ProgramWebsite
   m_EditorClassIdentifier: 
-  taskObjectUI: {fileID: 0}
+  taskObjectUI: {fileID: 7544282612785476022, guid: 4183a0554b7dc6f499d0c30ba3bc7a2d, type: 3}
   taskName: Program
   taskDescription: Program a website page for the DSH
   taskDifficulty: 3
+  taskSpecialty: 0

@@ -209,6 +209,12 @@ public class InternManager : MonoBehaviour
 
     private float CalculateTaskEfficiency()
     {
+        Debug.Log($"$Tech: {techEfficiency}, Art: {artEfficiency}, Design: {designEfficiency}, " +
+            $"Economy: {economyEfficiency}, Organisation: {organisationEfficiency}, Research: {researchEfficiency}");
+        Debug.Log(taskSO);
+        Debug.Log(workingEnergyEfficiency);
+        Debug.Log(CalculateTaskEfficiency());
+        Debug.Log(workingEnergyEfficiency * CalculateTaskEfficiency());
         switch (taskSO.taskSpecialty)
         {
             case TaskSO.taskTheme.Tech:
