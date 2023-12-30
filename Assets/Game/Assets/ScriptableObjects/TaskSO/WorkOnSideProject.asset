@@ -16,3 +16,4 @@ MonoBehaviour:
   taskName: Side Project
   taskDescription: An intern will need to work on a secret side project in the DSH.
   taskDifficulty: 1
+  taskSpecialty: 1

@@ -16,3 +16,4 @@ MonoBehaviour:
   taskName: Cleaning
   taskDescription: Clean the office from the dirt
   taskDifficulty: 1
+  taskSpecialty: 4

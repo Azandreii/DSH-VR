@@ -16,6 +16,12 @@ MonoBehaviour:
   internName: Jade
   startEnergy: 30
   maxEnergy: 150
+  selectedTech: 1
+  selectedArt: 0
+  selectedDesign: 0
+  selectedEconomy: 0
+  selectedOrganisation: 0
+  selectedResearch: 0
   processEfficiency: 0.85
   MaxPrEfficiency: 10
   energyEfficiency: 0.3
@@ -24,3 +30,9 @@ MonoBehaviour:
   workingEfficiency: -10
   awaitApprovalEfficiency: -8
   unavailableEfficiency: 12
+  techEfficiency: 2
+  artEfficiency: 2
+  designEfficiency: 2
+  economyEfficiency: 2
+  organisationEfficiency: 2
+  researchEfficiency: 2

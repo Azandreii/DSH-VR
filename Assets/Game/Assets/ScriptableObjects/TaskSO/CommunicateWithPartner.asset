@@ -16,3 +16,4 @@ MonoBehaviour:
   taskName: Email
   taskDescription: Write an email to the partners of DSH!
   taskDifficulty: 2
+  taskSpecialty: 4

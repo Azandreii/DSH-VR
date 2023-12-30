@@ -17,3 +17,4 @@ MonoBehaviour:
   taskDescription: DSH wants you to keep a diary for your intern so you won't fail
     your internship at school!
   taskDifficulty: 1
+  taskSpecialty: 4

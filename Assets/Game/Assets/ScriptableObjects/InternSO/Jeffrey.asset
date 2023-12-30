@@ -16,6 +16,12 @@ MonoBehaviour:
   internName: Jeffrey
   startEnergy: 280
   maxEnergy: 300
+  selectedTech: 0
+  selectedArt: 0
+  selectedDesign: 0
+  selectedEconomy: 1
+  selectedOrganisation: 0
+  selectedResearch: 0
   processEfficiency: 4
   MaxPrEfficiency: 10
   energyEfficiency: 1.7
@@ -24,3 +30,9 @@ MonoBehaviour:
   workingEfficiency: -140
   awaitApprovalEfficiency: -12
   unavailableEfficiency: 7
+  techEfficiency: 2
+  artEfficiency: 2
+  designEfficiency: 2
+  economyEfficiency: 2
+  organisationEfficiency: 2
+  researchEfficiency: 2

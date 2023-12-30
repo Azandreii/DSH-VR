@@ -16,3 +16,4 @@ MonoBehaviour:
   taskName: Coffee
   taskDescription: Get Coffee for you supperior
   taskDifficulty: 1
+  taskSpecialty: 4

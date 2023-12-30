@@ -16,3 +16,4 @@ MonoBehaviour:
   taskName: Poster
   taskDescription: Make a poster for the next DSH vacancy festival
   taskDifficulty: 2
+  taskSpecialty: 2

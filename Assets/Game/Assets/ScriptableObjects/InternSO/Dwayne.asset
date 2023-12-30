@@ -16,6 +16,12 @@ MonoBehaviour:
   internName: Dwayne
   startEnergy: 45
   maxEnergy: 300
+  selectedTech: 0
+  selectedArt: 1
+  selectedDesign: 0
+  selectedEconomy: 1
+  selectedOrganisation: 0
+  selectedResearch: 0
   processEfficiency: 2.8
   MaxPrEfficiency: 10
   energyEfficiency: 1.85
@@ -24,3 +30,9 @@ MonoBehaviour:
   workingEfficiency: -25
   awaitApprovalEfficiency: -3
   unavailableEfficiency: 7
+  techEfficiency: 2
+  artEfficiency: 2
+  designEfficiency: 2
+  economyEfficiency: 2
+  organisationEfficiency: 2
+  researchEfficiency: 2

@@ -53,6 +53,12 @@ public class InternManager : MonoBehaviour
     private float workingEnergyEfficiency = -25f;
     private float awaitApprovalEnergyEfficiency = -3f;
     private float unavaiableEnergyEfficiency = 10f;
+    private float techEfficiency = 1f;
+    private float artEfficiency = 1f;
+    private float designEfficiency = 1f;
+    private float economyEfficiency = 1f;
+    private float organisationEfficiency = 1f;
+    private float researchEfficiency = 1f;
 
     private void Start()
     {
@@ -81,7 +87,7 @@ public class InternManager : MonoBehaviour
             case State.WorkingOnTask:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 progress -= Time.deltaTime * processEfficiency;
-                if (currentEnergy >= 0) { AdjustEnergy(workingEnergyEfficiency, energyEfficiency); }
+                if (currentEnergy >= 0) { AdjustEnergy(workingEnergyEfficiency * CalculateTaskEfficiency(), energyEfficiency); }
                 if (progress < 0)
                 {
                     state = State.WaitingForApproval;
@@ -115,6 +121,8 @@ public class InternManager : MonoBehaviour
         SetEnergy(GetStartEnergy(), GetEnergyMax());
         SetStateEfficiency(GetAvailableEfficiency(), GetWorkingEfficiency(), 
             GetAwaitApprovalEfficiency(), GetUnavailableEfficiency());
+        SetSpecialtyEfficiency(GetTechEfficiency(), GetArtEfficiency(), GetDesignEfficiency(),
+            GetEconomyEfficiency(), GetOrganisationEfficiency(), GetResearchEfficiency());
         internObjectUI.SetInternName();
         gameObject.SetActive(_hide);
     }
@@ -187,6 +195,37 @@ public class InternManager : MonoBehaviour
         workingEnergyEfficiency = _working;
         awaitApprovalEnergyEfficiency = _awaitingApproval;
         unavaiableEnergyEfficiency = _unavailable;
+    }
+
+    public void SetSpecialtyEfficiency(float _tech, float _art, float _design, float _economy, float _organisitation, float _research)
+    {
+        techEfficiency = _tech;
+        artEfficiency = _art;
+        designEfficiency = _design;
+        economyEfficiency = _economy;
+        organisationEfficiency = _organisitation;
+        researchEfficiency = _research;
+    }
+
+    private float CalculateTaskEfficiency()
+    {
+        switch (taskSO.taskSpecialty)
+        {
+            case TaskSO.taskTheme.Tech:
+                return techEfficiency;
+            case TaskSO.taskTheme.Art:
+                return artEfficiency;
+            case TaskSO.taskTheme.Design:
+                return designEfficiency;
+            case TaskSO.taskTheme.Economy:
+                return economyEfficiency;
+            case TaskSO.taskTheme.Organisation:
+                return organisationEfficiency;
+            case TaskSO.taskTheme.Research:
+                return researchEfficiency;
+        }
+        Debug.Log("No task theme set!");
+        return 0f;
     }
 
     private void DifficultySwitch(float _difficultyGrade)
@@ -269,8 +308,70 @@ public class InternManager : MonoBehaviour
         return internSO.unavailableEfficiency;
     }
 
+    public float GetTechEfficiency()
+    {
+        if (internSO.selectedTech)
+        {
+            return internSO.techEfficiency;
+        }
+        float baseModifier = 1f;
+        return baseModifier;
+    }
+
+    public float GetArtEfficiency()
+    {
+        if (internSO.selectedArt)
+        {
+            return internSO.artEfficiency;
+        }
+        float baseModifier = 1f;
+        return baseModifier;
+    }
+
+    public float GetDesignEfficiency()
+    {
+        if (internSO.selectedDesign)
+        {
+            return internSO.designEfficiency;
+        }
+        float baseModifier = 1f;
+        return baseModifier;
+    }
+
+    public float GetEconomyEfficiency()
+    {
+        if (internSO.selectedEconomy)
+        {
+            return internSO.economyEfficiency;
+        }
+        float baseModifier = 1f;
+        return baseModifier;
+    }
+
+    public float GetOrganisationEfficiency()
+    {
+        if (internSO.selectedOrganisation)
+        {
+            return internSO.organisationEfficiency;
+        }
+        float baseModifier = 1f;
+        return baseModifier;
+    }
+
+    public float GetResearchEfficiency()
+    {
+        if (internSO.selectedResearch)
+        {
+            return internSO.researchEfficiency;
+        }
+        float baseModifier = 1f;
+        return baseModifier;
+    }
+
     public void ClearTaskSO()
     {
         taskSO = null;
     }
+
+    
 }

@@ -15,6 +15,13 @@ MonoBehaviour:
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
   internName: Vienna
   startEnergy: 180
+  maxEnergy: 300
+  selectedTech: 0
+  selectedArt: 0
+  selectedDesign: 0
+  selectedEconomy: 0
+  selectedOrganisation: 1
+  selectedResearch: 1
   processEfficiency: 1.5
   MaxPrEfficiency: 10
   energyEfficiency: 2
@@ -23,3 +30,9 @@ MonoBehaviour:
   workingEfficiency: -16
   awaitApprovalEfficiency: -1
   unavailableEfficiency: 45
+  techEfficiency: 2
+  artEfficiency: 2
+  designEfficiency: 2
+  economyEfficiency: 2
+  organisationEfficiency: 2
+  researchEfficiency: 2
