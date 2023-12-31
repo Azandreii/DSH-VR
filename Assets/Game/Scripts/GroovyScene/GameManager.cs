@@ -17,11 +17,6 @@ public class GameManager : MonoBehaviour
         public int totalTasks;
         public TaskSO taskSO;
     }
-    public event EventHandler OnCollisionVRHands;
-    public class OnCollisionVRHandsEventArgs : EventArgs
-    {
-        public GameObject ObjectColided;
-    }
 
     private List<Transform> internList;
     private int TasksCompleted = 0;

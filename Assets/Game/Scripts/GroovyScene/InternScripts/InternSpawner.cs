@@ -70,6 +70,7 @@ public class InternSpawner : MonoBehaviour
 
     public void AddInternToActiveInternList(InternSO _internSO)
     {
+        Debug.Log(_internSO);
         activeInterns.Add(_internSO);
         OnInternCreated?.Invoke(this, new OnInternCreatedEventArgs
         {

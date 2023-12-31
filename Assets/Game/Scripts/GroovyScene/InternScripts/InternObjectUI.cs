@@ -274,6 +274,5 @@ public class InternObjectUI : MonoBehaviour
         {
             assignText.color = _color;
         }
-        
     }
 }

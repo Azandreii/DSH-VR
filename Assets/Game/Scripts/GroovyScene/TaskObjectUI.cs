@@ -31,8 +31,6 @@ public class TaskObjectUI : MonoBehaviour
         if (selectedButtonVR != null)
         {
             selectedButtonVR.OnClick += SelectedButtonVR_OnClick;
-            ButtonVR.OnClickStatic += ButtonVR_OnClickStatic;
-            GameManager.Instance.OnDeselectTask += GameManager_OnDeselectTask;
         }
 
         if (selectedButton != null)
@@ -40,21 +38,7 @@ public class TaskObjectUI : MonoBehaviour
             selectedButton.onClick.AddListener(() =>
             {
                 GameManager.Instance.SetTaskSO(taskSO, gameObject);
-                selectedButton.Select();
             });
-        }
-    }
-
-    private void GameManager_OnDeselectTask(object sender, System.EventArgs e)
-    {
-        NotSelectedTask();
-    }
-
-    private void ButtonVR_OnClickStatic(object sender, ButtonVR.OnClickEventArgs e)
-    {
-        if (e.clickState == ButtonVR.ClickState.ClickDown)
-        {
-            UpdateSelectedButtonVisual(selectedButtonVR.GetClicked());
         }
     }
 
@@ -63,7 +47,6 @@ public class TaskObjectUI : MonoBehaviour
         if (e.clickState == ButtonVR.ClickState.ClickDown)
         {
             GameManager.Instance.SetTaskSO(taskSO, gameObject);
-            UpdateSelectedButtonVisual(selectedButtonVR.GetClicked());
         }
     }
 
@@ -106,31 +89,5 @@ public class TaskObjectUI : MonoBehaviour
                 break;
         }
         taskDifficultyText.text = _taskSO.taskDifficulty.ToString();
-    }
-
-    public void UpdateSelectedButtonVisual(bool _isSelected = false)
-    {
-        switch (_isSelected)
-        {
-            case true:
-                SelectedTask();
-            break;
-            case false:
-                if (GameManager.Instance.GetTaskSO() != taskSO)
-                {
-                    NotSelectedTask();
-                }
-            break;
-        }
-    }
-
-    public void SelectedTask()
-    {
-        selectedButtonVR.SetImage(selectedButtonVR.GetSelectButtonColor(), selectedButtonVR.GetSelectButtonColor().a);
-    }
-
-    public void NotSelectedTask()
-    {
-        selectedButtonVR.SetImage(selectedButtonVR.GetButtonColor(), selectedButtonVR.GetButtonColor().a);
     }
 }
