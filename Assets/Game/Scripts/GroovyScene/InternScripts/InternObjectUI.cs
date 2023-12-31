@@ -61,32 +61,9 @@ public class InternObjectUI : MonoBehaviour
 
     //[Header("Attributes")]
 
-    [Title("Set Intern Settings")]
-    [SerializeField] bool setInternOnAwake = false;
-    [SerializeField] InternSO setInternSO;
-
-    private void Awake()
-    {
-        if (setInternOnAwake)
-        {
-            internManager.SetInternSO(setInternSO);
-            if (internStopButtonObject != null)
-            {
-                internStopButtonObject.gameObject.SetActive(false);
-            }
-            internTaskObject.gameObject.SetActive(false);
-        }
-    }
-
     private void Start()
 
     {
-        if (setInternOnAwake)
-        {
-            int aditionalIntern = 1;
-            InternSpawner.Instance.AdjustInternCount(aditionalIntern);
-            InternSpawner.Instance.AddInternToActiveInternList(setInternSO);
-        }
         taskAvailable = TaskManager.Instance.HasTasks();
         if (assignButton != null)
         {
@@ -149,7 +126,7 @@ public class InternObjectUI : MonoBehaviour
 
     private void AssignBodyTriggerVR_OnCollisionGameObject(object sender, OnCollisionVR.SelectedObjectsEventArgs e)
     {
-        if (e.collisionObject == stopItem && !e.collisionObject.GetComponent<StopItemVR>().IsStashed())
+        if (e.collisionObject == stopItem && !e.collisionObject.GetComponent<StopItemVR>().IsStashed() && internManager.GetInternState() != InternManager.State.Unavailable)
         {
             StopTask();
         }
@@ -274,5 +251,15 @@ public class InternObjectUI : MonoBehaviour
         {
             assignText.color = _color;
         }
+    }
+
+    public GameObject GetStopButtonObject()
+    {
+        return internStopButtonObject;
+    }
+
+    public GameObject GetInternTaskObject()
+    {
+        return internTaskObject;
     }
 }

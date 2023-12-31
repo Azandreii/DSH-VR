@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: JadeTest
   m_EditorClassIdentifier: 
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
-  internName: Jade
+  internName: JadeTest
   startEnergy: 30
   maxEnergy: 150
   selectedTech: 0

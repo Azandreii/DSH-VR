@@ -60,8 +60,31 @@ public class InternManager : MonoBehaviour
     private float organisationEfficiency = 1f;
     private float researchEfficiency = 1f;
 
+    [Title("Set Intern Settings")]
+    [SerializeField] bool setInternOnAwake = false;
+    [SerializeField] InternSO setInternSO;
+
+    private void Awake()
+    {
+        if (setInternOnAwake)
+        {
+            SetInternSO(setInternSO);
+            if (internObjectUI.GetStopButtonObject() != null)
+            {
+                internObjectUI.GetStopButtonObject().gameObject.SetActive(false);
+            }
+            internObjectUI.GetInternTaskObject().gameObject.SetActive(false);
+        }
+    }
+
     private void Start()
     {
+        if (setInternOnAwake)
+        {
+            int aditionalIntern = 1;
+            InternSpawner.Instance.AdjustInternCount(aditionalIntern);
+            InternSpawner.Instance.AddInternToActiveInternList(setInternSO);
+        }
         GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
     }
 

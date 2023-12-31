@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,27 +16,27 @@ public class OnCollisionVR : MonoBehaviour
     }
 
     [Header("References")]
-    private List<GameObject> controlersListVR;
+    protected List<GameObject> controlersListVR;
     //[SerializeField] private GameObject[] interactableObjectsVR;
 
-    private bool hasControlers;
+    protected bool hasControlers;
 
     private void Start()
     {
         SetControlerReferences();
     }
 
-    private void OnCollisionEnter(Collision _collision)
+    protected void OnCollisionEnter(Collision _collision)
     {
         CheckColisionWithControler(_collision);
         ColisionWithObject(_collision);
     }
 
-    private void CheckColisionWithControler(Collision _collision)
+    protected void CheckColisionWithControler(Collision _collision)
     {
-        foreach (GameObject ControlerVR in controlersListVR)
+        foreach (GameObject _controlerVR in controlersListVR)
         {
-            if (_collision.gameObject == ControlerVR)
+            if (_collision.gameObject == _controlerVR)
             {
                 OnCollisionControler?.Invoke(this, EventArgs.Empty);
                 Debug.Log("Collision found between object and controler");
@@ -43,7 +44,7 @@ public class OnCollisionVR : MonoBehaviour
         }
     }
 
-    private void ColisionWithObject(Collision _collision)
+    protected virtual void ColisionWithObject(Collision _collision)
     {
         OnCollisionGameObject?.Invoke(this, new SelectedObjectsEventArgs
         {

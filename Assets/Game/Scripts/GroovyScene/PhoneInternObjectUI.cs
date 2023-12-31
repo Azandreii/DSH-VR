@@ -46,7 +46,6 @@ public class PhoneInternObjectUI : MonoBehaviour
             internSpecialtiesString += "research, ";
         }
         internSpecialtiesString += "learning and flexibility.";
-        Debug.Log(internSpecialtiesString);
         internSpecialties.text = internSpecialtiesString;
         Show();
     }

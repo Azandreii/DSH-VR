@@ -30,12 +30,12 @@ public class PhoneManager : MonoBehaviour
         phoneMenuToTaskUI.OnClick += PhoneMenuTaskUI_OnClick;
         phoneMenuToInternInformation.OnClick += PhoneMenuInternInformation_OnClick;
         phoneMenuToLevelSelect.OnClick += PhoneMenuLevelSelect_OnClick;
-        InternSpawner.Instance.OnInternCreated += InternSpawner_OnInternCreated;
+        InternSpawnerObject.Instance.OnInternObjectCreated += InternSpawner_OnInternCreated;
     }
 
-    private void InternSpawner_OnInternCreated(object sender, InternSpawner.OnInternCreatedEventArgs e)
+    private void InternSpawner_OnInternCreated(object sender, InternSpawnerObject.OnInternObjectCreatedEventArgs e)
     {
-        SetIntern(e);
+        SetInternSO(e.internSO);
     }
 
     private void PhoneMenuLevelSelect_OnClick(object sender, ButtonVR.OnClickEventArgs e)
@@ -66,7 +66,6 @@ public class PhoneManager : MonoBehaviour
     {
         if (e.clickState == ButtonVR.ClickState.ClickDown)
         {
-            Debug.Log("HomeButtonPressed");
             ShowMainMenu();
         }
     }
@@ -75,7 +74,6 @@ public class PhoneManager : MonoBehaviour
     {
         if (e.clickState == ButtonVR.ClickState.ClickDown)
         {
-            Debug.Log("HomeButtonPressed");
             ShowMainMenu();
         }
     }
@@ -85,6 +83,7 @@ public class PhoneManager : MonoBehaviour
         containerTaskUI.SetActive(false);
         containerPhoneMenu.SetActive(true);
         containerInternInformation.SetActive(false);
+        PhoneTaskCount.Instance.UpdateVisual();
     }
 
     private void ShowInternInformation()
@@ -101,10 +100,11 @@ public class PhoneManager : MonoBehaviour
         containerInternInformation.SetActive(false);
     }
 
-    private void SetIntern(InternSpawner.OnInternCreatedEventArgs e)
+    private void SetInternSO(InternSO _internSO)
     {
-            Transform _phoneInternUI = Instantiate(phoneInternObjectUI, internGroup);
-            PhoneInternObjectUI pioui = _phoneInternUI.GetComponent<PhoneInternObjectUI>();
-            pioui.SetInternSO(e.internSO);
+        Transform _phoneInternUI = Instantiate(phoneInternObjectUI, internGroup);
+        PhoneInternObjectUI pioui = _phoneInternUI.GetComponent<PhoneInternObjectUI>();
+        pioui.SetInternSO(_internSO);
+        gameObject.SetActive(true);
     }
 }

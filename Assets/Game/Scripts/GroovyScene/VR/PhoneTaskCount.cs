@@ -32,7 +32,7 @@ public class PhoneTaskCount : MonoBehaviour
         UpdateVisual();
     }
 
-    private void UpdateVisual()
+    public void UpdateVisual()
     {
         if (phoneTaskCount == 0)
         {
