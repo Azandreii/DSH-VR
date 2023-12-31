@@ -85,6 +85,7 @@ public class InternObjectUI : MonoBehaviour
         {
             int aditionalIntern = 1;
             InternSpawner.Instance.AdjustInternCount(aditionalIntern);
+            InternSpawner.Instance.AddInternToActiveInternList(setInternSO);
         }
         taskAvailable = TaskManager.Instance.HasTasks();
         if (assignButton != null)
@@ -255,6 +256,7 @@ public class InternObjectUI : MonoBehaviour
     {
         if (internManager.GetInternState() == InternManager.State.WaitingForApproval)
         {
+            //Could be an event
             GameManager.Instance.AddTaskCompleted(internManager.GetTaskSO(), internManager.GetGameObjectTaskSO());
             internManager.PlayerApproved();
         }

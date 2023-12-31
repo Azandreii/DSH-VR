@@ -9,9 +9,16 @@ using UnityEngine;
 public class InternSpawner : MonoBehaviour
 {
     public static InternSpawner Instance;
+
+    public event EventHandler<OnInternCreatedEventArgs> OnInternCreated;
+    public class OnInternCreatedEventArgs : EventArgs
+    {
+        public InternSO internSO;
+    }
     
     [Header("References")]
     [SerializeField] private InternSO[] internArraySO;
+    private List<InternSO> activeInterns;
     [SerializeField] private Transform internUI;
     [SerializeField] private Transform internTemplate;
 
@@ -23,12 +30,13 @@ public class InternSpawner : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        activeInterns = new List<InternSO>();
+        timeTillNextIntern = internTimerMax;
     }
 
     private void Start()
     {
         internTemplate.gameObject.SetActive(false);
-        timeTillNextIntern = internTimerMax;
         UpdateVisual();
     }
 
@@ -52,10 +60,21 @@ public class InternSpawner : MonoBehaviour
             Transform _internUI = Instantiate(internTemplate, internUI);
 
             //Attach the scriptableObject to the InternManager
+            InternSO chosenIntern = internArraySO[internCount];
             InternManager im = _internUI.GetComponent<InternManager>();
-            im.SetInternSO(internArraySO[internCount]);
+            im.SetInternSO(chosenIntern);
             internCount++;
+            AddInternToActiveInternList(chosenIntern);
         }
+    }
+
+    public void AddInternToActiveInternList(InternSO _internSO)
+    {
+        activeInterns.Add(_internSO);
+        OnInternCreated?.Invoke(this, new OnInternCreatedEventArgs
+        {
+            internSO = _internSO,
+        });
     }
 
     private void UpdateVisual()

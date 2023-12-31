@@ -15,5 +15,6 @@ MonoBehaviour:
   taskObjectUI: {fileID: 6438966367140107331, guid: de2e6c4f8fb308b44a84373d2e8b531e, type: 3}
   taskName: Side Project
   taskDescription: An intern will need to work on a secret side project in the DSH.
+    (Art)
   taskDifficulty: 1
   taskSpecialty: 1

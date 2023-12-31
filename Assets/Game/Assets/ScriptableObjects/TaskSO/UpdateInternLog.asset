@@ -15,6 +15,6 @@ MonoBehaviour:
   taskObjectUI: {fileID: 8929417063504854834, guid: a7960577cebfb544fb4623f7d8587e23, type: 3}
   taskName: Diary
   taskDescription: DSH wants you to keep a diary for your intern so you won't fail
-    your internship at school!
+    your internship at school! (Organisation)
   taskDifficulty: 1
   taskSpecialty: 4

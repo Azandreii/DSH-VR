@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskObjectUI: {fileID: 8929417063504854834, guid: a7960577cebfb544fb4623f7d8587e23, type: 3}
   taskName: Coffee
-  taskDescription: Get Coffee for you supperior
+  taskDescription: Get Coffee for you supperior. (Organisation)
   taskDifficulty: 1
   taskSpecialty: 4

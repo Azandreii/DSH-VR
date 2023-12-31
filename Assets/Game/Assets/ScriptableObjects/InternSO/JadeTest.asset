@@ -16,8 +16,8 @@ MonoBehaviour:
   internName: Jade
   startEnergy: 30
   maxEnergy: 150
-  selectedTech: 1
-  selectedArt: 0
+  selectedTech: 0
+  selectedArt: 1
   selectedDesign: 0
   selectedEconomy: 0
   selectedOrganisation: 0

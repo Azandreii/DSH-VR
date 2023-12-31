@@ -86,8 +86,8 @@ public class InternManager : MonoBehaviour
                 break;
             case State.WorkingOnTask:
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
-                progress -= Time.deltaTime * processEfficiency;
-                if (currentEnergy >= 0) { AdjustEnergy(workingEnergyEfficiency * CalculateTaskEfficiency(), energyEfficiency); }
+                progress -= Time.deltaTime * processEfficiency * CalculateTaskEfficiency();
+                if (currentEnergy >= 0) { AdjustEnergy(workingEnergyEfficiency, energyEfficiency); }
                 if (progress < 0)
                 {
                     state = State.WaitingForApproval;
@@ -209,12 +209,6 @@ public class InternManager : MonoBehaviour
 
     private float CalculateTaskEfficiency()
     {
-        Debug.Log($"$Tech: {techEfficiency}, Art: {artEfficiency}, Design: {designEfficiency}, " +
-            $"Economy: {economyEfficiency}, Organisation: {organisationEfficiency}, Research: {researchEfficiency}");
-        Debug.Log(taskSO);
-        Debug.Log(workingEnergyEfficiency);
-        Debug.Log(CalculateTaskEfficiency());
-        Debug.Log(workingEnergyEfficiency * CalculateTaskEfficiency());
         switch (taskSO.taskSpecialty)
         {
             case TaskSO.taskTheme.Tech:

@@ -9,10 +9,10 @@ public class TaskManager : MonoBehaviour
 {
     public static TaskManager Instance;
 
-    public event EventHandler OnTaskAdded;
+    public event EventHandler<OnTaskAddedEventArgs> OnTaskAdded;
     public class OnTaskAddedEventArgs : EventArgs
     {
-        public bool hasTasks;
+        public float taskAmount;
         public float difficulty;
     }
 
@@ -53,7 +53,7 @@ public class TaskManager : MonoBehaviour
         {
             OnTaskAdded?.Invoke(this, new OnTaskAddedEventArgs
             {
-                hasTasks = false
+                taskAmount = currentTasksList.Count,
             });
         }
     }
@@ -82,7 +82,7 @@ public class TaskManager : MonoBehaviour
             currentTasksList.Add(_taskSO);
             OnTaskAdded?.Invoke(this, new OnTaskAddedEventArgs
             {
-                hasTasks = true,
+                taskAmount = currentTasksList.Count,
                 difficulty = GetTaskDifficulty(_taskSO)
             });
         }

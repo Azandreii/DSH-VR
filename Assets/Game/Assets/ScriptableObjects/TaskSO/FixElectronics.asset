@@ -15,6 +15,6 @@ MonoBehaviour:
   taskObjectUI: {fileID: 7544282612785476022, guid: 4183a0554b7dc6f499d0c30ba3bc7a2d, type: 3}
   taskName: Repair
   taskDescription: The 3D printer in the Spacelab is broken again. Someone will need
-    to fix it
+    to fix it. (Tech)
   taskDifficulty: 2
   taskSpecialty: 0

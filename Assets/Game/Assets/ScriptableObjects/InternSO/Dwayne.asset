@@ -18,8 +18,8 @@ MonoBehaviour:
   maxEnergy: 300
   selectedTech: 0
   selectedArt: 1
-  selectedDesign: 0
-  selectedEconomy: 1
+  selectedDesign: 1
+  selectedEconomy: 0
   selectedOrganisation: 0
   selectedResearch: 0
   processEfficiency: 2.8

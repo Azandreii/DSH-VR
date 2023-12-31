@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskObjectUI: {fileID: 8029513779598881733, guid: bc9b12afee30f6d4aa533b7e68e7863a, type: 3}
   taskName: Poster
-  taskDescription: Make a poster for the next DSH vacancy festival
+  taskDescription: Make a poster for the next DSH vacancy festival. (Design)
   taskDifficulty: 2
   taskSpecialty: 2

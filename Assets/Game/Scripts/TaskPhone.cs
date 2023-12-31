@@ -6,16 +6,16 @@ using UnityEngine;
 public class TaskPhone : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private GameObject taskCanvas;
+    [SerializeField] private GameObject phoneCanvas;
     [SerializeField] private GameObject phoneVisual;
 
-    public void ShowCanvas()
+    public void ShowPhoneCanvas()
     {
-        taskCanvas.SetActive(true);
+        phoneCanvas.SetActive(true);
     }
 
-    public void HideCanvas()
+    public void HidePhoneCanvas()
     {
-        taskCanvas.SetActive(false);
+        phoneCanvas.SetActive(false);
     }
 }

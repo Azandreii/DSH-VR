@@ -10,12 +10,12 @@ public class PhoneHolder : MonoBehaviour
     public void OnSelectEnter()
     {
         TaskPhone tp = taskPhone.GetComponent<TaskPhone>();
-        tp.HideCanvas();
+        tp.HidePhoneCanvas();
     }
 
     public void OnSelectExit()
     {
         TaskPhone tp = taskPhone.GetComponent<TaskPhone>();
-        tp.ShowCanvas();
+        tp.ShowPhoneCanvas();
     }
 }
