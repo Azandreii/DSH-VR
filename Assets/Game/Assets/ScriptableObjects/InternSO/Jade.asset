@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Jade
   m_EditorClassIdentifier: 
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
+  internObjectVR: {fileID: 2459957585372401173, guid: 92ce359eb625de94a8e771d359e27e42, type: 3}
   internName: Jade
   startEnergy: 30
   maxEnergy: 150
@@ -20,7 +21,7 @@ MonoBehaviour:
   selectedArt: 0
   selectedDesign: 0
   selectedEconomy: 0
-  selectedOrganisation: 0
+  selectedOrganisation: 1
   selectedResearch: 0
   processEfficiency: 0.85
   MaxPrEfficiency: 10
@@ -30,6 +31,9 @@ MonoBehaviour:
   workingEfficiency: -10
   awaitApprovalEfficiency: -8
   unavailableEfficiency: 12
+  selectedSpecialties:
+  - selectedTech
+  - selectedOrganisation
   techEfficiency: 2
   artEfficiency: 2
   designEfficiency: 2

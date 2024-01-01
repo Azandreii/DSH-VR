@@ -67,7 +67,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6730660681519136640
 Transform:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762651461747739244}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.3096135, z: -0, w: 0.95086247}
+  m_LocalRotation: {x: 0, y: -0.3096145, z: 0, w: 0.95086217}
   m_LocalPosition: {x: -0.562, y: 1, z: -5.016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -105,6 +105,9 @@ MonoBehaviour:
   state: 0
   setInternOnAwake: 0
   setInternSO: {fileID: 0}
+  easyDifficulty: 3
+  mediumDifficulty: 7
+  hardDifficulty: 11
 --- !u!1 &1620113708257801203
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +473,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 596254172430863980, guid: ff067379a84ddf047aad43a0108cc8a7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 743561277216761572, guid: ff067379a84ddf047aad43a0108cc8a7, type: 3}
       propertyPath: setInternSO
@@ -482,11 +485,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2109000865685035182, guid: ff067379a84ddf047aad43a0108cc8a7, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2109000865685035182, guid: ff067379a84ddf047aad43a0108cc8a7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3775458584969036645, guid: ff067379a84ddf047aad43a0108cc8a7, type: 3}
       propertyPath: assignText
@@ -671,15 +674,15 @@ PrefabInstance:
     - target: {fileID: 6302640858161344744, guid: ff067379a84ddf047aad43a0108cc8a7, type: 3}
       propertyPath: internManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1174713867617353478}
     - target: {fileID: 7519829772937407959, guid: ff067379a84ddf047aad43a0108cc8a7, type: 3}
       propertyPath: internManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1174713867617353478}
     - target: {fileID: 8998541432693157437, guid: ff067379a84ddf047aad43a0108cc8a7, type: 3}
       propertyPath: internManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1174713867617353478}
     m_RemovedComponents:
     - {fileID: 969552842758648602, guid: ff067379a84ddf047aad43a0108cc8a7, type: 3}
     - {fileID: 3096143706289839, guid: ff067379a84ddf047aad43a0108cc8a7, type: 3}

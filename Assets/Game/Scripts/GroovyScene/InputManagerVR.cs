@@ -10,6 +10,7 @@ public class InputManagerVR : MonoBehaviour
     [SerializeField] private GameObject controlerLeft;
     [SerializeField] private GameObject controlerRight;
     [SerializeField] private GameObject cameraVR;
+    [SerializeField] private GameObject stopItem;
 
     private void Awake()
     {
@@ -31,6 +32,10 @@ public class InputManagerVR : MonoBehaviour
         return cameraVR;
     }
 
+    public GameObject GetStopItem()
+    {
+        return stopItem;
+    }
     public void OnRaySelectedEnterVR()
     {
         Debug.Log("OnRaySelectedEnterVR triggered");

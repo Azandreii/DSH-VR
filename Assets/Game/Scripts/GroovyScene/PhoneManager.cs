@@ -5,6 +5,15 @@ using UnityEngine;
 
 public class PhoneManager : MonoBehaviour
 {
+    public static PhoneManager Instance;
+
+    public enum PhoneState
+    {
+        PhoneMenu,
+        InternInformation,
+        PhoneTasks,
+    }
+
     [Header("References")]
     [SerializeField] private GameObject containerTaskUI;
     [SerializeField] private GameObject containerPhoneMenu;
@@ -17,10 +26,16 @@ public class PhoneManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI taskCountPopUp;
     [SerializeField] private Transform phoneInternObjectUI;
     [SerializeField] private Transform internGroup;
+    private PhoneState phoneState;
 
     private void Awake()
     {
+        Instance = this;
         phoneInternObjectUI.gameObject.SetActive(false);
+        containerInternInformation.gameObject.SetActive(false);
+        containerPhoneMenu.gameObject.SetActive(true);
+        containerTaskUI.gameObject.SetActive(false);
+        phoneState = PhoneState.PhoneMenu;
     }
 
     private void Start()
@@ -83,6 +98,7 @@ public class PhoneManager : MonoBehaviour
         containerTaskUI.SetActive(false);
         containerPhoneMenu.SetActive(true);
         containerInternInformation.SetActive(false);
+        phoneState = PhoneState.PhoneMenu;
         PhoneTaskCount.Instance.UpdateVisual();
     }
 
@@ -91,6 +107,7 @@ public class PhoneManager : MonoBehaviour
         containerTaskUI.SetActive(false);
         containerPhoneMenu.SetActive(false);
         containerInternInformation.SetActive(true);
+        phoneState = PhoneState.InternInformation;
     }
 
     private void ShowTaskUI()
@@ -98,13 +115,19 @@ public class PhoneManager : MonoBehaviour
         containerTaskUI.SetActive(true);
         containerPhoneMenu.SetActive(false);
         containerInternInformation.SetActive(false);
+        phoneState = PhoneState.PhoneTasks;
     }
 
     private void SetInternSO(InternSO _internSO)
     {
-        Transform _phoneInternUI = Instantiate(phoneInternObjectUI, internGroup);
-        PhoneInternObjectUI pioui = _phoneInternUI.GetComponent<PhoneInternObjectUI>();
-        pioui.SetInternSO(_internSO);
+        Transform _phoneInternObjectUI = Instantiate(phoneInternObjectUI, internGroup);
+        PhoneInternObjectUI _pioui = _phoneInternObjectUI.GetComponent<PhoneInternObjectUI>();
+        _pioui.SetInternSO(_internSO);
         gameObject.SetActive(true);
+    }
+
+    public bool IsPhoneMenu()
+    {
+        return phoneState == PhoneState.PhoneMenu;
     }
 }

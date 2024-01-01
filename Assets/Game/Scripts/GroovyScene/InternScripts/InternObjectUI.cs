@@ -55,8 +55,7 @@ public class InternObjectUI : MonoBehaviour
     [SerializeField] private GameObject internStopButtonObject;
     [FoldoutGroup("GameObjects")]
     [SerializeField] private GameObject internTaskObject;
-    [FoldoutGroup("GameObjects")]
-    [SerializeField] private GameObject stopItem;
+    private GameObject stopItem;
     private bool taskAvailable = false;
 
     //[Header("Attributes")]
@@ -64,6 +63,7 @@ public class InternObjectUI : MonoBehaviour
     private void Start()
 
     {
+        stopItem = InputManagerVR.Instance.GetStopItem();
         taskAvailable = TaskManager.Instance.HasTasks();
         if (assignButton != null)
         {

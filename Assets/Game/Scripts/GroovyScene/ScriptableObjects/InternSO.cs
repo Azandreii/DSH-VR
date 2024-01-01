@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using TMPro;
+using Unity.VisualScripting;
 
 [CreateAssetMenu()]
 public class InternSO : ScriptableObject
@@ -13,20 +15,8 @@ public class InternSO : ScriptableObject
     private const string ORGANISATION_SELECTED = "selectedOrganisation";
     private const string RESEARCH_SELECTED = "selectedResearch";
 
-
-    [System.Flags]
-    public enum Proficiency
-    {
-        Tech = 1 << 1,
-        Art = 1 << 2,
-        Design = 1 << 3,
-        Economy = 1 << 4,
-        Organisation = 1 << 5,
-        Research = 1 << 6,
-        All = Tech | Art | Design | Economy | Organisation | Research
-    }
-
     public Transform internObjectUI;
+    public GameObject internObjectVR;
     public string internName;
     [Title("Attributes") ,Range(0, 300)]
     public float startEnergy = 200f;
@@ -36,31 +26,49 @@ public class InternSO : ScriptableObject
     private void Tech()
     {
         selectedTech = !selectedTech;
+        SwapSelectedState(selectedTech, TECH_SELECTED);
     }
     [ButtonGroup("SelectedSpecialty")]
     private void Art()
     {
         selectedArt = !selectedArt;
+        SwapSelectedState(selectedArt, ART_SELECTED);
     }
     [ButtonGroup("SelectedSpecialty")]
     private void Design()
     {
         selectedDesign = !selectedDesign;
+        SwapSelectedState(selectedDesign, DESIGN_SELECTED);
     }
     [ButtonGroup("SelectedSpecialty")]
     private void Economy()
     {
         selectedEconomy = !selectedEconomy;
+        SwapSelectedState(selectedEconomy, ECONOMY_SELECTED);
     }
     [ButtonGroup("SelectedSpecialty")]
     private void Organisation()
     {
         selectedOrganisation = !selectedOrganisation;
+        SwapSelectedState(selectedOrganisation, ORGANISATION_SELECTED);
     }
     [ButtonGroup("SelectedSpecialty")]
     private void Research()
     {
         selectedResearch = !selectedResearch;
+        SwapSelectedState(selectedResearch, RESEARCH_SELECTED);
+    }
+
+    [ButtonGroup("SelectedSpecialty")]
+    private void ClearList()
+    {
+        selectedSpecialties.Clear();
+        selectedTech = false;
+        selectedArt = false;
+        selectedDesign = false;
+        selectedEconomy = false;
+        selectedOrganisation = false;
+        selectedResearch = false;
     }
 
     [HideInInspector]
@@ -96,6 +104,8 @@ public class InternSO : ScriptableObject
     [FoldoutGroup("Energy Efficiency")]
     public float unavailableEfficiency = 10f;
 
+    [DisableInEditorMode, HideInPlayMode, FoldoutGroup("Specialty Group")]
+    public List<string> selectedSpecialties = new List<string>();
     [ShowIf(TECH_SELECTED), FoldoutGroup("Specialty Group")]
     public float techEfficiency = 2f;
     [ShowIf(ART_SELECTED), FoldoutGroup("Specialty Group")]
@@ -108,4 +118,16 @@ public class InternSO : ScriptableObject
     public float organisationEfficiency = 2f;
     [ShowIf(RESEARCH_SELECTED), FoldoutGroup("Specialty Group")]
     public float researchEfficiency = 2f;
+
+    private void SwapSelectedState(bool _selectedState, string _stateText)
+    {
+        if (_selectedState)
+        {
+            selectedSpecialties.Add(_stateText);
+        }
+        else
+        {
+            selectedSpecialties.Remove(_stateText);
+        }
+    }
 }

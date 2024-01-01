@@ -40,6 +40,22 @@ public class TaskObjectUI : MonoBehaviour
                 GameManager.Instance.SetTaskSO(taskSO, gameObject);
             });
         }
+        GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
+    }
+
+    private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)
+    {
+        if (selectedButtonVR != null && e.taskSO == taskSO)
+        {
+            selectedButtonVR.OnClick -= SelectedButtonVR_OnClick;
+        }
+        if (selectedButton != null && e.taskSO == taskSO)
+        {
+            selectedButton.onClick.RemoveListener(() =>
+            {
+                GameManager.Instance.SetTaskSO(taskSO, gameObject);
+            });
+        }
     }
 
     private void SelectedButtonVR_OnClick(object sender, ButtonVR.OnClickEventArgs e)

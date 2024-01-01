@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Jeffrey
   m_EditorClassIdentifier: 
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
+  internObjectVR: {fileID: 931907244083659383, guid: 5da140dbe56126941a79dea03a2545e2, type: 3}
   internName: Jeffrey
   startEnergy: 280
   maxEnergy: 300
@@ -21,7 +22,7 @@ MonoBehaviour:
   selectedDesign: 0
   selectedEconomy: 1
   selectedOrganisation: 0
-  selectedResearch: 0
+  selectedResearch: 1
   processEfficiency: 4
   MaxPrEfficiency: 10
   energyEfficiency: 1.7
@@ -30,6 +31,9 @@ MonoBehaviour:
   workingEfficiency: -140
   awaitApprovalEfficiency: -12
   unavailableEfficiency: 7
+  selectedSpecialties:
+  - selectedEconomy
+  - selectedResearch
   techEfficiency: 2
   artEfficiency: 2
   designEfficiency: 2

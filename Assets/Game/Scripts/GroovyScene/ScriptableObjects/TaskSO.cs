@@ -14,6 +14,7 @@ public class TaskSO : ScriptableObject
         Economy,
         Organisation,
         Research,
+        Default,
     }
 
     public Transform taskObjectUI;
