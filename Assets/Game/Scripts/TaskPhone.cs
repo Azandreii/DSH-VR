@@ -27,7 +27,6 @@ public class TaskPhone : MonoBehaviour
             lerpTimerNormalized = 1 - lerpTimer / lerpTimerMax;
             transform.position = Vector3.Lerp(transform.position, phoneHolder.transform.position, lerpSpeed * lerpTimerNormalized);
             transform.rotation = Quaternion.Lerp(transform.rotation, phoneHolder.transform.rotation, lerpSpeed * lerpTimerNormalized * 1.3f);
-            Debug.Log(lerpSpeed);
             if (lerpTimer <= 0)
             {
                 timeLerp = false;
