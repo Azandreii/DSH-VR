@@ -17,7 +17,7 @@ MonoBehaviour:
   startEnergy: 30
   maxEnergy: 150
   selectedTech: 0
-  selectedArt: 1
+  selectedArt: 0
   selectedDesign: 0
   selectedEconomy: 0
   selectedOrganisation: 0
@@ -30,6 +30,7 @@ MonoBehaviour:
   workingEfficiency: -10
   awaitApprovalEfficiency: -8
   unavailableEfficiency: 12
+  selectedSpecialties: []
   techEfficiency: 2
   artEfficiency: 2
   designEfficiency: 2

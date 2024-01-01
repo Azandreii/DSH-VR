@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Bson;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,10 +60,16 @@ public class InternManager : MonoBehaviour
     private float economyEfficiency = 1f;
     private float organisationEfficiency = 1f;
     private float researchEfficiency = 1f;
+    private float defaultEffieciency = 1f;
 
     [Title("Set Intern Settings")]
     [SerializeField] bool setInternOnAwake = false;
     [SerializeField] InternSO setInternSO;
+
+    [Title("Task Level Effiency")]
+    [SerializeField] private float easyDifficulty = 3f;
+    [SerializeField] private float mediumDifficulty = 7f;
+    [SerializeField] private float hardDifficulty = 11f;
 
     private void Awake()
     {
@@ -167,7 +174,7 @@ public class InternManager : MonoBehaviour
     public void SetInternManagerTask(TaskSO _taskSO, GameObject _gameObjectTaskSO)
     {
         taskSO = _taskSO;
-        DifficultySwitch(_taskSO.taskDifficulty);
+        DifficultySwitch(_taskSO);
         gameObjectInternSO = _gameObjectTaskSO;
         this.state = State.WorkingOnTask;
     }
@@ -246,26 +253,27 @@ public class InternManager : MonoBehaviour
                 return organisationEfficiency;
             case TaskSO.taskTheme.Research:
                 return researchEfficiency;
+            case TaskSO.taskTheme.Default:
+                return defaultEffieciency;
         }
         Debug.Log("No task theme set!");
         return 0f;
     }
 
-    private void DifficultySwitch(float _difficultyGrade)
+    private void DifficultySwitch(TaskSO _taskSO)
     {
+
+        int _difficultyGrade = _taskSO.taskDifficulty;
         switch (_difficultyGrade)
         {
             case 1:
-                float easyTaskTime = 3f;
-                progressMax = easyTaskTime;
+                progressMax = easyDifficulty;
                 break;
             case 2:
-                float mediumTaskTime = 7f;
-                progressMax = mediumTaskTime;
+                progressMax = mediumDifficulty;
                 break;
             case 3:
-                float hardTaskTime = 11f;
-                progressMax = hardTaskTime;
+                progressMax = hardDifficulty;
                 break;
         }
         progress = progressMax;
@@ -395,6 +403,4 @@ public class InternManager : MonoBehaviour
     {
         taskSO = null;
     }
-
-    
 }

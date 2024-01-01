@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class PhoneTaskCount : MonoBehaviour
 {
-    //Change the Task Manager event from has tasks to task count.
-    //With it, you can get the amount of tasks and use that to update the task count, instead of 
-    //creatung a seperate script and gameObject in the scene
     public static PhoneTaskCount Instance;
 
     [Header("References")]
@@ -34,11 +31,11 @@ public class PhoneTaskCount : MonoBehaviour
 
     public void UpdateVisual()
     {
-        if (phoneTaskCount == 0)
+        if (phoneTaskCount == 0 && PhoneManager.Instance.IsPhoneMenu() && !TaskPhone.Instance.GetInPants())
         {
             phoneTaskCountImage.gameObject.SetActive(false);
         }
-        else
+        else if (phoneTaskCount > 0 && PhoneManager.Instance.IsPhoneMenu() && !TaskPhone.Instance.GetInPants())
         {
             phoneTaskCountImage.gameObject.SetActive(true);
             phoneTaskCountText.text = phoneTaskCount.ToString();

@@ -16,6 +16,7 @@ public class InternSO : ScriptableObject
     private const string RESEARCH_SELECTED = "selectedResearch";
 
     public Transform internObjectUI;
+    public GameObject internObjectVR;
     public string internName;
     [Title("Attributes") ,Range(0, 300)]
     public float startEnergy = 200f;

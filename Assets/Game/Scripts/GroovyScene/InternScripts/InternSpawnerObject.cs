@@ -63,14 +63,14 @@ public class InternSpawnerObject : MonoBehaviour
     {
         if (internObjectCount < internArraySO.Length)
         {
-            Transform _internObject = Instantiate(internObjectTemplate, RandomSpawnPlace());
+            InternSO _chosenIntern = internArraySO[internObjectCount];
+            Transform _internObject = Instantiate(_chosenIntern.internObjectVR.transform, RandomSpawnPlace());
 
             //Attach the scriptableObject to the InternManager
-            InternSO chosenIntern = internArraySO[internObjectCount];
             InternManager im = _internObject.GetComponent<InternManager>();
-            im.SetInternSO(chosenIntern);
+            im.SetInternSO(_chosenIntern);
             internObjectCount++;
-            AddInternToActiveInternList(chosenIntern);
+            AddInternToActiveInternList(_chosenIntern);
             possibleSpawnPlaces.Remove(tempRemoveSpawnPlace);
             tempRemoveSpawnPlace = null;
         }

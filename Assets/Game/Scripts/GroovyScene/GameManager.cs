@@ -51,13 +51,13 @@ public class GameManager : MonoBehaviour
 
     public void AddTaskCompleted(TaskSO _taskSO, GameObject _gameObjectTaskSO)
     {
-        Destroy(_gameObjectTaskSO);
-        TasksCompleted++;
         OnTaskCompleted?.Invoke(this, new OnTaskCompletedEventArgs
         {
             totalTasks = TasksCompleted,
             taskSO = _taskSO,
-        }) ;
+        });
+        Destroy(_gameObjectTaskSO);
+        TasksCompleted++;
         if (selectedTaskSO == _taskSO && selectedTaskSO != null)
         {
             selectedTaskSO = null;

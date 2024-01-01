@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class TaskPhone : MonoBehaviour
 {
+    public static TaskPhone Instance;
+
     [Header("References")]
     [SerializeField] private GameObject phoneCanvas;
     [SerializeField] private GameObject phoneVisual;
@@ -18,6 +20,11 @@ public class TaskPhone : MonoBehaviour
     [Header("References")]
     [SerializeField] private float lerpSpeed = 3f;
     [SerializeField] private float lerpTimerMax = 1f;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Update()
     {
@@ -55,5 +62,10 @@ public class TaskPhone : MonoBehaviour
             lerpTimer = lerpTimerMax;
             timeLerp = true;
         }
+    }
+
+    public bool GetInPants()
+    {
+        return inPants;
     }
 }
