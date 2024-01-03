@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public event EventHandler OnPauseAction;
     public event EventHandler OnAlternateAction;
-    public event EventHandler OnDeselectTask;
+    public event EventHandler OnSelectTask;
     public event EventHandler<OnTaskCompletedEventArgs> OnTaskCompleted;
     public class OnTaskCompletedEventArgs : EventArgs
     {
@@ -34,6 +34,16 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        InputManagerVR.Instance.OnTrigger += InputManagerVR_OnTrigger;
+    }
+
+    private void InputManagerVR_OnTrigger(object sender, InputManagerVR.OnTriggerEventArgs e)
+    {
+        SetTaskSO(null);
     }
 
     private void Update()
@@ -78,7 +88,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool hasTask()
+    public bool HasTask()
     {
         return selectedTaskSO != null;
     }
@@ -87,7 +97,7 @@ public class GameManager : MonoBehaviour
     {
         selectedTaskSO = _taskSO;
         selectedGameObjectTaskSO = _gameObjectTaskSO;
-        OnDeselectTask?.Invoke(this, EventArgs.Empty);
+        OnSelectTask?.Invoke(this, EventArgs.Empty);
     }
 
     public TaskSO GetTaskSO()

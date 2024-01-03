@@ -220,7 +220,7 @@ public class InternObjectUI : MonoBehaviour
 
     private void SetTask()
     {
-        if (internManager.GetInternState() == InternManager.State.Available && taskAvailable && GameManager.Instance.hasTask())
+        if (internManager.GetInternState() == InternManager.State.Available && taskAvailable && GameManager.Instance.HasTask())
         {
             internManager.SetInternManagerTask(GameManager.Instance.GetTaskSO(), GameManager.Instance.GetGameObjectTaskSO());
             TaskSO _assignedTaskSO = GameManager.Instance.GetTaskSO();

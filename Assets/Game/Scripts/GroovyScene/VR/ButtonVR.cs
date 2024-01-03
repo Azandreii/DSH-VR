@@ -30,6 +30,7 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     private bool hasBeenClicked;
     private bool isCurrentlySelected;
     private bool isHovering;
+    private ClickState clickState;
 
     [Header("Attributes")]
     [SerializeField] private bool rememberSelected;
@@ -45,21 +46,22 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     private void Start()
     {
-        OnClickStatic += ButtonVR_OnClickStatic;
+        InputManagerVR.Instance.OnTrigger += InputManagerVR_OnTrigger;
     }
-
-    private void ButtonVR_OnClickStatic(object sender, OnClickEventArgs e)
+    private void OnDestroy()
     {
-        if(e.clickState == ClickState.ClickDown)
-        {
-            ClearSelected();
-            SetImage(buttonColor, buttonColor.a);
-        }
+        InputManagerVR.Instance.OnTrigger -= InputManagerVR_OnTrigger;
     }
 
+    private void InputManagerVR_OnTrigger(object sender, InputManagerVR.OnTriggerEventArgs e)
+    {
+        ClearSelected();
+        SetImage(buttonColor, buttonColor.a);
+    }
+    
     public void OnPointerDown(PointerEventData eventData)
     {
-        
+        clickState = ClickState.ClickDown;
         SetClick(true);
         OnClick?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickDown });
         OnClickStatic?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickDown });
@@ -69,6 +71,7 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        clickState = ClickState.ClickUp;
         if (!isCurrentlySelected){SetImage(buttonColor, buttonColor.a);}
         SetClick(false);
         OnClick?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickUp });
@@ -77,6 +80,7 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        clickState = ClickState.ClickEnter;
         isHovering = true;
         if (!GetClicked() && !isCurrentlySelected)
         {
@@ -88,6 +92,7 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        clickState = ClickState.ClickExit;
         isHovering = false;
         if (GetClicked())
         {
