@@ -75,7 +75,7 @@ public class TaskManager : MonoBehaviour
     {
         if (currentTasksList.Count < taskAmountMax)
         {
-            Transform _taskObjectUI = Instantiate(_taskSO.taskObjectUI, taskUI);
+            Transform _taskObjectUI = Instantiate(_taskSO.taskPhoneObjectUI, taskUI);
             TaskObjectUI toUI = _taskObjectUI.GetComponent<TaskObjectUI>();
             toUI.SetTaskSO(_taskSO);
             

@@ -37,7 +37,6 @@ public class TaskPhone : MonoBehaviour
             if (lerpTimer <= 0)
             {
                 timeLerp = false;
-                gameObject.GetComponent<Rigidbody>().isKinematic = false;
             }
         }
     }
@@ -58,7 +57,6 @@ public class TaskPhone : MonoBehaviour
     {
         if (!inPants)
         {
-            gameObject.GetComponent<Rigidbody>().isKinematic = true;
             lerpTimer = lerpTimerMax;
             timeLerp = true;
         }

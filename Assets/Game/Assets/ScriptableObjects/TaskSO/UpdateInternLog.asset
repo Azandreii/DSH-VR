@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6f396d7ad30e146bd8a27d43695598, type: 3}
   m_Name: UpdateInternLog
   m_EditorClassIdentifier: 
-  taskObjectUI: {fileID: 7544282612785476022, guid: dfd13d88c6fcfbd49bb50cba39aadcad, type: 3}
+  taskPhoneObjectUI: {fileID: 7544282612785476022, guid: dfd13d88c6fcfbd49bb50cba39aadcad, type: 3}
+  taskSelectedUI: {fileID: 7372734894869106378, guid: e41b6a8fcc63d7043bd54cd2170cf74f, type: 3}
   taskName: Diary
   taskDescription: DSH wants you to keep a diary for your intern so you won't fail
-    your internship at school! (Organisation)
+    your internship at school! (Default)
   taskDifficulty: 1
   taskSpecialty: 6

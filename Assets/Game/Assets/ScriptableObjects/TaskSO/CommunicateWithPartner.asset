@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6f396d7ad30e146bd8a27d43695598, type: 3}
   m_Name: CommunicateWithPartner
   m_EditorClassIdentifier: 
-  taskObjectUI: {fileID: 8929417063504854834, guid: a7960577cebfb544fb4623f7d8587e23, type: 3}
+  taskPhoneObjectUI: {fileID: 8929417063504854834, guid: a7960577cebfb544fb4623f7d8587e23, type: 3}
+  taskSelectedUI: {fileID: 5310173792946896418, guid: 4ab52dc635e035b4aac9b6db8e3749a3, type: 3}
   taskName: Email
   taskDescription: Write an email to the partners of DSH! (Organisation)
   taskDifficulty: 2

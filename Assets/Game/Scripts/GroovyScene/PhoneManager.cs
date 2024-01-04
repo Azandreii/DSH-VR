@@ -123,7 +123,7 @@ public class PhoneManager : MonoBehaviour
         Transform _phoneInternObjectUI = Instantiate(phoneInternObjectUI, internGroup);
         PhoneInternObjectUI _pioui = _phoneInternObjectUI.GetComponent<PhoneInternObjectUI>();
         _pioui.SetInternSO(_internSO);
-        gameObject.SetActive(true);
+        _phoneInternObjectUI.gameObject.SetActive(true);
     }
 
     public bool IsPhoneMenu()

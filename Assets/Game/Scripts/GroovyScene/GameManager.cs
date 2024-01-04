@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1f;
                 break;
         }
+        Debug.Log($"The game has been paused : { isPaused }");
     }
 
     public bool HasTask()

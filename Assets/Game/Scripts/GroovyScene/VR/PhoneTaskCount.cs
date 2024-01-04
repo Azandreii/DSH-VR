@@ -40,5 +40,6 @@ public class PhoneTaskCount : MonoBehaviour
             phoneTaskCountImage.gameObject.SetActive(true);
             phoneTaskCountText.text = phoneTaskCount.ToString();
         }
+        Debug.Log($"Current tasks left open are { phoneTaskCount }");
     }
 }

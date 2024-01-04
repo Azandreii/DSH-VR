@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6f396d7ad30e146bd8a27d43695598, type: 3}
   m_Name: Clean
   m_EditorClassIdentifier: 
-  taskObjectUI: {fileID: 8929417063504854834, guid: a7960577cebfb544fb4623f7d8587e23, type: 3}
+  taskPhoneObjectUI: {fileID: 7544282612785476022, guid: dfd13d88c6fcfbd49bb50cba39aadcad, type: 3}
+  taskSelectedUI: {fileID: 7372734894869106378, guid: e41b6a8fcc63d7043bd54cd2170cf74f, type: 3}
   taskName: Cleaning
-  taskDescription: Clean the office from the dirt (Organisation)
+  taskDescription: Clean the office from the dirt (Default)
   taskDifficulty: 1
-  taskSpecialty: 4
+  taskSpecialty: 6
