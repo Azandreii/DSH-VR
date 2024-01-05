@@ -2,10 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
 public class TimeClockManager : MonoBehaviour
 {
     public static TimeClockManager Instance;
+
+    public event EventHandler<OnMinuteChangedEventArgs> OnMinuteChanged;
+    public class OnMinuteChangedEventArgs : EventArgs
+    {
+        public float minutes;
+    }
+    public event EventHandler<OnHourChangedEventArgs> OnHourChanged;
+    public class OnHourChangedEventArgs : EventArgs
+    {
+        public float hours;
+    }
 
     [Header("References")]
     [SerializeField] private Transform clockArmMinutes;
@@ -45,12 +57,21 @@ public class TimeClockManager : MonoBehaviour
             //In game, an hour has passed
             minutes = 0;
             hours++;
+            OnMinuteChanged?.Invoke(this, new OnMinuteChangedEventArgs
+            {
+                minutes = minutes,
+            });
             if (hours == timerMax)
             {
                 //In game, the timer maximum has been reached
-                SetTimeMinutes(0);
-                SetTimeHours(0);
+                
+                //Set in game state manager
                 Time.timeScale = 0;
+                
+                OnHourChanged?.Invoke(this, new OnHourChangedEventArgs
+                {
+                    hours = hours,
+                });
             }
         }
     }

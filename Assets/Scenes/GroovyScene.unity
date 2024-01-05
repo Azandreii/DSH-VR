@@ -5881,10 +5881,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clockArmMinutes: {fileID: 1135159827}
   clockArmHours: {fileID: 1347176490}
-  timerMax: 0
+  timerMax: 11
   minutesStart: 0
-  hoursStart: 0
-  timerSpeed: 20
+  hoursStart: 9
+  timerSpeed: 30
 --- !u!4 &1391113952
 Transform:
   m_ObjectHideFlags: 0
