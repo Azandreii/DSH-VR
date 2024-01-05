@@ -48,7 +48,7 @@ public class InternSpawnerObject : MonoBehaviour
 
     private void Update()
     {
-        if (internObjectCount < internArraySO.Length)
+        if (internObjectCount < internArraySO.Length && GameStateManager.Instance.GetGameStatePlaying())
         {
             timeTillNextInternObject -= Time.deltaTime;
             if (timeTillNextInternObject < 0)

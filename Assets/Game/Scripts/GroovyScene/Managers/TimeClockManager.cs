@@ -8,16 +8,13 @@ public class TimeClockManager : MonoBehaviour
 {
     public static TimeClockManager Instance;
 
-    public event EventHandler<OnMinuteChangedEventArgs> OnMinuteChanged;
-    public class OnMinuteChangedEventArgs : EventArgs
+    public event EventHandler<OnTimeChangedEventArgs> OnTimeChanged;
+    public class OnTimeChangedEventArgs : EventArgs
     {
         public float minutes;
-    }
-    public event EventHandler<OnHourChangedEventArgs> OnHourChanged;
-    public class OnHourChangedEventArgs : EventArgs
-    {
         public float hours;
     }
+    public event EventHandler OnDayFinished;
 
     [Header("References")]
     [SerializeField] private Transform clockArmMinutes;
@@ -31,14 +28,14 @@ public class TimeClockManager : MonoBehaviour
     [PropertyRange(0, 23), HideInPlayMode]
     [SerializeField] private int hoursStart;
     [SerializeField] private float timerSpeed = 3f;
-    private float minutes;
-    private float hours;
+    private float currentMinutes;
+    private float currentHours;
 
     private void Awake()
     {
         Instance = this;
-        minutes = minutesStart;
-        hours = hoursStart;
+        currentMinutes = minutesStart;
+        currentHours = hoursStart;
         minutesStart = Mathf.RoundToInt(MinutesZeroReference(minutesStart));
         clockArmMinutes.eulerAngles = SetTimeMinutes(minutesStart);
         hoursStart = Mathf.RoundToInt(HourZeroReference(hoursStart));
@@ -47,31 +44,31 @@ public class TimeClockManager : MonoBehaviour
 
     private void Update()
     {
-        clockArmMinutes.eulerAngles = AdjustTimeMinutes(timerSpeed);
-        clockArmHours.eulerAngles = AdjustTimeHours(timerSpeed);
+        if (GameStateManager.Instance.GetGameStatePlaying()) {
+            clockArmMinutes.eulerAngles = AdjustTimeMinutes(timerSpeed);
+            clockArmHours.eulerAngles = AdjustTimeHours(timerSpeed);
 
-        int _minutesMultiplier = 6;
-        minutes = minutes + ((Time.deltaTime * timerSpeed) / _minutesMultiplier);
-        if (minutes >= 60)
-        {
-            //In game, an hour has passed
-            minutes = 0;
-            hours++;
-            OnMinuteChanged?.Invoke(this, new OnMinuteChangedEventArgs
+            int _minutesMultiplier = 6;
+            currentMinutes = currentMinutes + ((Time.deltaTime * timerSpeed) / _minutesMultiplier);
+            if (currentMinutes >= 60)
             {
-                minutes = minutes,
-            });
-            if (hours == timerMax)
-            {
-                //In game, the timer maximum has been reached
-                
-                //Set in game state manager
-                Time.timeScale = 0;
-                
-                OnHourChanged?.Invoke(this, new OnHourChangedEventArgs
+                //In game, an hour has passed
+                currentMinutes = 0;
+                currentHours++;
+                OnTimeChanged?.Invoke(this, new OnTimeChangedEventArgs
                 {
-                    hours = hours,
+                    minutes = currentMinutes,
+                    hours = currentHours,
                 });
+                if (currentHours == timerMax)
+                {
+                    //In game, the timer maximum has been reached
+
+                    //Set in game state manager
+                    Time.timeScale = 0;
+
+                    OnDayFinished?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
     }

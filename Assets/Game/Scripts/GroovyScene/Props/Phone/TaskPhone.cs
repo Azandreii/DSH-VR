@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Bson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,6 +8,8 @@ using UnityEngine;
 public class TaskPhone : MonoBehaviour
 {
     public static TaskPhone Instance;
+
+    public event EventHandler OnPhoneGrabbed;
 
     [Header("References")]
     [SerializeField] private GameObject phoneCanvas;
@@ -39,6 +42,11 @@ public class TaskPhone : MonoBehaviour
                 timeLerp = false;
             }
         }
+    }
+
+    public void PhoneGrabbed()
+    {
+        OnPhoneGrabbed?.Invoke(this, EventArgs.Empty);
     }
 
     public void IsNotInPants()

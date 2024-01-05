@@ -20,6 +20,8 @@ public class PhoneTaskCount : MonoBehaviour
 
     private void Start()
     {
+        phoneTaskCountText.text = "0";
+        UpdateVisual();
         TaskManager.Instance.OnTaskAdded += TaskManager_OnTaskAdded;
     }
 

@@ -23,7 +23,6 @@ public class PhoneManager : MonoBehaviour
     [SerializeField] private ButtonVR phoneMenuToTaskUI;
     [SerializeField] private ButtonVR phoneMenuToInternInformation;
     [SerializeField] private ButtonVR phoneMenuToLevelSelect;
-    [SerializeField] private TextMeshProUGUI taskCountPopUp;
     [SerializeField] private Transform phoneInternObjectUI;
     [SerializeField] private Transform internGroup;
     private PhoneState phoneState;
