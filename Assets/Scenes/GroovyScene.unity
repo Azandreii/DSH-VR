@@ -4192,7 +4192,7 @@ PrefabInstance:
       objectReference: {fileID: 1925812945}
     - target: {fileID: 4830498040615579856, guid: ed8226a513b57614cb8ccc8f91160971, type: 3}
       propertyPath: taskArraySO.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4830498040615579856, guid: ed8226a513b57614cb8ccc8f91160971, type: 3}
       propertyPath: taskArraySO.Array.data[0]
@@ -4234,6 +4234,10 @@ PrefabInstance:
       propertyPath: taskArraySO.Array.data[9]
       value: 
       objectReference: {fileID: 11400000, guid: 26b112cbfe60ce84c9a9b62cf2a76a9a, type: 2}
+    - target: {fileID: 4830498040615579856, guid: ed8226a513b57614cb8ccc8f91160971, type: 3}
+      propertyPath: taskArraySO.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 40cc5d9eeab7de444a4a874978e1647f, type: 2}
     - target: {fileID: 6479656739524711020, guid: ed8226a513b57614cb8ccc8f91160971, type: 3}
       propertyPath: internUI
       value: 

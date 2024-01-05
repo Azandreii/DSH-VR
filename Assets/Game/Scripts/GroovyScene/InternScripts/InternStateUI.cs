@@ -17,21 +17,21 @@ public class InternStateUI : MonoBehaviour
 
     private void InternManager_OnStateChanged(object sender, InternManager.OnStateChangedEventArgs e)
     {
-        switch (e.state)
+        switch (e.internState)
         {
-            case InternManager.State.Available:
+            case InternManager.InternState.Available:
                 internStateText.color = Color.white;
                 internStateText.text = "Available";
                 break;
-            case InternManager.State.WorkingOnTask:
+            case InternManager.InternState.WorkingOnTask:
                 internStateText.color = Color.yellow;
                 internStateText.text = "Working";
                 break;
-            case InternManager.State.WaitingForApproval:
+            case InternManager.InternState.WaitingForApproval:
                 internStateText.color = Color.cyan;
                 internStateText.text = "Finished";
                 break;
-            case InternManager.State.Unavailable:
+            case InternManager.InternState.Unavailable:
                 internStateText.color = Color.red;
                 internStateText.text = "Unavailable";
                 break;

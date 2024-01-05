@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d82052f6b6388548a3ea2b820c97f44, type: 3}
+  m_Name: Daan
+  m_EditorClassIdentifier: 
+  internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
+  internObjectVR: {fileID: 6085985424350044962, guid: c6b238cbcdf830e45909198c6efacb8a, type: 3}
+  internName: Daan
+  startEnergy: 300
+  maxEnergy: 300
+  selectedTech: 0
+  selectedArt: 0
+  selectedDesign: 0
+  selectedEconomy: 0
+  selectedOrganisation: 0
+  selectedResearch: 0
+  processEfficiency: 10
+  MaxPrEfficiency: 10
+  energyEfficiency: 1
+  MaxEnEfficiency: 10
+  availableEfficiency: 15
+  workingEfficiency: -25
+  awaitApprovalEfficiency: -3
+  unavailableEfficiency: 10
+  selectedSpecialties: []
+  techEfficiency: 2
+  artEfficiency: 2
+  designEfficiency: 2
+  economyEfficiency: 2
+  organisationEfficiency: 2
+  researchEfficiency: 2

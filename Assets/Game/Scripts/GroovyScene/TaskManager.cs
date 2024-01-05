@@ -19,7 +19,7 @@ public class TaskManager : MonoBehaviour
     [SerializeField] private TaskSO[] taskArraySO;
     [SerializeField] private Transform taskTemplate;
     [SerializeField] private Transform taskUI;
-    [SerializeField] private float taskAmountMax = 2f; //0, 1, 2, which means 3
+    [SerializeField] private float taskAmountMax = 2f;
     private float timeTillNextTask;
     [SerializeField] private float taskTimerMax = 10f;
     private List<TaskSO> currentTasksList;
