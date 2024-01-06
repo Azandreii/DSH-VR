@@ -88,9 +88,19 @@ public class InternManager : MonoBehaviour
     {
         if (setInternOnAwake)
         {
-            int aditionalIntern = 1;
-            InternSpawner.Instance.AdjustInternCount(aditionalIntern);
-            InternSpawner.Instance.AddInternToActiveInternList(setInternSO);
+            int _aditionalIntern = 1;
+            if (InternSpawner.Instance != null)
+            {
+                InternSpawner.Instance.AdjustInternCount(_aditionalIntern);
+                InternSpawner.Instance.AddInternToActiveInternList(setInternSO);
+                PhoneManager.Instance.SetInternSO(setInternSO);
+            }
+            if (InternSpawnerObject.Instance != null)
+            {
+                InternSpawnerObject.Instance.AdjustInternCount(_aditionalIntern);
+                InternSpawnerObject.Instance.AddInternToActiveInternList(setInternSO);
+                PhoneManager.Instance.SetInternSO(setInternSO);
+            }
         }
         GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
     }

@@ -54,7 +54,7 @@ public class PhoneInternObjectUI : MonoBehaviour
         _randomSkillList.Add(_randomSkillOne);
         _randomSkillList.Add(_randomSkillTwo);
         _randomSkillList.Add(_randomSkillThree);
-        _internSpecialtiesString += _randomSkillList[UnityEngine.Random.Range(0, _randomSkillList.Count)];
+        _internSpecialtiesString += _randomSkillList[Random.Range(0, _randomSkillList.Count)];
 
         //Checking all the specialties that have been selected in the _selectedSpecialties
         //list and extending the sentence accordingly

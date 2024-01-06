@@ -194,6 +194,10 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         {
             return true;
         }
+        else if (!onlyPlayingState)
+        {
+            return true;
+        }
         return false;
     }
 }

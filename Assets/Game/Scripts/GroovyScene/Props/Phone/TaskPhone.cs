@@ -47,6 +47,12 @@ public class TaskPhone : MonoBehaviour
     public void PhoneGrabbed()
     {
         OnPhoneGrabbed?.Invoke(this, EventArgs.Empty);
+        GetComponent<Rigidbody>().isKinematic = true;
+        PhoneManager.Instance.ShowMainMenu();
+        if (!GameStateManager.Instance.GetIsTutorial())
+        {
+            GameStateManager.Instance.SetGamestate(GameStateManager.GameState.Playing);
+        }
     }
 
     public void IsNotInPants()

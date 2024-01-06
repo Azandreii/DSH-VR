@@ -32,7 +32,7 @@ public class PhoneManager : MonoBehaviour
         Instance = this;
         phoneInternObjectUI.gameObject.SetActive(false);
         containerInternInformation.gameObject.SetActive(false);
-        containerPhoneMenu.gameObject.SetActive(true);
+        containerPhoneMenu.gameObject.SetActive(false);
         containerTaskUI.gameObject.SetActive(false);
         phoneState = PhoneState.PhoneMenu;
     }
@@ -44,10 +44,10 @@ public class PhoneManager : MonoBehaviour
         phoneMenuToTaskUI.OnClick += PhoneMenuTaskUI_OnClick;
         phoneMenuToInternInformation.OnClick += PhoneMenuInternInformation_OnClick;
         phoneMenuToLevelSelect.OnClick += PhoneMenuLevelSelect_OnClick;
-        InternSpawnerObject.Instance.OnInternObjectCreated += InternSpawner_OnInternCreated;
+        InternSpawnerObject.Instance.OnInternObjectCreated += InternSpawnerObject_OnInternCreated;
     }
 
-    private void InternSpawner_OnInternCreated(object sender, InternSpawnerObject.OnInternObjectCreatedEventArgs e)
+    private void InternSpawnerObject_OnInternCreated(object sender, InternSpawnerObject.OnInternObjectCreatedEventArgs e)
     {
         SetInternSO(e.internSO);
     }
@@ -92,7 +92,7 @@ public class PhoneManager : MonoBehaviour
         }
     }
 
-    private void ShowMainMenu()
+    public void ShowMainMenu()
     {
         containerTaskUI.SetActive(false);
         containerPhoneMenu.SetActive(true);
@@ -117,7 +117,7 @@ public class PhoneManager : MonoBehaviour
         phoneState = PhoneState.PhoneTasks;
     }
 
-    private void SetInternSO(InternSO _internSO)
+    public void SetInternSO(InternSO _internSO)
     {
         Transform _phoneInternObjectUI = Instantiate(phoneInternObjectUI, internGroup);
         PhoneInternObjectUI _pioui = _phoneInternObjectUI.GetComponent<PhoneInternObjectUI>();

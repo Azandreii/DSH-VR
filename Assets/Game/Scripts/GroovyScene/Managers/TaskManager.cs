@@ -35,6 +35,7 @@ public class TaskManager : MonoBehaviour
             Destroy(gameObject);
         }
         currentTasksList = new List<TaskSO>();
+        CreateTask(RandomTask());
     }
 
     private void Start()

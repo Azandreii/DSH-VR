@@ -25,36 +25,68 @@ public class SelectedSpawnerTaskSO : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnSelectTask += GameManager_OnSelectTask;
-        InputManagerVR.Instance.OnTrigger += InputManagerVR_OnTrigger;
+        GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
     }
 
-    private void InputManagerVR_OnTrigger(object sender, InputManagerVR.OnTriggerEventArgs e)
+    private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)
     {
-        selectedTaskSO = null;
-        UpdateVisual();
+        if (selectedTaskSO == GameManager.Instance.GetTaskSO())
+        {
+            selectedTaskSO = null;
+            UpdateVisual();
+        }
     }
 
     private void GameManager_OnSelectTask(object sender, System.EventArgs e)
     {
-        selectedTaskSO = GameManager.Instance.GetTaskSO();
-        UpdateVisual();
+        if (selectedTaskSO == null || selectedTaskSO != GameManager.Instance.GetTaskSO())
+        {
+            selectedTaskSO = GameManager.Instance.GetTaskSO();
+            Debug.Log(selectedTaskSO);
+            UpdateVisual();
+        }
+        else if (selectedTaskSO == GameManager.Instance.GetTaskSO())
+        {
+            GameManager.Instance.SetTaskSO(null);
+            selectedTaskSO = null;
+            Debug.Log(selectedTaskSO);
+            UpdateVisual();
+        }
     }
 
     public void UpdateVisual()
     {
-        if (selectedTaskSO == null && hasSpawned == true)
+        switch (hasSpawned)
         {
-            selectedManagerTaskSO.DestroySelf();
-            selectedTaskBackside.gameObject.SetActive(false);
-            hasSpawned = false;
-        }
-        else if (selectedTaskSO != null)
-        {
-            Transform _spawnedTaskUI = Instantiate(selectedTaskSO.taskSelectedUI, selectedTaskSpawnPoint);
-            selectedManagerTaskSO = _spawnedTaskUI.GetComponent<SelectedManagerTaskSO>();
-            selectedManagerTaskSO.SetSelectedTaskSO(selectedTaskSO);
-            selectedTaskBackside.gameObject.SetActive(true);
-            hasSpawned = true;
+            case true:
+                if (selectedTaskSO == null)
+                {
+                    selectedManagerTaskSO.DestroySelf();
+                    selectedManagerTaskSO = null;
+                    selectedTaskBackside.gameObject.SetActive(false);
+                    hasSpawned = false;
+                }
+                if (selectedTaskSO != null)
+                {
+                    selectedManagerTaskSO.DestroySelf();
+                    selectedManagerTaskSO = null;
+                    Transform _spawnedTaskUI = Instantiate(selectedTaskSO.taskSelectedUI, selectedTaskSpawnPoint);
+                    selectedManagerTaskSO = _spawnedTaskUI.GetComponent<SelectedManagerTaskSO>();
+                    selectedManagerTaskSO.SetSelectedTaskSO(selectedTaskSO);
+                    selectedTaskBackside.gameObject.SetActive(true);
+                    hasSpawned = true;
+                }
+                break;
+            case false:
+                if (selectedTaskSO != null)
+                {
+                    Transform _spawnedTaskUI = Instantiate(selectedTaskSO.taskSelectedUI, selectedTaskSpawnPoint);
+                    selectedManagerTaskSO = _spawnedTaskUI.GetComponent<SelectedManagerTaskSO>();
+                    selectedManagerTaskSO.SetSelectedTaskSO(selectedTaskSO);
+                    selectedTaskBackside.gameObject.SetActive(true);
+                    hasSpawned = true;
+                }
+            break;
         }
     }
 }

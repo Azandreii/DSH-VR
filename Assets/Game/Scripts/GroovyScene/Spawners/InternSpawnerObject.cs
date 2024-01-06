@@ -69,7 +69,6 @@ public class InternSpawnerObject : MonoBehaviour
             //Attach the scriptableObject to the InternManager
             InternManager im = _internObject.GetComponent<InternManager>();
             im.SetInternSO(_chosenIntern);
-            internObjectCount++;
             AddInternToActiveInternList(_chosenIntern);
             possibleSpawnPlaces.Remove(tempRemoveSpawnPlace);
             tempRemoveSpawnPlace = null;
@@ -78,6 +77,7 @@ public class InternSpawnerObject : MonoBehaviour
 
     public void AddInternToActiveInternList(InternSO _internSO)
     {
+        internObjectCount++;
         activeInterns.Add(_internSO);
         OnInternObjectCreated?.Invoke(this, new OnInternObjectCreatedEventArgs
         {

@@ -36,16 +36,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        InputManagerVR.Instance.OnTrigger += InputManagerVR_OnTrigger;
-    }
-
-    private void InputManagerVR_OnTrigger(object sender, InputManagerVR.OnTriggerEventArgs e)
-    {
-        SetTaskSO(null);
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

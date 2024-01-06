@@ -65,6 +65,7 @@ public class TimeClockManager : MonoBehaviour
                     //In game, the timer maximum has been reached
 
                     //Set in game state manager
+                    GameStateManager.Instance.SetGamestate(GameStateManager.GameState.GameOver);
                     Time.timeScale = 0;
 
                     OnDayFinished?.Invoke(this, EventArgs.Empty);
