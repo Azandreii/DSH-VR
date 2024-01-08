@@ -14,7 +14,7 @@ public class InternManager : MonoBehaviour
     public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
     public class OnStateChangedEventArgs : EventArgs
     {
-        public State state;
+        public InternState internState;
     }
     public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
     public class OnProgressChangedEventArgs : EventArgs
@@ -28,7 +28,7 @@ public class InternManager : MonoBehaviour
         public float energyNormalized;
     }
 
-    public enum State
+    public enum InternState
     {
         Available,
         WorkingOnTask,
@@ -47,7 +47,7 @@ public class InternManager : MonoBehaviour
     [SerializeField] private float currentEnergy = 200f;
     [SerializeField] private float progressMax = 3f;
     private float progress;
-    [SerializeField] private State state;
+    [SerializeField] private InternState state;
     private float energyEfficiency = 1f;
     private float processEfficiency = 1f;
     private float availableEnergyEfficiency = 15f;
@@ -88,9 +88,19 @@ public class InternManager : MonoBehaviour
     {
         if (setInternOnAwake)
         {
-            int aditionalIntern = 1;
-            InternSpawner.Instance.AdjustInternCount(aditionalIntern);
-            InternSpawner.Instance.AddInternToActiveInternList(setInternSO);
+            int _aditionalIntern = 1;
+            if (InternSpawner.Instance != null)
+            {
+                InternSpawner.Instance.AdjustInternCount(_aditionalIntern);
+                InternSpawner.Instance.AddInternToActiveInternList(setInternSO);
+                PhoneManager.Instance.SetInternSO(setInternSO);
+            }
+            if (InternSpawnerObject.Instance != null)
+            {
+                InternSpawnerObject.Instance.AdjustInternCount(_aditionalIntern);
+                InternSpawnerObject.Instance.AddInternToActiveInternList(setInternSO);
+                PhoneManager.Instance.SetInternSO(setInternSO);
+            }
         }
         GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
     }
@@ -100,47 +110,62 @@ public class InternManager : MonoBehaviour
         if (taskSO == e.taskSO)
         {
             taskSO = null;
-            state = State.Available;
+            state = InternState.Available;
         }
     }
 
     private void Update()
     {
         switch (state) {
-            case State.Available:
-                OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
+            case InternState.Available:
+                //State Available
+
+                OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { internState = state });
                 if (currentEnergy <= energyMax) { AdjustEnergy(availableEnergyEfficiency, energyEfficiency);
                     if (currentEnergy >= energyMax) { currentEnergy = energyMax; }
                 }
                 else { currentEnergy = energyMax; }
                 break;
-            case State.WorkingOnTask:
-                OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
+
+            case InternState.WorkingOnTask:
+                //State WorkingOnTask
+
+                OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { internState = state });
                 progress -= Time.deltaTime * processEfficiency * CalculateTaskEfficiency();
                 if (currentEnergy >= 0) { AdjustEnergy(workingEnergyEfficiency, energyEfficiency); }
                 if (progress < 0)
                 {
-                    state = State.WaitingForApproval;
+                    //Set State to WaitingForApproval
+                    state = InternState.WaitingForApproval;
 
-                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
+                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { internState = state });
                 }
                 OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs { 
                     progressNormalized = 1 - progress / progressMax,
                     eventTaskSO = taskSO,
                 });
                 break;
-            case State.WaitingForApproval:
+
+            case InternState.WaitingForApproval:
+                //State Waiting for approval
+
                 if (currentEnergy >= 0) { AdjustEnergy(awaitApprovalEnergyEfficiency, energyEfficiency); }
                 break;
-            case State.Unavailable:
-                OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
+
+            case InternState.Unavailable:
+                //State Unavailable
+
+                OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { internState = state });
                 if (currentEnergy <= energyMax) { AdjustEnergy(unavaiableEnergyEfficiency, energyEfficiency); }
-                else { currentEnergy = energyMax; state = State.Available; }
+
+                //Set State to Available
+                else { currentEnergy = energyMax; state = InternState.Available; }
                 break;
         }
-        if (currentEnergy <= 0 && state != State.Unavailable)
+        if (currentEnergy <= 0 && state != InternState.Unavailable)
         {
-            SetInternState(State.Unavailable);
+            //Set State to Unavailable
+            SetInternState(InternState.Unavailable);
         }
     }
 
@@ -162,10 +187,10 @@ public class InternManager : MonoBehaviour
         return internSO;
     }
 
-    public void SetInternState(State _state)
+    public void SetInternState(InternState _state)
     {
         this.state = _state;
-        if(_state == State.Unavailable)
+        if(_state == InternState.Unavailable)
         {
             taskSO = null;
         }
@@ -176,19 +201,24 @@ public class InternManager : MonoBehaviour
         taskSO = _taskSO;
         DifficultySwitch(_taskSO);
         gameObjectInternSO = _gameObjectTaskSO;
-        this.state = State.WorkingOnTask;
+        this.state = InternState.WorkingOnTask;
+
+        //Set State to WorkingOnTask
     }
 
-    public State GetInternState()
+    public InternState GetInternState()
     {
         return this.state;
     }
 
     public void PlayerApproved()
     {
-        if (state == State.WaitingForApproval)
+        if (state == InternState.WaitingForApproval)
         {
-            state = State.Available;
+            state = InternState.Available;
+
+            //Set State to Available
+
             taskSO = null;
         }
     }

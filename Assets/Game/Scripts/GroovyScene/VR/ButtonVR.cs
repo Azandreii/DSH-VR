@@ -6,10 +6,10 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IPointerEnterHandler
 {
-    public static event EventHandler<OnClickEventArgs> OnClickStatic;
     public event EventHandler<OnClickEventArgs> OnClick;
     public class OnClickEventArgs : EventArgs
     {
@@ -30,10 +30,12 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     private bool hasBeenClicked;
     private bool isCurrentlySelected;
     private bool isHovering;
+    private ClickState clickState;
 
     [Header("Attributes")]
     [SerializeField] private bool rememberSelected;
     private Color buttonColor;
+    [SerializeField] bool onlyPlayingState = true;
     [SerializeField] private Color hoverButtonColor = Color.grey;
     [SerializeField] private Color selectButtonColor = Color.black;
 
@@ -45,49 +47,75 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     private void Start()
     {
-        OnClickStatic += ButtonVR_OnClickStatic;
+        InputManagerVR.Instance.OnTrigger += InputManagerVR_OnTrigger;
     }
-
-    private void ButtonVR_OnClickStatic(object sender, OnClickEventArgs e)
+    private void OnDestroy()
     {
-        if(e.clickState == ClickState.ClickDown)
-        {
-            ClearSelected();
-            SetImage(buttonColor, buttonColor.a);
-        }
+        InputManagerVR.Instance.OnTrigger -= InputManagerVR_OnTrigger;
     }
 
+    private void InputManagerVR_OnTrigger(object sender, InputManagerVR.OnTriggerEventArgs e)
+    {
+        if (!OnlyPlayingState())
+        {
+            return; 
+        }
+
+        ClearSelected();
+        SetImage(buttonColor, buttonColor.a);
+    }
+    
     public void OnPointerDown(PointerEventData eventData)
     {
-        
+        if (!OnlyPlayingState())
+        {
+            return;
+        }
+
+        clickState = ClickState.ClickDown;
         SetClick(true);
         OnClick?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickDown });
-        OnClickStatic?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickDown });
-        if (!isCurrentlySelected){SetImage(selectButtonColor, selectButtonColor.a);}
-        if (rememberSelected){isCurrentlySelected = true;}
+        if (!isCurrentlySelected) { SetImage(selectButtonColor, selectButtonColor.a); }
+        if (rememberSelected) { isCurrentlySelected = true; }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (!isCurrentlySelected){SetImage(buttonColor, buttonColor.a);}
+        if (!OnlyPlayingState())
+        {
+            return;
+        }
+
+        clickState = ClickState.ClickUp;
+        if (!isCurrentlySelected) { SetImage(buttonColor, buttonColor.a); }
         SetClick(false);
         OnClick?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickUp });
-        OnClickStatic?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickUp });
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!OnlyPlayingState())
+        {
+            return;
+        }
+
+        clickState = ClickState.ClickEnter;
         isHovering = true;
         if (!GetClicked() && !isCurrentlySelected)
         {
             SetImage(hoverButtonColor, hoverButtonColor.a);
         }
         OnClick?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickEnter });
-        OnClickStatic?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickEnter });
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (!OnlyPlayingState())
+        {
+            return;
+        }
+
+        clickState = ClickState.ClickExit;
         isHovering = false;
         if (GetClicked())
         {
@@ -98,7 +126,6 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             SetImage(buttonColor, buttonColor.a);
         }
         OnClick?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickExit });
-        OnClickStatic?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickExit });
     }
 
     public void SetSelected(bool _setRememberSelected)
@@ -159,5 +186,18 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
                 buttonImage.color = imageColor;
             break;
         }
+    }
+
+    private bool OnlyPlayingState()
+    {
+        if (onlyPlayingState && GameStateManager.Instance.GetGameStatePlaying())
+        {
+            return true;
+        }
+        else if (!onlyPlayingState)
+        {
+            return true;
+        }
+        return false;
     }
 }

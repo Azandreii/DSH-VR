@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 549373712797217195, guid: 4183a0554b7dc6f499d0c30ba3bc7a2d, type: 3}
       propertyPath: m_Name
-      value: TaskObjectUIVR (1) Variant
+      value: DesignTaskObjectVR
       objectReference: {fileID: 0}
     - target: {fileID: 1100999039075090903, guid: 4183a0554b7dc6f499d0c30ba3bc7a2d, type: 3}
       propertyPath: m_Color.b
@@ -150,6 +150,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7544282612785476022, guid: 4183a0554b7dc6f499d0c30ba3bc7a2d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353695578441310321, guid: 4183a0554b7dc6f499d0c30ba3bc7a2d, type: 3}
+      propertyPath: onlyPlayingState
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8740212877469050858, guid: 4183a0554b7dc6f499d0c30ba3bc7a2d, type: 3}

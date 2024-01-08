@@ -32,6 +32,7 @@ public class InternObjectUI : MonoBehaviour
     [FoldoutGroup("Buttons"), ShowIf("buttonToggle")]
     [SerializeField] private ButtonVR stopButtonVR;
 
+    //Christopher : OnCollisionEventTriggers
     [FoldoutGroup("Buttons"), ShowIf("buttonToggle")]
     [SerializeField] private OnCollisionVR assignBodyTriggerVR;
     [FoldoutGroup("Buttons"), ShowIf("buttonToggle")]
@@ -85,7 +86,7 @@ public class InternObjectUI : MonoBehaviour
         {
             stopButton.onClick.AddListener(() =>
             {
-                internManager.SetInternState(InternManager.State.Available);
+                internManager.SetInternState(InternManager.InternState.Available);
             });
         }
 
@@ -126,7 +127,7 @@ public class InternObjectUI : MonoBehaviour
 
     private void AssignBodyTriggerVR_OnCollisionGameObject(object sender, OnCollisionVR.SelectedObjectsEventArgs e)
     {
-        if (e.collisionObject == stopItem && !e.collisionObject.GetComponent<StopItemVR>().IsStashed() && internManager.GetInternState() != InternManager.State.Unavailable)
+        if (e.collisionObject == stopItem && !e.collisionObject.GetComponent<StopItemVR>().IsStashed() && internManager.GetInternState() != InternManager.InternState.Unavailable)
         {
             StopTask();
         }
@@ -135,9 +136,9 @@ public class InternObjectUI : MonoBehaviour
     private void TaskManager_OnTaskAdded(object sender, EventArgs e)
     {
         taskAvailable = TaskManager.Instance.HasTasks();
-        if (!TaskManager.Instance.HasTasks() && internManager.GetInternState() != InternManager.State.Unavailable)
+        if (!TaskManager.Instance.HasTasks() && internManager.GetInternState() != InternManager.InternState.Unavailable)
         {
-            internManager.SetInternState(InternManager.State.Available);
+            internManager.SetInternState(InternManager.InternState.Available);
         }
     }
 
@@ -182,21 +183,21 @@ public class InternObjectUI : MonoBehaviour
 
     private void InternManager_OnStateChanged(object sender, InternManager.OnStateChangedEventArgs e)
     {
-        switch (e.state)
+        switch (e.internState)
         {
-            case InternManager.State.Available:
+            case InternManager.InternState.Available:
                 AssignTextColor(Color.white);
                 SetTaskVisibilityUI(false);
                 break;
-            case InternManager.State.WorkingOnTask:
+            case InternManager.InternState.WorkingOnTask:
                 AssignTextColor(Color.white);
                 SetTaskVisibilityUI(true);
                 break;
-            case InternManager.State.WaitingForApproval:
+            case InternManager.InternState.WaitingForApproval:
                 AssignTextColor(Color.white);
                 SetTaskVisibilityUI(true);
                 break;
-            case InternManager.State.Unavailable:
+            case InternManager.InternState.Unavailable:
                 AssignTextColor(Color.red);
                 SetTaskVisibilityUI(false);
                 break;
@@ -220,31 +221,37 @@ public class InternObjectUI : MonoBehaviour
 
     private void SetTask()
     {
-        if (internManager.GetInternState() == InternManager.State.Available && taskAvailable && GameManager.Instance.hasTask())
+        if (internManager.GetInternState() == InternManager.InternState.Available && taskAvailable && GameManager.Instance.HasTask())
         {
             internManager.SetInternManagerTask(GameManager.Instance.GetTaskSO(), GameManager.Instance.GetGameObjectTaskSO());
             TaskSO _assignedTaskSO = GameManager.Instance.GetTaskSO();
             internTask.text = _assignedTaskSO.taskName;
             GameManager.Instance.SetTaskSO(null);
+
+            //Set task intern state (WorkingOnTask) change here
         }
     }
 
     private void ApproveTask()
     {
-        if (internManager.GetInternState() == InternManager.State.WaitingForApproval)
+        if (internManager.GetInternState() == InternManager.InternState.WaitingForApproval)
         {
-            //Could be an event
             GameManager.Instance.AddTaskCompleted(internManager.GetTaskSO(), internManager.GetGameObjectTaskSO());
             internManager.PlayerApproved();
+
+            //Set task intern state (Availabe) change here
         }
     }
 
     private void StopTask()
     {
-        internManager.SetInternState(InternManager.State.Available);
+        internManager.SetInternState(InternManager.InternState.Available);
         internManager.ClearTaskSO();
+
+        //Set task intern state (Availabe) change here
     }
 
+    //This is not related to VR
     private void AssignTextColor(Color _color)
     {
         if (assignText != null)

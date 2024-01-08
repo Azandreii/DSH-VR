@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_EffectColor.r
       value: 0.050980393
       objectReference: {fileID: 0}
+    - target: {fileID: 7278263463164739359, guid: 9aff660322194f443831b127e901a18c, type: 3}
+      propertyPath: onlyPlayingState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7754607170252332504, guid: 9aff660322194f443831b127e901a18c, type: 3}
       propertyPath: m_EffectColor.b
       value: 0.2735849

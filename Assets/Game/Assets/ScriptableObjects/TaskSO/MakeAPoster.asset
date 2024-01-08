@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6f396d7ad30e146bd8a27d43695598, type: 3}
   m_Name: MakeAPoster
   m_EditorClassIdentifier: 
-  taskObjectUI: {fileID: 8029513779598881733, guid: bc9b12afee30f6d4aa533b7e68e7863a, type: 3}
+  taskPhoneObjectUI: {fileID: 6438966367140107331, guid: de2e6c4f8fb308b44a84373d2e8b531e, type: 3}
+  taskSelectedUI: {fileID: 606221076363221103, guid: 1be64d876dd4de746ab8318f8b04794f, type: 3}
   taskName: Poster
-  taskDescription: Make a poster for the next DSH vacancy festival. (Design)
+  taskDescription: Make a poster for the next DSH vacancy festival. (Art)
   taskDifficulty: 2
-  taskSpecialty: 2
+  taskSpecialty: 1

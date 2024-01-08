@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class TaskSO : ScriptableObject
 {
+    private const string REFERENCES = "References";
+
     public enum taskTheme
     {
         Tech,
@@ -17,7 +19,12 @@ public class TaskSO : ScriptableObject
         Default,
     }
 
-    public Transform taskObjectUI;
+    [Title("References"), FoldoutGroup(REFERENCES)]
+    public Transform taskPhoneObjectUI;
+    [FoldoutGroup(REFERENCES)]
+    public Transform taskSelectedUI;
+
+    [Title("General Attributes")]
     public string taskName;
     [TextArea(4, 8)]
     public string taskDescription;
