@@ -29,6 +29,8 @@ public class InternSpawnerObject : MonoBehaviour
     private float timeTillNextInternObject;
     private int internObjectCount;
     private Transform tempRemoveSpawnPlace;
+    private int currentSpawnMinute;
+    private int previousSpawnMinute;
 
     private void Awake()
     {
@@ -56,13 +58,22 @@ public class InternSpawnerObject : MonoBehaviour
 
     private void TimeClockManager_OnTimeChanged(object sender, TimeClockManager.OnTimeChangedEventArgs e)
     {
+        /*bool _newMinute = false;
+        currentSpawnMinute = Mathf.RoundToInt(e.minutes);
         foreach (InternSO _internSO in possibleInterns)
         {
-            if (e.hours == _internSO.spawnHour && e.minutes == _internSO.spawnMinute)
+            if (e.hours == _internSO.spawnHour && Mathf.RoundToInt(e.minutes) == _internSO.spawnMinute && _newMinute)
             {
+                Debug.Log("Spawn");
                 SpawnIntern();
             }
         }
+        if (previousSpawnMinute != currentSpawnMinute)
+        {
+            _newMinute = true;
+        }
+        previousSpawnMinute = Mathf.RoundToInt(e.minutes);*/
+
         /*if (internObjectCount < internArraySO.Length && GameStateManager.Instance.GetGameStatePlaying())
         {
             timeTillNextInternObject -= Time.deltaTime;
