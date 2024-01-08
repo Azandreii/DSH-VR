@@ -17,6 +17,10 @@ MonoBehaviour:
   internName: Jeffrey
   startEnergy: 280
   maxEnergy: 300
+  spawnHour: 9
+  spawnMinute: 25
+  workTimeHours: 4
+  generalEfficiency: 0.8
   selectedTech: 0
   selectedArt: 0
   selectedDesign: 0

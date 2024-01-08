@@ -18,25 +18,21 @@ public class InternSpawnerObject : MonoBehaviour
     
     [Header("References")]
     [SerializeField] private InternSO[] internArraySO;
-    private List<InternSO> activeInterns;
+    private List<InternManager> activeInterns;
     private List<InternSO> possibleInterns;
     [SerializeField] private Transform[] spawnPlaces;
     private List<Transform> possibleSpawnPlaces;
-    [SerializeField] private Transform internObjectTemplate;
 
     [Header("Attributes")]
     [SerializeField] private float internObjectTimerMax = 5f;
-    private float timeTillNextInternObject;
     private int internObjectCount;
-    private Transform tempRemoveSpawnPlace;
-    private int currentSpawnMinute;
-    private int previousSpawnMinute;
+    private int currentSpawnMinute = 1;
+    private int previousSpawnMinute = 0;
 
     private void Awake()
     {
-        internObjectTemplate.gameObject.SetActive(false);
         Instance = this;
-        activeInterns = new List<InternSO>();
+        activeInterns = new List<InternManager>();
         possibleInterns = new List<InternSO>();
         foreach (InternSO _internSO in internArraySO) 
         { 
@@ -47,42 +43,47 @@ public class InternSpawnerObject : MonoBehaviour
         {
             possibleSpawnPlaces.Add(_spawnPlace);
         }
-        timeTillNextInternObject = internObjectTimerMax;
     }
 
     private void Start()
     {
-        internObjectTemplate.gameObject.SetActive(false);
         TimeClockManager.Instance.OnTimeChanged += TimeClockManager_OnTimeChanged;
     }
 
     private void TimeClockManager_OnTimeChanged(object sender, TimeClockManager.OnTimeChangedEventArgs e)
     {
-        /*bool _newMinute = false;
-        currentSpawnMinute = Mathf.RoundToInt(e.minutes);
-        foreach (InternSO _internSO in possibleInterns)
+        int _minutesInt = Mathf.RoundToInt(e.minutes);
+        previousSpawnMinute = currentSpawnMinute;
+        currentSpawnMinute = _minutesInt;
+        for (int i = 0; i < possibleInterns.Count; i++)
         {
-            if (e.hours == _internSO.spawnHour && Mathf.RoundToInt(e.minutes) == _internSO.spawnMinute && _newMinute)
+            if (e.hours == possibleInterns[i].spawnHour && _minutesInt == possibleInterns[i].spawnMinute)
             {
-                Debug.Log("Spawn");
                 SpawnIntern();
             }
-        }
-        if (previousSpawnMinute != currentSpawnMinute)
-        {
-            _newMinute = true;
-        }
-        previousSpawnMinute = Mathf.RoundToInt(e.minutes);*/
-
-        /*if (internObjectCount < internArraySO.Length && GameStateManager.Instance.GetGameStatePlaying())
-        {
-            timeTillNextInternObject -= Time.deltaTime;
-            if (timeTillNextInternObject < 0)
+            if (e.hours == possibleInterns[i].workTimeHours + possibleInterns[i].spawnHour && _minutesInt == possibleInterns[i].spawnMinute)
             {
-                timeTillNextInternObject = internObjectTimerMax;
-                
+                //Clear Spawnpoint occupied and destroy object
+                foreach (InternManager _activeInterns in activeInterns)
+                {
+                    if (_activeInterns.GetInternSO() == possibleInterns[i] && _activeInterns.GetPoint() != null)
+                    {
+                        Debug.Log("Destroy");
+                        _activeInterns.RemovePoint();
+                        Destroy(_activeInterns.gameObject);
+                    }else
+                    {
+                        Debug.Log(_activeInterns.GetInternSO());
+                    }
+                }
+
+                //Remove intern from list, (possibly back in possibleIntern list, but not for now)
+                possibleInterns.Remove(possibleInterns[i]);
+
+                //Decrease internObjectCount
+                //internObjectCount--;
             }
-        }*/
+        }
     }
 
     private void SpawnIntern()
@@ -90,21 +91,22 @@ public class InternSpawnerObject : MonoBehaviour
         if (internObjectCount < internArraySO.Length)
         {
             InternSO _chosenIntern = internArraySO[internObjectCount];
-            Transform _internObject = Instantiate(_chosenIntern.internObjectVR.transform, RandomSpawnPlace());
+            Transform _spawnPoint = RandomSpawnPlace();
+            Transform _internObject = Instantiate(_chosenIntern.internObjectVR.transform, _spawnPoint);
 
             //Attach the scriptableObject to the InternManager
             InternManager im = _internObject.GetComponent<InternManager>();
             im.SetInternSO(_chosenIntern);
-            AddInternToActiveInternList(_chosenIntern);
-            possibleSpawnPlaces.Remove(tempRemoveSpawnPlace);
-            tempRemoveSpawnPlace = null;
+            im.SetPoint(_spawnPoint.GetComponent<SpawnSpot>());
+            AddInternToActiveInternList(_chosenIntern, im);
+            Debug.Log("General Intern Spawn");
         }
     }
 
-    public void AddInternToActiveInternList(InternSO _internSO)
+    public void AddInternToActiveInternList(InternSO _internSO, InternManager _internObject)
     {
         internObjectCount++;
-        activeInterns.Add(_internSO);
+        activeInterns.Add(_internObject);
         OnInternObjectCreated?.Invoke(this, new OnInternObjectCreatedEventArgs
         {
             internSO = _internSO,
@@ -113,13 +115,9 @@ public class InternSpawnerObject : MonoBehaviour
 
     private Transform RandomSpawnPlace()
     {
-        tempRemoveSpawnPlace = possibleSpawnPlaces[UnityEngine.Random.Range(0, possibleSpawnPlaces.Count)];
-        tempRemoveSpawnPlace.GetComponent<SpawnSpot>().SetOccupied(true);
-        return tempRemoveSpawnPlace;
-    }
-
-    public void AdjustInternCount(int _amount)
-    {
-        internObjectCount += _amount;
+        Transform _tempRemoveSpawnPlace = possibleSpawnPlaces[UnityEngine.Random.Range(0, possibleSpawnPlaces.Count)];
+        _tempRemoveSpawnPlace.GetComponent<SpawnSpot>().SetOccupied(true);
+        possibleSpawnPlaces.Remove(_tempRemoveSpawnPlace);
+        return _tempRemoveSpawnPlace;
     }
 }

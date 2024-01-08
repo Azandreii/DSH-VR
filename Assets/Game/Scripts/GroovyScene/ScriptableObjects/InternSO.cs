@@ -24,6 +24,7 @@ public class InternSO : ScriptableObject
     public int spawnHour = 9;
     public int spawnMinute = 10;
     public int workTimeHours = 4;
+    public float generalEfficiency = 1f;
 
     [ButtonGroup("SelectedSpecialty")]
     private void Tech()

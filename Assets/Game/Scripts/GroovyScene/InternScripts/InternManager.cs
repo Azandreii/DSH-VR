@@ -46,6 +46,7 @@ public class InternManager : MonoBehaviour
     [SerializeField] private float energyMax = 300f;
     [SerializeField] private float currentEnergy = 200f;
     [SerializeField] private float progressMax = 3f;
+    private float generalEfficiency = 1f;
     private float progress;
     [SerializeField] private InternState state;
     private float energyEfficiency = 1f;
@@ -65,6 +66,7 @@ public class InternManager : MonoBehaviour
     [Title("Set Intern Settings")]
     [SerializeField] bool setInternOnAwake = false;
     [SerializeField] InternSO setInternSO;
+    private SpawnSpot currentSpot;
 
     [Title("Task Level Effiency")]
     [SerializeField] private float easyDifficulty = 3f;
@@ -88,17 +90,14 @@ public class InternManager : MonoBehaviour
     {
         if (setInternOnAwake)
         {
-            int _aditionalIntern = 1;
             if (InternSpawner.Instance != null)
             {
-                InternSpawner.Instance.AdjustInternCount(_aditionalIntern);
                 InternSpawner.Instance.AddInternToActiveInternList(setInternSO);
                 PhoneManager.Instance.SetInternSO(setInternSO);
             }
             if (InternSpawnerObject.Instance != null)
             {
-                InternSpawnerObject.Instance.AdjustInternCount(_aditionalIntern);
-                InternSpawnerObject.Instance.AddInternToActiveInternList(setInternSO);
+                InternSpawnerObject.Instance.AddInternToActiveInternList(setInternSO, this);
                 PhoneManager.Instance.SetInternSO(setInternSO);
             }
         }
@@ -112,6 +111,11 @@ public class InternManager : MonoBehaviour
             taskSO = null;
             state = InternState.Available;
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnTaskCompleted -= GameManager_OnTaskCompleted;
     }
 
     private void Update()
@@ -174,6 +178,7 @@ public class InternManager : MonoBehaviour
         internSO = _internSO;
         SetEfficiency(GetEnergyEfficiency(), GetProcessEfficiency());
         SetEnergy(GetStartEnergy(), GetEnergyMax());
+        SetGeneralEfficiency(GetGeneralEfficiency());
         SetStateEfficiency(GetAvailableEfficiency(), GetWorkingEfficiency(), 
             GetAwaitApprovalEfficiency(), GetUnavailableEfficiency());
         SetSpecialtyEfficiency(GetTechEfficiency(), GetArtEfficiency(), GetDesignEfficiency(),
@@ -227,13 +232,18 @@ public class InternManager : MonoBehaviour
     {
         if (_withTimeDelta)
         {
-            currentEnergy += _value * Time.deltaTime * _energyEfficiency;
+            currentEnergy += _value * Time.deltaTime * _energyEfficiency * generalEfficiency;
         }
         else
         {
             currentEnergy += _value * _energyEfficiency;
         }
         OnEnergyChanged?.Invoke(this, new OnEnergyChangedEventArgs { energyNormalized = currentEnergy / energyMax });
+    }
+
+    public void SetGeneralEfficiency(float _generalEfficiency)
+    {
+        generalEfficiency = _generalEfficiency;
     }
 
     public void SetEnergy(float _currentEnergyValue, float _maxEnergyValue)
@@ -265,6 +275,18 @@ public class InternManager : MonoBehaviour
         economyEfficiency = _economy;
         organisationEfficiency = _organisitation;
         researchEfficiency = _research;
+    }
+
+    public void SetPoint(SpawnSpot _spawnSpot)
+    {
+        currentSpot = _spawnSpot;
+        _spawnSpot.SetOccupied(true);
+    }
+
+    public void RemovePoint()
+    {
+        currentSpot.SetOccupied(false);
+        currentSpot = null;
     }
 
     private float CalculateTaskEfficiency()
@@ -349,6 +371,11 @@ public class InternManager : MonoBehaviour
         return internSO.energyEfficiency;
     }
 
+    public float GetGeneralEfficiency()
+    {
+        return internSO.generalEfficiency;
+    }
+
     public float GetAvailableEfficiency()
     {
         return internSO.availableEfficiency;
@@ -427,6 +454,11 @@ public class InternManager : MonoBehaviour
         }
         float baseModifier = 1f;
         return baseModifier;
+    }
+
+    public SpawnSpot GetPoint()
+    {
+        return currentSpot;
     }
 
     public void ClearTaskSO()

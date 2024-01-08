@@ -17,6 +17,10 @@ MonoBehaviour:
   internName: Vienna
   startEnergy: 180
   maxEnergy: 300
+  spawnHour: 11
+  spawnMinute: 30
+  workTimeHours: 4
+  generalEfficiency: 0.5
   selectedTech: 0
   selectedArt: 1
   selectedDesign: 0

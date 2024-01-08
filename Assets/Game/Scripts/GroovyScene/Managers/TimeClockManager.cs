@@ -30,6 +30,7 @@ public class TimeClockManager : MonoBehaviour
     [SerializeField] private float timerSpeed = 3f;
     private float currentMinutes;
     private float currentHours;
+    private float previousMinute;
 
     private void Awake()
     {
@@ -47,7 +48,8 @@ public class TimeClockManager : MonoBehaviour
         if (GameStateManager.Instance.GetGameStatePlaying()) {
             clockArmMinutes.eulerAngles = AdjustTimeMinutes(timerSpeed);
             clockArmHours.eulerAngles = AdjustTimeHours(timerSpeed);
-
+            
+            previousMinute = Mathf.RoundToInt(currentMinutes);
             int _minutesMultiplier = 6;
             currentMinutes = currentMinutes + ((Time.deltaTime * timerSpeed) / _minutesMultiplier);
             if (currentMinutes >= 60)
@@ -66,12 +68,26 @@ public class TimeClockManager : MonoBehaviour
                     OnDayFinished?.Invoke(this, EventArgs.Empty);
                 }
             }
+            if (MinuteChanged(currentMinutes))
+            {
+                OnTimeChanged?.Invoke(this, new OnTimeChangedEventArgs
+                {
+                    minutes = currentMinutes,
+                    hours = currentHours,
+                });
+            }
         }
-        OnTimeChanged?.Invoke(this, new OnTimeChangedEventArgs
+    }
+
+    private bool MinuteChanged(float _newValue)
+    {
+        int _intCurrentMinutes = Mathf.RoundToInt(_newValue);
+        if (previousMinute != _intCurrentMinutes)
         {
-            minutes = currentMinutes,
-            hours = currentHours,
-        });
+            previousMinute = _intCurrentMinutes;
+            return true;
+        }
+        return false;
     }
 
     private Vector3 AdjustTimeMinutes(float _timerSpeed)
