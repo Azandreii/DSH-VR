@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InternSpawnerObject : MonoBehaviour
@@ -18,6 +19,7 @@ public class InternSpawnerObject : MonoBehaviour
     [Header("References")]
     [SerializeField] private InternSO[] internArraySO;
     private List<InternSO> activeInterns;
+    private List<InternSO> possibleInterns;
     [SerializeField] private Transform[] spawnPlaces;
     private List<Transform> possibleSpawnPlaces;
     [SerializeField] private Transform internObjectTemplate;
@@ -33,6 +35,11 @@ public class InternSpawnerObject : MonoBehaviour
         internObjectTemplate.gameObject.SetActive(false);
         Instance = this;
         activeInterns = new List<InternSO>();
+        possibleInterns = new List<InternSO>();
+        foreach (InternSO _internSO in internArraySO) 
+        { 
+            possibleInterns.Add(_internSO);
+        }
         possibleSpawnPlaces = new List<Transform>();
         foreach (Transform _spawnPlace in spawnPlaces)
         {
@@ -44,19 +51,27 @@ public class InternSpawnerObject : MonoBehaviour
     private void Start()
     {
         internObjectTemplate.gameObject.SetActive(false);
+        TimeClockManager.Instance.OnTimeChanged += TimeClockManager_OnTimeChanged;
     }
 
-    private void Update()
+    private void TimeClockManager_OnTimeChanged(object sender, TimeClockManager.OnTimeChangedEventArgs e)
     {
-        if (internObjectCount < internArraySO.Length && GameStateManager.Instance.GetGameStatePlaying())
+        foreach (InternSO _internSO in possibleInterns)
+        {
+            if (e.hours == _internSO.spawnHour && e.minutes == _internSO.spawnMinute)
+            {
+                SpawnIntern();
+            }
+        }
+        /*if (internObjectCount < internArraySO.Length && GameStateManager.Instance.GetGameStatePlaying())
         {
             timeTillNextInternObject -= Time.deltaTime;
             if (timeTillNextInternObject < 0)
             {
                 timeTillNextInternObject = internObjectTimerMax;
-                SpawnIntern();
+                
             }
-        }
+        }*/
     }
 
     private void SpawnIntern()

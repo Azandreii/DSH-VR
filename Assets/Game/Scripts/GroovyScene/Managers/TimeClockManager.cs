@@ -55,11 +55,6 @@ public class TimeClockManager : MonoBehaviour
                 //In game, an hour has passed
                 currentMinutes = 0;
                 currentHours++;
-                OnTimeChanged?.Invoke(this, new OnTimeChangedEventArgs
-                {
-                    minutes = currentMinutes,
-                    hours = currentHours,
-                });
                 if (currentHours == timerMax)
                 {
                     //In game, the timer maximum has been reached
@@ -72,6 +67,11 @@ public class TimeClockManager : MonoBehaviour
                 }
             }
         }
+        OnTimeChanged?.Invoke(this, new OnTimeChangedEventArgs
+        {
+            minutes = currentMinutes,
+            hours = currentHours,
+        });
     }
 
     private Vector3 AdjustTimeMinutes(float _timerSpeed)

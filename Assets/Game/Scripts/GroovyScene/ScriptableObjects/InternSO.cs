@@ -21,6 +21,9 @@ public class InternSO : ScriptableObject
     [Title("Attributes") ,Range(0, 300)]
     public float startEnergy = 200f;
     public float maxEnergy = 300f;
+    public int spawnHour = 9;
+    public int spawnMinute = 10;
+    public int workTimeHours = 4;
 
     [ButtonGroup("SelectedSpecialty")]
     private void Tech()
