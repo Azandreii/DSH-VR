@@ -393,6 +393,7 @@ GameObject:
   - component: {fileID: 5130641562309742756}
   - component: {fileID: 4263888872127786637}
   - component: {fileID: 5375449652875117053}
+  - component: {fileID: 7320658572840997983}
   m_Layer: 0
   m_Name: DoorCorridorFar
   m_TagString: Untagged
@@ -468,6 +469,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7320658572840997983
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2853701248346694858}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2988474514345591306, guid: 446bfd220611a5842bec0715956480b6, type: 3}
 --- !u!1 &2916869411653201392
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,6 +994,7 @@ GameObject:
   - component: {fileID: 387024435487884371}
   - component: {fileID: 7685442394123353812}
   - component: {fileID: 1241328333164437410}
+  - component: {fileID: 4459330707515393708}
   m_Layer: 0
   m_Name: DoorMakerspace
   m_TagString: Untagged
@@ -1046,6 +1070,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4459330707515393708
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857321350696647790}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7833523222699026897, guid: 446bfd220611a5842bec0715956480b6, type: 3}
 --- !u!1 &5154048292971552170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,6 +1353,7 @@ GameObject:
   - component: {fileID: 5155479852808267740}
   - component: {fileID: 7460662508269268565}
   - component: {fileID: 8856861477453202192}
+  - component: {fileID: 4042571729056785737}
   m_Layer: 0
   m_Name: Celling
   m_TagString: Untagged
@@ -1379,6 +1426,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4042571729056785737
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843245767012061488}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8642397347941580671, guid: 446bfd220611a5842bec0715956480b6, type: 3}
 --- !u!1 &6910588110035869667
 GameObject:
   m_ObjectHideFlags: 0
