@@ -18,11 +18,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2280404309218122211, guid: 9aff660322194f443831b127e901a18c, type: 3}
       propertyPath: m_text
-      value: Difficulty
+      value: dupa
       objectReference: {fileID: 0}
     - target: {fileID: 2280404309218122211, guid: 9aff660322194f443831b127e901a18c, type: 3}
       propertyPath: m_fontSize
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280404309218122211, guid: 9aff660322194f443831b127e901a18c, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2280404309218122211, guid: 9aff660322194f443831b127e901a18c, type: 3}
       propertyPath: m_fontSizeBase
