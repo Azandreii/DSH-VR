@@ -16,5 +16,5 @@ MonoBehaviour:
   taskSelectedUI: {fileID: 6574337513375030405, guid: 8745c7805533b704d8147fcb7ba3034c, type: 3}
   taskName: Program
   taskDescription: Program a website page for the DSH. (Tech)
-  taskDifficulty: 3
+  taskDifficulty: 5
   taskSpecialty: 0
