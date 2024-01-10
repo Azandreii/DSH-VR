@@ -103,6 +103,12 @@ public class TaskObjectUI : MonoBehaviour
             case 3:
                 taskDifficultyText.color = Color.red;
                 break;
+            case 4:
+                taskDifficultyText.color = Color.blue;
+                break;
+            case 5:
+                taskDifficultyText.color = Color.magenta;
+                break;
         }
         taskDifficultyText.text = _taskSO.taskDifficulty.ToString();
     }

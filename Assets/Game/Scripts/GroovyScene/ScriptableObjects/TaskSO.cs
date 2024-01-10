@@ -29,7 +29,7 @@ public class TaskSO : ScriptableObject
     public string taskName;
     [TextArea(4, 8)]
     public string taskDescription;
-    [Range(1, 3)]
+    [Range(1, 5)]
     public int taskDifficulty = 1;
     private float taskTimerEasy = 3f;
     private float taskTimerMedium = 5f;
