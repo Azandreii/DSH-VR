@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: d3eda53fd4d7a494fbed275ca16720bf, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.52541745, g: 0.49550307, b: 0.50665355, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1257,8 +1257,8 @@ Transform:
   m_GameObject: {fileID: 367261045}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: 5.3313, y: -0, z: -3.0094}
+  m_LocalScale: {x: 2.8201275, y: 3.3667161, z: 1.085026}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -4968,6 +4968,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4774254944132107953, guid: d5a3d7131ce05ef4b9420047ff0a53a7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 51667f75a031e5748852bf7ad387a67e, type: 2}
+    - target: {fileID: 4774254944132107953, guid: d5a3d7131ce05ef4b9420047ff0a53a7, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 810b10e94eb9cf5479127f3233a26324, type: 2}
     - target: {fileID: 6564769160640643913, guid: d5a3d7131ce05ef4b9420047ff0a53a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.610237
@@ -5012,6 +5020,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DSH
       objectReference: {fileID: 0}
+    - target: {fileID: 9212420418887224030, guid: d5a3d7131ce05ef4b9420047ff0a53a7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 51667f75a031e5748852bf7ad387a67e, type: 2}
+    - target: {fileID: 9212420418887224030, guid: d5a3d7131ce05ef4b9420047ff0a53a7, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 810b10e94eb9cf5479127f3233a26324, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
