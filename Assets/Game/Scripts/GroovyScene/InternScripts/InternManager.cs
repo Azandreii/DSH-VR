@@ -59,19 +59,14 @@ public class InternManager : MonoBehaviour
     private float artEfficiency = 1f;
     private float designEfficiency = 1f;
     private float economyEfficiency = 1f;
-    private float organisationEfficiency = 1f;
-    private float researchEfficiency = 1f;
+    private float communicationEfficiency = 1f;
+    private float teamworkEfficiency = 1f;
     private float defaultEffieciency = 1f;
 
     [Title("Set Intern Settings")]
     [SerializeField] bool setInternOnAwake = false;
     [SerializeField] InternSO setInternSO;
     private SpawnSpot currentSpot;
-
-    [Title("Task Level Effiency")]
-    [SerializeField] private float easyDifficulty = 3f;
-    [SerializeField] private float mediumDifficulty = 7f;
-    [SerializeField] private float hardDifficulty = 11f;
 
     private void Awake()
     {
@@ -182,7 +177,7 @@ public class InternManager : MonoBehaviour
         SetStateEfficiency(GetAvailableEfficiency(), GetWorkingEfficiency(), 
             GetAwaitApprovalEfficiency(), GetUnavailableEfficiency());
         SetSpecialtyEfficiency(GetTechEfficiency(), GetArtEfficiency(), GetDesignEfficiency(),
-            GetEconomyEfficiency(), GetOrganisationEfficiency(), GetResearchEfficiency());
+            GetEconomyEfficiency(), GetCommunicationEfficiency(), GetTeamworkEfficiency());
         internObjectUI.SetInternName();
         gameObject.SetActive(_hide);
     }
@@ -273,8 +268,8 @@ public class InternManager : MonoBehaviour
         artEfficiency = _art;
         designEfficiency = _design;
         economyEfficiency = _economy;
-        organisationEfficiency = _organisitation;
-        researchEfficiency = _research;
+        communicationEfficiency = _organisitation;
+        teamworkEfficiency = _research;
     }
 
     public void SetPoint(SpawnSpot _spawnSpot)
@@ -301,10 +296,10 @@ public class InternManager : MonoBehaviour
                 return designEfficiency;
             case TaskSO.taskTheme.Economy:
                 return economyEfficiency;
-            case TaskSO.taskTheme.Organisation:
-                return organisationEfficiency;
-            case TaskSO.taskTheme.Research:
-                return researchEfficiency;
+            case TaskSO.taskTheme.Communication:
+                return communicationEfficiency;
+            case TaskSO.taskTheme.Teamwork:
+                return teamworkEfficiency;
             case TaskSO.taskTheme.Default:
                 return defaultEffieciency;
         }
@@ -314,20 +309,7 @@ public class InternManager : MonoBehaviour
 
     private void DifficultySwitch(TaskSO _taskSO)
     {
-
-        int _difficultyGrade = _taskSO.taskDifficulty;
-        switch (_difficultyGrade)
-        {
-            case 1:
-                progressMax = easyDifficulty;
-                break;
-            case 2:
-                progressMax = mediumDifficulty;
-                break;
-            case 3:
-                progressMax = hardDifficulty;
-                break;
-        }
+        progressMax = _taskSO.GetTaskDifficulty();
         progress = progressMax;
     }
 
@@ -436,21 +418,21 @@ public class InternManager : MonoBehaviour
         return baseModifier;
     }
 
-    public float GetOrganisationEfficiency()
+    public float GetCommunicationEfficiency()
     {
-        if (internSO.selectedOrganisation)
+        if (internSO.selectedCommunication)
         {
-            return internSO.organisationEfficiency;
+            return internSO.communicationEfficiency;
         }
         float baseModifier = 1f;
         return baseModifier;
     }
 
-    public float GetResearchEfficiency()
+    public float GetTeamworkEfficiency()
     {
-        if (internSO.selectedResearch)
+        if (internSO.selectedTeamwork)
         {
-            return internSO.researchEfficiency;
+            return internSO.teamworkEfficiency;
         }
         float baseModifier = 1f;
         return baseModifier;

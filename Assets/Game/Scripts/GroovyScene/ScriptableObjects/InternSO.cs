@@ -12,8 +12,8 @@ public class InternSO : ScriptableObject
     private const string ART_SELECTED = "selectedArt";
     private const string DESIGN_SELECTED = "selectedDesign";
     private const string ECONOMY_SELECTED = "selectedEconomy";
-    private const string ORGANISATION_SELECTED = "selectedOrganisation";
-    private const string RESEARCH_SELECTED = "selectedResearch";
+    private const string COMMUNICATION_SELECTED = "selectedCommunication";
+    private const string TEAMWORK_SELECTED = "selectedTeamwork";
 
     public Transform internObjectUI;
     public GameObject internObjectVR;
@@ -51,16 +51,16 @@ public class InternSO : ScriptableObject
         SwapSelectedState(selectedEconomy, ECONOMY_SELECTED);
     }
     [ButtonGroup("SelectedSpecialty")]
-    private void Organisation()
+    private void Communication()
     {
-        selectedOrganisation = !selectedOrganisation;
-        SwapSelectedState(selectedOrganisation, ORGANISATION_SELECTED);
+        selectedCommunication = !selectedCommunication;
+        SwapSelectedState(selectedCommunication, COMMUNICATION_SELECTED);
     }
     [ButtonGroup("SelectedSpecialty")]
-    private void Research()
+    private void Teamwork()
     {
-        selectedResearch = !selectedResearch;
-        SwapSelectedState(selectedResearch, RESEARCH_SELECTED);
+        selectedTeamwork = !selectedTeamwork;
+        SwapSelectedState(selectedTeamwork, TEAMWORK_SELECTED);
     }
 
     [ButtonGroup("SelectedSpecialty")]
@@ -71,8 +71,8 @@ public class InternSO : ScriptableObject
         selectedArt = false;
         selectedDesign = false;
         selectedEconomy = false;
-        selectedOrganisation = false;
-        selectedResearch = false;
+        selectedCommunication = false;
+        selectedTeamwork = false;
     }
 
     [HideInInspector]
@@ -84,9 +84,9 @@ public class InternSO : ScriptableObject
     [HideInInspector]
     public bool selectedEconomy = false;
     [HideInInspector]
-    public bool selectedOrganisation = false;
+    public bool selectedCommunication = false;
     [HideInInspector]
-    public bool selectedResearch = false;
+    public bool selectedTeamwork = false;
 
     [PropertyRange(0, "MaxPrEfficiency"), FoldoutGroup("Process Efficiency"), Title("Processing Power")]
     public float processEfficiency = 1f;
@@ -118,10 +118,10 @@ public class InternSO : ScriptableObject
     public float designEfficiency = 2f;
     [ShowIf(ECONOMY_SELECTED), FoldoutGroup("Specialty Group")]
     public float economyEfficiency = 2f;
-    [ShowIf(ORGANISATION_SELECTED), FoldoutGroup("Specialty Group")]
-    public float organisationEfficiency = 2f;
-    [ShowIf(RESEARCH_SELECTED), FoldoutGroup("Specialty Group")]
-    public float researchEfficiency = 2f;
+    [ShowIf(COMMUNICATION_SELECTED), FoldoutGroup("Specialty Group")]
+    public float communicationEfficiency = 2f;
+    [ShowIf(TEAMWORK_SELECTED), FoldoutGroup("Specialty Group")]
+    public float teamworkEfficiency = 2f;
 
     private void SwapSelectedState(bool _selectedState, string _stateText)
     {

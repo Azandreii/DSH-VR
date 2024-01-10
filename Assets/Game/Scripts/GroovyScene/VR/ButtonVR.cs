@@ -74,9 +74,13 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
         clickState = ClickState.ClickDown;
         SetClick(true);
-        OnClick?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickDown });
         if (!isCurrentlySelected) { SetImage(selectButtonColor, selectButtonColor.a); }
         if (rememberSelected) { isCurrentlySelected = true; }
+        OnClick?.Invoke(this, new OnClickEventArgs { clickState = ClickState.ClickDown });
+        if (!isActiveAndEnabled)
+        {
+            SetClick(false);
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -101,6 +105,9 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
         clickState = ClickState.ClickEnter;
         isHovering = true;
+        Debug.Log(GetClicked());
+        Debug.Log(isCurrentlySelected);
+
         if (!GetClicked() && !isCurrentlySelected)
         {
             SetImage(hoverButtonColor, hoverButtonColor.a);

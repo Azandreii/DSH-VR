@@ -20,13 +20,13 @@ MonoBehaviour:
   spawnHour: 9
   spawnMinute: 25
   workTimeHours: 4
-  generalEfficiency: 0.8
+  generalEfficiency: 0.67
   selectedTech: 0
   selectedArt: 0
   selectedDesign: 0
   selectedEconomy: 1
-  selectedOrganisation: 0
-  selectedResearch: 1
+  selectedCommunication: 0
+  selectedTeamwork: 0
   processEfficiency: 4
   MaxPrEfficiency: 10
   energyEfficiency: 1.7
@@ -42,5 +42,5 @@ MonoBehaviour:
   artEfficiency: 2
   designEfficiency: 2
   economyEfficiency: 3
-  organisationEfficiency: 2
-  researchEfficiency: 2
+  communicationEfficiency: 2
+  teamworkEfficiency: 2
