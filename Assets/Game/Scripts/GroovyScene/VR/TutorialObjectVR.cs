@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TutorialObjectVR : MonoBehaviour
 {
     [Header("Refereces")]
     [SerializeField] private InternManager tutorialInternManager;
-    [SerializeField] private ButtonVR buttonTutorial;
-    [SerializeField] private OnCollisionVR collisionTriggerTutorial;
     [SerializeField] private GameObject tutorialObjectReference;
 
     [Header("Attributes")]
@@ -23,26 +22,18 @@ public class TutorialObjectVR : MonoBehaviour
     private void Start()
     {
         GameStateManager.OnGamestateTutorial += GameStateManager_OnGamestateTutorial;
-        if (buttonTutorial != null)
-        {
-            buttonTutorial.OnClick += ButtonTutorial_OnClick;
-        }
-        if (collisionTriggerTutorial != null)
-        {
-            collisionTriggerTutorial.OnCollisionControler += CollisionTriggerTutorial_OnCollisionControler;
-        }
+        GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
+        tutorialInternManager.OnStateChanged += TutorialInternManager_OnStateChanged;
     }
 
-    private void CollisionTriggerTutorial_OnCollisionControler(object sender, System.EventArgs e)
+    private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)
     {
-        if (tutorialInternManager != null)
-        {
-            if (tutorialInternManager.GetInternState() == InternManager.InternState.WaitingForApproval)
-            {
-                AdjustTutorial();
-            }
-        }
-        else if (tutorialInternManager == null)
+        AdjustTutorial();
+    }
+
+    private void TutorialInternManager_OnStateChanged(object sender, InternManager.OnStateChangedEventArgs e)
+    {
+        if (tutorialInternManager.GetInternState() == InternManager.InternState.WaitingForApproval)
         {
             AdjustTutorial();
         }
@@ -61,11 +52,12 @@ public class TutorialObjectVR : MonoBehaviour
         switch (showDuringTutorial)
         {
             case true:
-                Show();
                 if (GameStateManager.Instance.GetGameStatePlaying())
                 {
                     Hide();
+                    break;
                 }
+                Show();
             break;
             case false:
                 if (e.tutorialState == showOnTutorialState)

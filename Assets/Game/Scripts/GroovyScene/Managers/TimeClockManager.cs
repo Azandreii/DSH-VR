@@ -7,6 +7,7 @@ using System;
 public class TimeClockManager : MonoBehaviour
 {
     public static TimeClockManager Instance;
+    public event EventHandler<OnTimeChangedEventArgs> UpdateTimeChanged;
 
     public event EventHandler<OnTimeChangedEventArgs> OnTimeChanged;
     public class OnTimeChangedEventArgs : EventArgs
@@ -76,6 +77,12 @@ public class TimeClockManager : MonoBehaviour
                     hours = currentHours,
                 });
             }
+            UpdateTimeChanged?.Invoke(this, new OnTimeChangedEventArgs
+            {
+                minutes = currentMinutes,
+                hours = currentHours,
+            });
+
         }
     }
 
