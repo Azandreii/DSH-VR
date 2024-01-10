@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1239221388741278384, guid: bbccae9b27635694da7ea2574bd01f55, type: 3}
+      propertyPath: m_text
+      value: 69
+      objectReference: {fileID: 0}
     - target: {fileID: 1274700741456489234, guid: bbccae9b27635694da7ea2574bd01f55, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -18,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2298838299938164118, guid: bbccae9b27635694da7ea2574bd01f55, type: 3}
       propertyPath: m_Name
-      value: TaskObjectUIVR Variant
+      value: BaseTaskObjectVR
       objectReference: {fileID: 0}
     - target: {fileID: 2298838299938164118, guid: bbccae9b27635694da7ea2574bd01f55, type: 3}
       propertyPath: m_Layer
@@ -175,5 +179,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rememberSelected: 1
+  onlyPlayingState: 1
   hoverButtonColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.078431375}
   selectButtonColor: {r: 0, g: 0, b: 0, a: 0.078431375}
