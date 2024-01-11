@@ -15,6 +15,9 @@ MonoBehaviour:
   taskPhoneObjectUI: {fileID: 7544282612785476022, guid: dfd13d88c6fcfbd49bb50cba39aadcad, type: 3}
   taskSelectedUI: {fileID: 7372734894869106378, guid: e41b6a8fcc63d7043bd54cd2170cf74f, type: 3}
   taskName: Coffee
-  taskDescription: Get Coffee for you supperior. (Default)
-  taskDifficulty: 1
+  taskDescription: Get Coffee for you supperior. (Recharge)
   taskSpecialty: 6
+  taskDifficulty: 1
+  isRechargeTask: 1
+  taskRechargeTime: 3
+  taskRechargeAmount: 50

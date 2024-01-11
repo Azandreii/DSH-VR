@@ -29,18 +29,26 @@ public class TaskSO : ScriptableObject
     public string taskName;
     [TextArea(4, 8)]
     public string taskDescription;
-    [Range(1, 5)]
+    
+    public taskTheme taskSpecialty;
+    [Range(0, 5)]
     public int taskDifficulty = 1;
     private float taskTimerEasy = 3f;
     private float taskTimerMedium = 5f;
     private float taskTimerHard = 8f;
     private float taskTimerExtreme = 13f;
     private float taskTimerImpossible = 21f;
-
-    public taskTheme taskSpecialty;
+    [Header("Recharge Task")]
+    public bool isRechargeTask;
+    public float taskRechargeTime = 3f;
+    public float taskRechargeAmount = 50f;
 
     public float GetTaskDifficulty()
     {
+        if (isRechargeTask)
+        {
+            return taskRechargeTime;
+        }
         switch (taskDifficulty)
         {
             case 1:

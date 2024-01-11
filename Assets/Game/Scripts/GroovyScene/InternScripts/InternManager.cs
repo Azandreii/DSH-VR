@@ -120,7 +120,14 @@ public class InternManager : MonoBehaviour
                 //State Available
 
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { internState = state });
-                if (currentEnergy <= energyMax) { AdjustEnergy(availableEnergyEfficiency, energyEfficiency);
+                if (currentEnergy <= energyMax) 
+                { 
+                    AdjustEnergy(availableEnergyEfficiency, energyEfficiency);
+                    if (workingEnergyEfficiency != GetWorkingEfficiency())
+                    {
+                        SetWorkingEfficiency(GetWorkingEfficiency());
+                    }
+
                     if (currentEnergy >= energyMax) { currentEnergy = energyMax; }
                 }
                 else { currentEnergy = energyMax; }
@@ -198,10 +205,28 @@ public class InternManager : MonoBehaviour
 
     public void SetInternManagerTask(TaskSO _taskSO, GameObject _gameObjectTaskSO)
     {
-        taskSO = _taskSO;
-        DifficultySwitch(_taskSO);
-        gameObjectInternSO = _gameObjectTaskSO;
-        this.state = InternState.WorkingOnTask;
+        if (_taskSO.isRechargeTask)
+        {
+            taskSO = _taskSO;
+            DifficultySwitch(_taskSO);
+            if (_gameObjectTaskSO != null)
+            {
+                gameObjectInternSO = _gameObjectTaskSO;
+            }else
+            {
+                Debug.LogWarning("No GameObject attached to taskSO to destroy");
+            }
+
+            SetWorkingEfficiency(_taskSO.taskRechargeAmount);
+            this.state = InternState.WorkingOnTask;
+        }
+        else
+        {
+            taskSO = _taskSO;
+            DifficultySwitch(_taskSO);
+            gameObjectInternSO = _gameObjectTaskSO;
+            this.state = InternState.WorkingOnTask;
+        }
 
         //Set State to WorkingOnTask
     }
@@ -262,6 +287,11 @@ public class InternManager : MonoBehaviour
         unavaiableEnergyEfficiency = _unavailable;
     }
 
+    public void SetWorkingEfficiency(float _working)
+    {
+        workingEnergyEfficiency = _working;
+    }
+
     public void SetSpecialtyEfficiency(float _tech, float _art, float _design, float _economy, float _organisitation, float _research)
     {
         techEfficiency = _tech;
@@ -303,7 +333,7 @@ public class InternManager : MonoBehaviour
             case TaskSO.taskTheme.Default:
                 return defaultEffieciency;
         }
-        Debug.Log("No task theme set!");
+        Debug.LogError("No task theme set!");
         return 0f;
     }
 

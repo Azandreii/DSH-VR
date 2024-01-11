@@ -21,9 +21,12 @@ public class TutorialObjectVR : MonoBehaviour
 
     private void Start()
     {
-        GameStateManager.OnGamestateTutorial += GameStateManager_OnGamestateTutorial;
-        GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
-        tutorialInternManager.OnStateChanged += TutorialInternManager_OnStateChanged;
+        if (GameStateManager.Instance.GetIsTutorial())
+        {
+            GameStateManager.OnGamestateTutorial += GameStateManager_OnGamestateTutorial;
+            GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
+            tutorialInternManager.OnStateChanged += TutorialInternManager_OnStateChanged;
+        }
     }
 
     private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)
