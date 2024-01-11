@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,6 +30,11 @@ public class GameStateManager : MonoBehaviour
     private int tutorialState;
     private bool hasGrabbedPhoneTutorial;
     private bool hasSelectedTaskTutorial;
+    [ButtonGroup]
+    private void NextTutorialPhase()
+    {
+        NextTutorialState();
+    }
 
     private void Awake()
     {

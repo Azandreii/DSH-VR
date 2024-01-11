@@ -18,6 +18,7 @@ public class PhoneManager : MonoBehaviour
     [SerializeField] private GameObject containerTaskUI;
     [SerializeField] private GameObject containerPhoneMenu;
     [SerializeField] private GameObject containerInternInformation;
+    [SerializeField] private GameObject containerPhoneClock;
     [SerializeField] private ButtonVR homeButtonTaskUI;
     [SerializeField] private ButtonVR homeButtonInternInformation;
     [SerializeField] private ButtonVR phoneMenuToTaskUI;
@@ -34,6 +35,7 @@ public class PhoneManager : MonoBehaviour
         containerInternInformation.gameObject.SetActive(false);
         containerPhoneMenu.gameObject.SetActive(false);
         containerTaskUI.gameObject.SetActive(false);
+        containerPhoneClock.SetActive(false);
         phoneState = PhoneState.PhoneMenu;
     }
 
@@ -98,6 +100,7 @@ public class PhoneManager : MonoBehaviour
         containerPhoneMenu.SetActive(true);
         containerInternInformation.SetActive(false);
         phoneState = PhoneState.PhoneMenu;
+        containerPhoneClock.SetActive(true);
         PhoneTaskCount.Instance.UpdateVisual();
     }
 
@@ -107,6 +110,7 @@ public class PhoneManager : MonoBehaviour
         containerPhoneMenu.SetActive(false);
         containerInternInformation.SetActive(true);
         phoneState = PhoneState.InternInformation;
+        containerPhoneClock.SetActive(true);
     }
 
     private void ShowTaskUI()
@@ -115,7 +119,8 @@ public class PhoneManager : MonoBehaviour
         containerPhoneMenu.SetActive(false);
         containerInternInformation.SetActive(false);
         phoneState = PhoneState.PhoneTasks;
-    }
+        containerPhoneClock.SetActive(true);
+;    }
 
     public void SetInternSO(InternSO _internSO)
     {
