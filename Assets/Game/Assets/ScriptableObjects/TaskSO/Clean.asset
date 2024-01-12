@@ -16,5 +16,8 @@ MonoBehaviour:
   taskSelectedUI: {fileID: 7372734894869106378, guid: e41b6a8fcc63d7043bd54cd2170cf74f, type: 3}
   taskName: Cleaning
   taskDescription: Clean the office from the dirt (Default)
-  taskDifficulty: 1
   taskSpecialty: 6
+  taskDifficulty: 1
+  isRechargeTask: 0
+  taskRechargeTime: 3
+  taskRechargeAmount: 50

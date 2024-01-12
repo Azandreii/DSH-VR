@@ -115,6 +115,7 @@ public class InternSpawnerObject : MonoBehaviour
 
     private Transform RandomSpawnPlace()
     {
+        //Check for occupied instead of removing from list
         Transform _tempRemoveSpawnPlace = possibleSpawnPlaces[UnityEngine.Random.Range(0, possibleSpawnPlaces.Count)];
         _tempRemoveSpawnPlace.GetComponent<SpawnSpot>().SetOccupied(true);
         possibleSpawnPlaces.Remove(_tempRemoveSpawnPlace);

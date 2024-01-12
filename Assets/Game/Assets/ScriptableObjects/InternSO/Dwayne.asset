@@ -25,8 +25,8 @@ MonoBehaviour:
   selectedArt: 0
   selectedDesign: 1
   selectedEconomy: 0
-  selectedOrganisation: 0
-  selectedResearch: 0
+  selectedCommunication: 0
+  selectedTeamwork: 0
   processEfficiency: 2.8
   MaxPrEfficiency: 10
   energyEfficiency: 1.85
@@ -42,5 +42,5 @@ MonoBehaviour:
   artEfficiency: 2
   designEfficiency: 2
   economyEfficiency: 2
-  organisationEfficiency: 2
-  researchEfficiency: 2
+  communicationEfficiency: 2
+  teamworkEfficiency: 2
