@@ -18,9 +18,6 @@ public class PhoneTimer : MonoBehaviour
 
     private void TimeClockManager_UpdateTimeChanged(object sender, TimeClockManager.OnTimeChangedEventArgs e)
     {
-        Debug.Log(e.minutes);
-        Debug.Log(e.minutes.ToString());
-
         ShowTime(e.minutes, e.hours);
     }
 

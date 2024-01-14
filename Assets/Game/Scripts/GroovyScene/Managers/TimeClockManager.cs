@@ -46,7 +46,7 @@ public class TimeClockManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameStateManager.Instance.GetGameStatePlaying()) {
+        if (GameStateManager.Instance.IsGamePlaying()) {
             clockArmMinutes.eulerAngles = AdjustTimeMinutes(timerSpeed);
             clockArmHours.eulerAngles = AdjustTimeHours(timerSpeed);
             
@@ -64,7 +64,6 @@ public class TimeClockManager : MonoBehaviour
 
                     //Set in game state manager
                     GameStateManager.Instance.SetGamestate(GameStateManager.GameState.GameOver);
-                    Time.timeScale = 0;
 
                     OnDayFinished?.Invoke(this, EventArgs.Empty);
                 }

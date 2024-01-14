@@ -61,7 +61,7 @@ public class TaskManager : MonoBehaviour
 
     private void Update()
     {
-        if (currentTasksList.Count < taskAmountMax && GameStateManager.Instance.GetGameStatePlaying())
+        if (currentTasksList.Count < taskAmountMax && GameStateManager.Instance.IsGamePlaying())
         {
             timeTillNextTask -= Time.deltaTime;
             if (timeTillNextTask < 0)

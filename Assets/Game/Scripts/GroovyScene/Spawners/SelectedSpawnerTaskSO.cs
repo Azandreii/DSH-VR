@@ -42,14 +42,12 @@ public class SelectedSpawnerTaskSO : MonoBehaviour
         if (selectedTaskSO == null || selectedTaskSO != GameManager.Instance.GetTaskSO())
         {
             selectedTaskSO = GameManager.Instance.GetTaskSO();
-            Debug.Log(selectedTaskSO);
             UpdateVisual();
         }
         else if (selectedTaskSO == GameManager.Instance.GetTaskSO())
         {
             GameManager.Instance.SetTaskSO(null);
             selectedTaskSO = null;
-            Debug.Log(selectedTaskSO);
             UpdateVisual();
         }
     }
@@ -88,5 +86,10 @@ public class SelectedSpawnerTaskSO : MonoBehaviour
                 }
             break;
         }
+    }
+
+    public TaskSO GetSelectedTaskSO()
+    {
+        return selectedTaskSO;
     }
 }
