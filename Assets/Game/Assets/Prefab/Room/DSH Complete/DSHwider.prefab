@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 7547773823756555454}
   - component: {fileID: 5020384100944878481}
   - component: {fileID: 4916871007250689304}
-  - component: {fileID: 8728476271163518369}
+  - component: {fileID: 8919295746489918149}
   m_Layer: 0
   m_Name: ToiletDoorHandle.001
   m_TagString: Untagged
@@ -333,8 +333,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8728476271163518369
-BoxCollider:
+--- !u!64 &8919295746489918149
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -351,9 +351,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.14561272, y: 0.025468588, z: 0.19944477}
-  m_Center: {x: -0.010197639, y: -0.0016249418, z: 0}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4854550592409259713, guid: ca0683e02bc534841bbad60eb5f4ec10, type: 3}
 --- !u!1 &1925479872465669861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,7 +1283,7 @@ GameObject:
   - component: {fileID: 6575648699713001361}
   - component: {fileID: 5088316504735378009}
   - component: {fileID: 27472444083666655}
-  - component: {fileID: 728142231696017904}
+  - component: {fileID: 3283642242037242681}
   m_Layer: 0
   m_Name: ToiletDoorHandle
   m_TagString: Untagged
@@ -1355,8 +1356,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &728142231696017904
-BoxCollider:
+--- !u!64 &3283642242037242681
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1373,9 +1374,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.14561272, y: 0.025468588, z: 0.19944477}
-  m_Center: {x: -0.010197639, y: -0.0016249418, z: 0}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8439136587637015000, guid: ca0683e02bc534841bbad60eb5f4ec10, type: 3}
 --- !u!1 &4601112895691881026
 GameObject:
   m_ObjectHideFlags: 0
