@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.52541745, g: 0.49550307, b: 0.50665355, a: 1}
+  m_IndirectSpecularColor: {r: 0.52541786, g: 0.49550447, b: 0.5066541, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2000,6 +2000,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 209456588}
+  tutorialButtonVR: {fileID: 392454751}
+  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 1
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -2066,6 +2068,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 1632546183}
+  tutorialButtonVR: {fileID: 1272898114}
+  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 3
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -3421,6 +3425,7 @@ GameObject:
   - component: {fileID: 599309279}
   - component: {fileID: 599309278}
   - component: {fileID: 599309277}
+  - component: {fileID: 599309280}
   m_Layer: 0
   m_Name: GameEndUI
   m_TagString: Untagged
@@ -3436,18 +3441,18 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599309275}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.601}
+  m_LocalPosition: {x: 0, y: 0, z: -1.2763233}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 561389266}
   - {fileID: 880274130}
   - {fileID: 518781066}
-  m_Father: {fileID: 7194042081553305139}
+  m_Father: {fileID: 673791780}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.0009716749, y: 1.096024}
+  m_AnchoredPosition: {x: 4.9019547, y: 3.2831693}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &599309277
@@ -3513,6 +3518,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &599309280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599309275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2635855a7250fdc4086d332df123e4c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 7300805021785645029}
+  distance: 1.5
+  positionSpeedModifier: 0.025
+  rotationSpeedModifier: 135
 --- !u!1 &608625496
 GameObject:
   m_ObjectHideFlags: 0
@@ -3753,6 +3774,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660527446}
   m_CullTransparentMesh: 1
+--- !u!1 &673791779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 673791780}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &673791780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673791779}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.030011, y: -2.1741698, z: 0.6513193}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 599309276}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &674889946
 GameObject:
   m_ObjectHideFlags: 0
@@ -4025,6 +4078,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 299154137}
+  tutorialButtonVR: {fileID: 527325643}
+  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 4
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -7346,6 +7401,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 952765586}
+  tutorialButtonVR: {fileID: 0}
+  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 0
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -10563,7 +10620,7 @@ Transform:
   m_GameObject: {fileID: 1884001276}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.142, y: -0.254, z: 2.448}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10615,8 +10672,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e569b876e7b6a84387d40feb63c33a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameEndUI: {fileID: 599309275}
   gameState: 0
-  isTutorial: 0
+  isTutorial: 1
 --- !u!1 &1907435813
 GameObject:
   m_ObjectHideFlags: 0
@@ -10664,6 +10722,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 389334725}
+  tutorialButtonVR: {fileID: 0}
+  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 2
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -16354,9 +16414,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 1133160264709250714}
+  tutorialButtonVR: {fileID: 0}
+  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 6
   showDuringTutorial: 0
-  setGamestatePlaying: 1
+  setGamestatePlaying: 0
 --- !u!4 &3099200577641864932
 Transform:
   m_ObjectHideFlags: 0
@@ -17831,6 +17893,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 8443866010781789099}
+  tutorialButtonVR: {fileID: 0}
+  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 5
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -21713,7 +21777,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 599309276}
   - {fileID: 6250221345661393975}
   m_Father: {fileID: 3099200577641864932}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22867,9 +22930,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 6462756270551416077}
+  tutorialButtonVR: {fileID: 0}
+  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 6
   showDuringTutorial: 0
-  setGamestatePlaying: 1
+  setGamestatePlaying: 0
 --- !u!223 &8240050223444171352
 Canvas:
   m_ObjectHideFlags: 0
@@ -23868,6 +23933,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1044437474}
+  - {fileID: 673791780}
   - {fileID: 1884001277}
   - {fileID: 1590144059}
   - {fileID: 367261049}

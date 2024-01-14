@@ -8,6 +8,7 @@ public class TutorialObjectVR : MonoBehaviour
     [Header("Refereces")]
     [SerializeField] private InternManager tutorialInternManager;
     [SerializeField] private GameObject tutorialObjectReference;
+    [SerializeField] private ButtonVR tutorialButtonVR;
 
     [Header("Attributes")]
     [SerializeField] private int showOnTutorialState = 0;
@@ -26,12 +27,41 @@ public class TutorialObjectVR : MonoBehaviour
             GameStateManager.OnGamestateTutorial += GameStateManager_OnGamestateTutorial;
             GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
             tutorialInternManager.OnStateChanged += TutorialInternManager_OnStateChanged;
+            if (tutorialButtonVR != null)
+            {
+                tutorialButtonVR.OnClick += ButtonVR_OnClick;
+            }
+        }
+    }
+
+    private void CollisionVR_OnCollisionControler(object sender, System.EventArgs e)
+    {
+        AdjustTutorial();
+    }
+
+    private void ButtonVR_OnClick(object sender, ButtonVR.OnClickEventArgs e)
+    {
+        if (e.clickState == ButtonVR.ClickState.ClickDown)
+        {
+            AdjustTutorial();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.OnGamestateTutorial -= GameStateManager_OnGamestateTutorial;
+        GameManager.Instance.OnTaskCompleted -= GameManager_OnTaskCompleted;
+        tutorialInternManager.OnStateChanged -= TutorialInternManager_OnStateChanged;
+        if (tutorialButtonVR != null)
+        {
+            tutorialButtonVR.OnClick -= ButtonVR_OnClick;
         }
     }
 
     private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)
     {
-        AdjustTutorial();
+        GameStateManager.Instance.SetGamestate(GameStateManager.GameState.Playing);
+        Destroy(gameObject);
     }
 
     private void TutorialInternManager_OnStateChanged(object sender, InternManager.OnStateChangedEventArgs e)
@@ -42,20 +72,12 @@ public class TutorialObjectVR : MonoBehaviour
         }
     }
 
-    private void ButtonTutorial_OnClick(object sender, ButtonVR.OnClickEventArgs e)
-    {
-        if (e.clickState == ButtonVR.ClickState.ClickDown)
-        {
-            AdjustTutorial();
-        }
-    }
-
     private void GameStateManager_OnGamestateTutorial(object sender, GameStateManager.OnGamestateTutorialEventArgs e)
     {
         switch (showDuringTutorial)
         {
             case true:
-                if (GameStateManager.Instance.GetGameStatePlaying())
+                if (GameStateManager.Instance.IsGamePlaying())
                 {
                     Hide();
                     break;
@@ -72,6 +94,10 @@ public class TutorialObjectVR : MonoBehaviour
                     Hide();
                 }
             break;
+        }
+        if (!GameStateManager.Instance.GetIsTutorial())
+        {
+            Destroy(gameObject);
         }
     }
 

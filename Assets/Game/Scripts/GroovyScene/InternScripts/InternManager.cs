@@ -244,7 +244,10 @@ public class InternManager : MonoBehaviour
 
             //Set State to Available
 
-            taskSO = null;
+            if (taskSO == SelectedSpawnerTaskSO.Instance.GetSelectedTaskSO())
+            {
+                taskSO = null;
+            }
         }
     }
 

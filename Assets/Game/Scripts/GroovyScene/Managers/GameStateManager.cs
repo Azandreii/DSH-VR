@@ -24,12 +24,16 @@ public class GameStateManager : MonoBehaviour
         GameOver,
     }
 
+    [Header("References")]
+    [SerializeField] private GameObject gameEndUI;
+
     [Header("Attributes")]
     [SerializeField] private GameState gameState;
     [SerializeField] private bool isTutorial = false;
     private int tutorialState;
     private bool hasGrabbedPhoneTutorial;
     private bool hasSelectedTaskTutorial;
+    private bool spawnedGameEndUI = false;
     [ButtonGroup]
     private void NextTutorialPhase()
     {
@@ -43,6 +47,7 @@ public class GameStateManager : MonoBehaviour
 
     private void Start()
     {
+        gameEndUI.SetActive(false);
         TimeClockManager.Instance.OnDayFinished += TimeClockManager_OnDayFinished;
         TaskPhone.Instance.OnPhoneGrabbed += TaskPhone_OnPhoneGrabbed;
         GameManager.Instance.OnSelectTask += GameManager_OnSelectTask;
@@ -98,6 +103,11 @@ public class GameStateManager : MonoBehaviour
                 //Playing state gets changed in the Taskphone script
                 break;
             case GameState.GameOver:
+                if (!spawnedGameEndUI)
+                {
+                    gameEndUI.SetActive(true);
+                    spawnedGameEndUI = true;
+                }
                 //GameOver state is being set in the TimeClockManager script
                 Debug.Log("Game Ended");
                 break;
@@ -126,9 +136,14 @@ public class GameStateManager : MonoBehaviour
         gameState = _gameState;
     }
 
-    public bool GetGameStatePlaying()
+    public bool IsGamePlaying()
     {
         return gameState == GameState.Playing;
+    }
+
+    public bool IsGameOver()
+    {
+        return gameState == GameState.GameOver;
     }
 
     public int GetTutorialState()

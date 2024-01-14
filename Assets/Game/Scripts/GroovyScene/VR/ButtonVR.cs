@@ -105,8 +105,6 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
         clickState = ClickState.ClickEnter;
         isHovering = true;
-        Debug.Log(GetClicked());
-        Debug.Log(isCurrentlySelected);
 
         if (!GetClicked() && !isCurrentlySelected)
         {
@@ -197,7 +195,7 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     private bool OnlyPlayingState()
     {
-        if (onlyPlayingState && GameStateManager.Instance.GetGameStatePlaying())
+        if (onlyPlayingState && GameStateManager.Instance.IsGamePlaying())
         {
             return true;
         }

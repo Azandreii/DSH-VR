@@ -17,6 +17,7 @@ public class TaskPhone : MonoBehaviour
     [SerializeField] private Transform phoneHolder;
     private bool inPants;
     private bool timeLerp;
+    private bool changedStateToPlaying = false;
     private float lerpTimer;
     private float lerpTimerNormalized;
 
@@ -27,6 +28,16 @@ public class TaskPhone : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        TimeClockManager.Instance.OnDayFinished += TimeClockManager_OnDayFinished;
+    }
+
+    private void TimeClockManager_OnDayFinished(object sender, EventArgs e)
+    {
+        phoneCanvas.SetActive(false);
     }
 
     private void Update()
@@ -49,16 +60,24 @@ public class TaskPhone : MonoBehaviour
         OnPhoneGrabbed?.Invoke(this, EventArgs.Empty);
         GetComponent<Rigidbody>().isKinematic = true;
         PhoneManager.Instance.ShowMainMenu();
-        if (!GameStateManager.Instance.GetIsTutorial())
+        if (!GameStateManager.Instance.GetIsTutorial() && !changedStateToPlaying)
         {
             GameStateManager.Instance.SetGamestate(GameStateManager.GameState.Playing);
+            changedStateToPlaying = true;
+        }
+        else
+        {
+            changedStateToPlaying = true;
         }
     }
 
     public void IsNotInPants()
     {
-        inPants = false;
-        phoneCanvas.SetActive(true);
+        if (!GameStateManager.Instance.IsGameOver())
+        {
+            inPants = false;
+            phoneCanvas.SetActive(true);
+        }
     }
 
     public void IsInPants() 
