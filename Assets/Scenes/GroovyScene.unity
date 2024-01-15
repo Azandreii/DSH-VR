@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.52541786, g: 0.49550447, b: 0.5066541, a: 1}
+  m_IndirectSpecularColor: {r: 0.52541745, g: 0.49550307, b: 0.50665355, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1599,8 +1599,8 @@ Transform:
   m_GameObject: {fileID: 367261045}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.291, y: -0.1, z: -1.6203}
-  m_LocalScale: {x: 2.7556996, y: 3.3667161, z: 1.3145369}
+  m_LocalPosition: {x: 5.6271, y: -0.1, z: -1.6203}
+  m_LocalScale: {x: 2.7701836, y: 3.3667161, z: 1.3145369}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -2001,7 +2001,6 @@ MonoBehaviour:
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 209456588}
   tutorialButtonVR: {fileID: 392454751}
-  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 1
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -2069,7 +2068,6 @@ MonoBehaviour:
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 1632546183}
   tutorialButtonVR: {fileID: 1272898114}
-  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 3
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -4079,7 +4077,6 @@ MonoBehaviour:
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 299154137}
   tutorialButtonVR: {fileID: 527325643}
-  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 4
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -6563,6 +6560,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1004861309438956043, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.34
+      objectReference: {fileID: 0}
     - target: {fileID: 2290982744870362143, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.31
@@ -6591,6 +6592,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2302873773728594335, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3192488315484781798, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9973771
@@ -6602,6 +6607,10 @@ PrefabInstance:
     - target: {fileID: 3192488315484781798, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -8.301
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171938404873232970, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.3
       objectReference: {fileID: 0}
     - target: {fileID: 4740148190522622619, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6643,13 +6652,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5299738904134908976, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5369332022000982049, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
       propertyPath: m_Name
       value: DSHwider
       objectReference: {fileID: 0}
+    - target: {fileID: 6486938726043774364, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8212353440969004100, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
       propertyPath: m_LocalPosition.z
       value: 3.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254683132832036491, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8551354637402103977, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7387520335139322622, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
@@ -7419,7 +7444,6 @@ MonoBehaviour:
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 952765586}
   tutorialButtonVR: {fileID: 0}
-  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 0
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -8751,7 +8775,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -8810,13 +8834,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590144057}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.09586328, y: 0.83094466, z: 0.42591095, w: 0.3448785}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: -39.918, y: 121.376, z: 36.211}
 --- !u!114 &1590144060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10740,7 +10764,6 @@ MonoBehaviour:
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 389334725}
   tutorialButtonVR: {fileID: 0}
-  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 2
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -16432,7 +16455,6 @@ MonoBehaviour:
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 1133160264709250714}
   tutorialButtonVR: {fileID: 0}
-  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 6
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -17911,7 +17933,6 @@ MonoBehaviour:
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 8443866010781789099}
   tutorialButtonVR: {fileID: 0}
-  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 5
   showDuringTutorial: 0
   setGamestatePlaying: 0
@@ -22948,7 +22969,6 @@ MonoBehaviour:
   tutorialInternManager: {fileID: 2345239546490022388}
   tutorialObjectReference: {fileID: 6462756270551416077}
   tutorialButtonVR: {fileID: 0}
-  tutorialCollisionVR: {fileID: 0}
   showOnTutorialState: 6
   showDuringTutorial: 0
   setGamestatePlaying: 0
