@@ -4,13 +4,25 @@ using Sirenix.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class InternManager : MonoBehaviour
+
+public class InternManager : MonoBehaviour, ITriggerCheckable
 {
+    [SerializeField] private bool isAwaitingTaskState;
+    [SerializeField] private bool isBored;
+    [SerializeField] private bool isMovingToWorkArea;
+    [SerializeField] private bool isWorking;
+    [SerializeField] private bool isHighFiveable;
+    [SerializeField] private bool isMovingBackToMainArea;
+
+
+
     public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
     public class OnStateChangedEventArgs : EventArgs
     {
@@ -68,8 +80,66 @@ public class InternManager : MonoBehaviour
     [SerializeField] InternSO setInternSO;
     private SpawnSpot currentSpot;
 
-    private void Awake()
+    #region AwaitingTask Variables
+
+    public float randomMovementRange = 5f;
+    public float randomMovementSpeed = 1f;
+
+    #endregion
+
+    public bool isGivenWorkCheckable { get; set; }
+    public bool isBoredCheckable { get; set; }
+    public bool isFinishedCheckable { get; set; }
+    public bool isHighfivedCheckable { get; set; }
+    public bool isWorkingCheckable { get; set; }
+    public bool isGoingToWorkCheckable { get; set; }
+
+    #region State Machine Variable
+
+    public InternStateMachine StateMachine { get; set; }
+    public Working WorkingState { get; set; }
+    public Highfived HighfivedState { get; set; }
+    public Highfiveable HighfiveableState { get; set; }
+    public GoingToWork GoingtoWorkeState { get; set; }
+    public Bored BoredState { get; set; }
+    public AwaitingTask AwaitingTaskState { get; set; }
+
+
+    #endregion
+
+    #region Animation Triggers
+
+    private void AnimationTriggerEvent(AnimationTriggerType triggerType)
     {
+        StateMachine.currentInternState.AnimationTriggerEvent(triggerType);
+    }
+
+    public enum AnimationTriggerType //types of triggers for anim
+    {
+        WaitingForTask,
+        BecameBored,
+        GivenTask,
+        Working,
+        HighFiveable,
+        Highfived
+
+    }
+
+    #endregion
+
+
+    private void Awake()
+    {   
+        //seting up states
+        StateMachine = new InternStateMachine();
+        WorkingState = new Working(this, StateMachine);
+        HighfivedState = new Highfived(this, StateMachine);
+        HighfiveableState = new Highfiveable(this, StateMachine);
+        GoingtoWorkeState = new GoingToWork(this, StateMachine);
+        BoredState = new Bored(this, StateMachine);
+        AwaitingTaskState = new AwaitingTask(this, StateMachine); 
+
+
         if (setInternOnAwake)
         {
             SetInternSO(setInternSO);
@@ -78,11 +148,18 @@ public class InternManager : MonoBehaviour
                 internObjectUI.GetStopButtonObject().gameObject.SetActive(false);
             }
             internObjectUI.GetInternTaskObject().gameObject.SetActive(false);
-        }
+        }        
+
     }
+
+   
+
 
     private void Start()
     {
+
+        StateMachine.Initialize(AwaitingTaskState);
+
         if (setInternOnAwake)
         {
             if (InternSpawner.Instance != null)
@@ -97,6 +174,8 @@ public class InternManager : MonoBehaviour
             }
         }
         GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
+
+
     }
 
     private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)
@@ -115,6 +194,10 @@ public class InternManager : MonoBehaviour
 
     private void Update()
     {
+        //state frame update
+        StateMachine.currentInternState.FrameUpdate();
+
+
         switch (state) {
             case InternState.Available:
                 //State Available
@@ -173,6 +256,11 @@ public class InternManager : MonoBehaviour
             //Set State to Unavailable
             SetInternState(InternState.Unavailable);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        StateMachine.currentInternState.PhysicsUpdate();
     }
 
     public void SetInternSO(InternSO _internSO, bool _hide = true)
@@ -480,4 +568,37 @@ public class InternManager : MonoBehaviour
     {
         taskSO = null;
     }
+
+    #region Distance Checks
+
+    public void SetIsGivenWorkStatus(bool isGivenWork)
+    {
+        isGivenWork = isGivenWork;
+    }
+
+    public void SetIsBoredStatus(bool isBored)
+    {
+        isBored = isBored;
+    }
+
+    public void SetIsFinishedStatus(bool isFinished)
+    {
+        isFinished = isFinished;
+    }
+
+    public void SetIsHighfivedStatus(bool isHighfived)
+    {
+        isHighfived = isHighfived;
+    }
+
+    public void SetIsWorkingStatus(bool isWorking)
+    {
+        isWorking = isWorking;
+    }
+
+    public void SetGoingToWorkStatus(bool isGoingToWork)
+    {
+        isGoingToWork = isGoingToWork;
+    }
+    #endregion
 }
