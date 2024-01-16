@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class InternAwaitingTaskCheck : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private InternManager _internmanager;
+
+    private void Awake()
     {
-        
+        _internmanager = GetComponent<InternManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    /* private void EXAMPLE(example example) // // have to detect the 30s without work, then set specific anim state trigger bool to true
+     {
+         internManager.SetIsBoredStatus(true);
+     }
+    */
+
+
+    /* private void EXAMPLE(example example) // have to detect its been given a task, then set specific anim state trigger bool to false
     {
-        
+        internManager.SetIsBoredStatus(false);
     }
+   */
+
+    //NOTE - TUTORIAL WAS INTENDED FOR 2D COLLISION WITH ONTRIGGERENTER2D AND ONTRIGGEREXIT2D, SO IT MIGHT BE DIFFERENT HERE
 }
