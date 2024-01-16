@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Game/Assets/Prefab/Room/CoffeeMug.prefab.meta
 guid: e1c4625173e20414391d8dded023fe0b
 PrefabImporter:
+========
+guid: 78fa2a6dffde115428a7634214a74660
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> parent of f81a713d (updates from main):Assets/Game/Scripts/GroovyScene/InternScripts/TriggerChecks.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

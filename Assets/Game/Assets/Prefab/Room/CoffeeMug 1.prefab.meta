@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Game/Assets/Prefab/Room/CoffeeMug 1.prefab.meta
 guid: 94126a0c2c4f0134f8d6e20826561d39
 PrefabImporter:
+========
+guid: d53038a10eed6854ebf94220f4f8bbdb
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> parent of f81a713d (updates from main):Assets/Game/Animations.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

@@ -1,8 +1,19 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<<< HEAD:Assets/Game/Animations/InternObjectDwayneVR 1.controller.meta
 guid: 3881ebf1724d90e4d9c3666ee237c97f
+========
+guid: 814c26032a3013f478823902cefcc829
+>>>>>>>> parent of f81a713d (updates from main):Assets/Game/Animations/TestAnim.anim.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 2100000
+  mainObjectFileID: 7400000
+=======
+guid: 162440682e76e594aaaeb8d23688128f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+>>>>>>> parent of f81a713d (updates from main)
   userData: 
   assetBundleName: 
   assetBundleVariant: 

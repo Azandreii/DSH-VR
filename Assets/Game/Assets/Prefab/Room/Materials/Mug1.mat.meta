@@ -1,8 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Game/Assets/Prefab/Room/Materials/Mug1.mat.meta
 guid: 43c548ace05a12442bf387f499871cc8
+========
+guid: 0bc632e271add1c4f8c3e9603012ce7b
+>>>>>>>> parent of f81a713d (updates from main):Assets/Game/Animations/NPCtest.controller.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 2100000
+  mainObjectFileID: 9100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
