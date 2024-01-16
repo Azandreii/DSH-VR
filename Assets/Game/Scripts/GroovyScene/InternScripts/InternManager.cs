@@ -4,13 +4,40 @@ using Sirenix.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class InternManager : MonoBehaviour
+
+public class InternManager : MonoBehaviour, ITriggerCheckable
 {
+
+    #region TriggerCheckables Integration
+
+    public bool isGivenWorkCheckable { get; set; }
+    public bool isBoredCheckable { get; set; }
+    public bool isWaitingForApprovalCheckable { get; set; }
+    public bool isWorkingCheckable { get; set; }
+    public bool isUnavailableCheckable { get; set; }
+
+    #endregion
+
+    #region State Machine Variable
+
+    public InternStateMachine StateMachine { get; set; }
+    public Working WorkingState { get; set; }
+    public WaitingForApproval WaitingForApprovalState { get; set; }
+    public Bored BoredState { get; set; }
+    public AwaitingTask AwaitingTaskState { get; set; }
+    public Unavailable UnavailableState { get; set; }
+
+
+    #endregion
+
+
     public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
     public class OnStateChangedEventArgs : EventArgs
     {
@@ -30,7 +57,7 @@ public class InternManager : MonoBehaviour
 
     public enum InternState
     {
-        Available,
+        Idle,
         WorkingOnTask,
         WaitingForApproval,
         Unavailable,
@@ -62,14 +89,38 @@ public class InternManager : MonoBehaviour
     private float communicationEfficiency = 1f;
     private float teamworkEfficiency = 1f;
     private float defaultEffieciency = 1f;
+    // State machine animations
+    [SerializeField] private bool isAwaitingTaskState;
+    [SerializeField] private bool isBored;
+    [SerializeField] private bool isWorking;
+    [SerializeField] private bool isWaitingForApproval;
+    [SerializeField] private bool isUnavailable;
 
     [Title("Set Intern Settings")]
     [SerializeField] bool setInternOnAwake = false;
     [SerializeField] InternSO setInternSO;
     private SpawnSpot currentSpot;
 
+    #region AwaitingTask Variables
+
+    public float randomMovementRange = 5f;
+    public float randomMovementSpeed = 1f;
+
+    #endregion
+
+
+
     private void Awake()
     {
+        //seting up states
+        StateMachine = new InternStateMachine();
+        WorkingState = new Working(this, StateMachine);
+        WaitingForApprovalState = new WaitingForApproval(this, StateMachine);
+        BoredState = new Bored(this, StateMachine);
+        AwaitingTaskState = new AwaitingTask(this, StateMachine);
+        UnavailableState = new Unavailable(this, StateMachine);
+
+
         if (setInternOnAwake)
         {
             SetInternSO(setInternSO);
@@ -79,10 +130,17 @@ public class InternManager : MonoBehaviour
             }
             internObjectUI.GetInternTaskObject().gameObject.SetActive(false);
         }
+
     }
+
+
+
 
     private void Start()
     {
+
+        StateMachine.Initialize(AwaitingTaskState);
+
         if (setInternOnAwake)
         {
             if (InternSpawner.Instance != null)
@@ -97,6 +155,8 @@ public class InternManager : MonoBehaviour
             }
         }
         GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
+
+
     }
 
     private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)
@@ -104,7 +164,7 @@ public class InternManager : MonoBehaviour
         if (taskSO == e.taskSO)
         {
             taskSO = null;
-            state = InternState.Available;
+            state = InternState.Idle;
         }
     }
 
@@ -115,13 +175,18 @@ public class InternManager : MonoBehaviour
 
     private void Update()
     {
-        switch (state) {
-            case InternState.Available:
-                //State Available
+        //state frame update
+        StateMachine.currentInternState.FrameUpdate();
+
+
+        switch (state)
+        {
+            case InternState.Idle:
+                //State Idle
 
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { internState = state });
-                if (currentEnergy <= energyMax) 
-                { 
+                if (currentEnergy <= energyMax)
+                {
                     AdjustEnergy(availableEnergyEfficiency, energyEfficiency);
                     if (workingEnergyEfficiency != GetWorkingEfficiency())
                     {
@@ -146,7 +211,8 @@ public class InternManager : MonoBehaviour
 
                     OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { internState = state });
                 }
-                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs { 
+                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                {
                     progressNormalized = 1 - progress / progressMax,
                     eventTaskSO = taskSO,
                 });
@@ -164,8 +230,8 @@ public class InternManager : MonoBehaviour
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { internState = state });
                 if (currentEnergy <= energyMax) { AdjustEnergy(unavaiableEnergyEfficiency, energyEfficiency); }
 
-                //Set State to Available
-                else { currentEnergy = energyMax; state = InternState.Available; }
+                //Set State to Idle
+                else { currentEnergy = energyMax; state = InternState.Idle; }
                 break;
         }
         if (currentEnergy <= 0 && state != InternState.Unavailable)
@@ -175,13 +241,36 @@ public class InternManager : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        StateMachine.currentInternState.PhysicsUpdate();
+    }
+
+    #region Animation Triggers
+
+    private void AnimationTriggerEvent(AnimationTriggerType triggerType)
+    {
+        StateMachine.currentInternState.AnimationTriggerEvent(triggerType);
+    }
+
+    public enum AnimationTriggerType //types of triggers for anim
+    {
+        WaitingForTask,
+        BecameBored,
+        Working,
+        WaitingForApproval,
+        Unavailable,
+    }
+
+    #endregion
+
     public void SetInternSO(InternSO _internSO, bool _hide = true)
     {
         internSO = _internSO;
         SetEfficiency(GetEnergyEfficiency(), GetProcessEfficiency());
         SetEnergy(GetStartEnergy(), GetEnergyMax());
         SetGeneralEfficiency(GetGeneralEfficiency());
-        SetStateEfficiency(GetAvailableEfficiency(), GetWorkingEfficiency(), 
+        SetStateEfficiency(GetAvailableEfficiency(), GetWorkingEfficiency(),
             GetAwaitApprovalEfficiency(), GetUnavailableEfficiency());
         SetSpecialtyEfficiency(GetTechEfficiency(), GetArtEfficiency(), GetDesignEfficiency(),
             GetEconomyEfficiency(), GetCommunicationEfficiency(), GetTeamworkEfficiency());
@@ -197,7 +286,7 @@ public class InternManager : MonoBehaviour
     public void SetInternState(InternState _state)
     {
         this.state = _state;
-        if(_state == InternState.Unavailable)
+        if (_state == InternState.Unavailable)
         {
             taskSO = null;
         }
@@ -212,7 +301,8 @@ public class InternManager : MonoBehaviour
             if (_gameObjectTaskSO != null)
             {
                 gameObjectInternSO = _gameObjectTaskSO;
-            }else
+            }
+            else
             {
                 Debug.LogWarning("No GameObject attached to taskSO to destroy");
             }
@@ -240,9 +330,9 @@ public class InternManager : MonoBehaviour
     {
         if (state == InternState.WaitingForApproval)
         {
-            state = InternState.Available;
+            state = InternState.Idle;
 
-            //Set State to Available
+            //Set State to Idle
 
             if (taskSO == SelectedSpawnerTaskSO.Instance.GetSelectedTaskSO())
             {
@@ -350,7 +440,7 @@ public class InternManager : MonoBehaviour
     {
         return taskSO;
     }
-    
+
     public GameObject GetGameObjectTaskSO()
     {
         return gameObjectInternSO;
@@ -480,4 +570,36 @@ public class InternManager : MonoBehaviour
     {
         taskSO = null;
     }
+
+    #region Distance Checks
+
+    public void SetIsGivenWorkStatus(bool isGivenWork)
+    {
+        isGivenWork = isGivenWork;
+    }
+
+    public void SetIsBoredStatus(bool isBored)
+    {
+        isBored = isBored;
+    }
+
+    public void SetIsWaitingForApprovalStatus(bool isWaitingForApprovalCheckable)
+    {
+        isWaitingForApprovalCheckable = isWaitingForApprovalCheckable;
+    }
+
+    public void SetIsWorkingStatus(bool isWorking)
+    {
+        isWorking = isWorking;
+    }
+
+    public void SetIsUnavailable(bool isUnavailable)
+    {
+        isUnavailable = isUnavailable;
+    }
+
+    #endregion
+
+    //MoveIntern
+
 }
