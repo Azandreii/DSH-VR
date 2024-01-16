@@ -1,8 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Game/Assets/Prefab/Room/Materials/SmallTable.mat.meta
 guid: 58d98a31d391ff94c9433c09a1bff748
+========
+guid: 162440682e76e594aaaeb8d23688128f
+>>>>>>>> parent of f81a713d (updates from main):Assets/Game/Animations/Base_001.controller.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 2100000
+  mainObjectFileID: 9100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

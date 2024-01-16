@@ -1,8 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Game/Assets/Prefab/Room/Models/Materials/LargeTable 1.mat.meta
 guid: 1a9a70917a7e00a4e9479dc2ebd76a6e
+========
+guid: e49ed77a55061204789c6e60b6d63705
+>>>>>>>> parent of f81a713d (updates from main):Assets/Game/Animations/InternObjectDwayneVR.controller.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 2100000
+  mainObjectFileID: 9100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

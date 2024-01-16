@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Game/Assets/Prefab/Room/LargeTable.prefab.meta
 guid: b642419b9a01f3c4f863ec44ff397768
 PrefabImporter:
+========
+guid: d53038a10eed6854ebf94220f4f8bbdb
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> parent of f81a713d (updates from main):Assets/Game/Animations.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
