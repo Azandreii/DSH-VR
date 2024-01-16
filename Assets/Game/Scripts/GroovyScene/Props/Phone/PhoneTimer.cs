@@ -13,10 +13,10 @@ public class PhoneTimer : MonoBehaviour
 
     private void Start()
     {
-        TimeClockManager.Instance.UpdateTimeChanged += TimeClockManager_UpdateTimeChanged;
+        TimeClockManager.Instance.OnTimeChanged += TimeClockManager_OnTimeChanged;
     }
 
-    private void TimeClockManager_UpdateTimeChanged(object sender, TimeClockManager.OnTimeChangedEventArgs e)
+    private void TimeClockManager_OnTimeChanged(object sender, TimeClockManager.OnTimeChangedEventArgs e)
     {
         ShowTime(e.minutes, e.hours);
     }
