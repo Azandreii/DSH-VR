@@ -3581,7 +3581,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -14761,7 +14761,6 @@ GameObject:
   - component: {fileID: 2702156263511515749}
   - component: {fileID: 642693059898098604}
   - component: {fileID: 8207012604025722989}
-  - component: {fileID: 8207012604025722990}
   m_Layer: 7
   m_Name: TriggerRightHand
   m_TagString: Untagged
@@ -17876,11 +17875,6 @@ MonoBehaviour:
   currentEnergy: 200
   progressMax: 3
   state: 0
-  isAwaitingTaskState: 0
-  isBored: 0
-  isWorking: 0
-  isWaitingForApproval: 0
-  isUnavailable: 0
   setInternOnAwake: 1
   setInternSO: {fileID: 11400000, guid: 80b95553107f64441bc00530f812492b, type: 2}
   randomMovementRange: 5
@@ -19931,8 +19925,8 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1
-  m_Radius: 0.05
+  m_Height: 1.4
+  m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -19997,6 +19991,7 @@ GameObject:
   - component: {fileID: 7903402565877901682}
   - component: {fileID: 2345239546490022388}
   - component: {fileID: 7903402565877901683}
+  - component: {fileID: 7903402565877901684}
   m_Layer: 0
   m_Name: InternObjectDwayneVR
   m_TagString: Untagged
@@ -23899,7 +23894,7 @@ Transform:
   m_GameObject: {fileID: 7876855893222647356}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0009716749, y: -1.0960244, z: 0.018996}
+  m_LocalPosition: {x: 0.0009716749, y: -0.705, z: 0.018996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24670,6 +24665,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7903402565877901684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4202950879170190494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b5e306a2a426a24bb4f00a27b97934d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  internManager: {fileID: 2345239546490022388}
+  isAwaitingTaskState: 0
+  isBored: 0
+  isWorking: 0
+  isWaitingForApproval: 0
+  isUnavailable: 0
+  lastState: 0
+  nextState: 0
+  randomMovementRange: 5
+  randomMovementSpeed: 1
 --- !u!222 &7952391337069281892
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24964,21 +24981,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
---- !u!114 &8207012604025722990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 609125339738118288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddc11eb5849532d428f7e3520e49597a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LeftHand: {fileID: 0}
-  RightHand: {fileID: 0}
-  collisionVR: {fileID: 642693059898098604}
 --- !u!1001 &8216354095842138821
 PrefabInstance:
   m_ObjectHideFlags: 0

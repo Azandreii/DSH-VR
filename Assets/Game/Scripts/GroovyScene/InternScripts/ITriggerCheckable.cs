@@ -4,13 +4,13 @@ using UnityEngine;
 
 public interface ITriggerCheckable 
 {
-   bool isGivenWorkCheckable { get; set; }
+   bool isAwaitingTaskCheckable { get; set; }
    bool isBoredCheckable { get; set; }
    bool isWaitingForApprovalCheckable {  get; set; }
    bool isWorkingCheckable { get; set; }
    bool isUnavailableCheckable {  get; set; }
 
-    void SetIsGivenWorkStatus (bool _isGivenWorkCheckable);
+    void SetIsAwaitingTaskState(bool _isAwaitingTaskCheckable);
     void SetIsBoredStatus (bool _isBoredCheckable);
     void SetIsWaitingForApprovalStatus(bool _isWaitingForApprovalCheckable);
     void SetIsWorkingStatus (bool _isWorkingCheckable);

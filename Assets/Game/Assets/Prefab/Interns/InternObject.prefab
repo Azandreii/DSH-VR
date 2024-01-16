@@ -61,6 +61,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6730660681519136640}
   - component: {fileID: 1174713867617353478}
+  - component: {fileID: -4766101117000203846}
   m_Layer: 0
   m_Name: InternObject
   m_TagString: Untagged
@@ -105,9 +106,30 @@ MonoBehaviour:
   state: 0
   setInternOnAwake: 0
   setInternSO: {fileID: 0}
-  easyDifficulty: 3
-  mediumDifficulty: 7
-  hardDifficulty: 11
+  randomMovementRange: 5
+  randomMovementSpeed: 1
+--- !u!114 &-4766101117000203846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762651461747739244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b5e306a2a426a24bb4f00a27b97934d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  internManager: {fileID: 1174713867617353478}
+  isAwaitingTaskState: 0
+  isBored: 0
+  isWorking: 0
+  isWaitingForApproval: 0
+  isUnavailable: 0
+  lastState: 0
+  nextState: 0
+  randomMovementRange: 5
+  randomMovementSpeed: 1
 --- !u!1 &1620113708257801203
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class InternVisuals : MonoBehaviour, ITriggerCheckable
 {
     #region TriggerCheckables Integration
 
-    public bool isGivenWorkCheckable { get; set; }
+    public bool isAwaitingTaskCheckable { get; set; }
     public bool isBoredCheckable { get; set; }
     public bool isWaitingForApprovalCheckable { get; set; }
     public bool isWorkingCheckable { get; set; }
@@ -29,7 +30,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
 
     public enum AnimationTriggerType //types of triggers for anim
     {
-        WaitingForTask,
+        AwaitingTaskState,
         BecameBored,
         Working,
         WaitingForApproval,
@@ -40,11 +41,13 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
     [SerializeField] private InternManager internManager;
 
     // State machine animations
-    [SerializeField] private bool isAwaitingTaskState;
-    [SerializeField] private bool isBored;
-    [SerializeField] private bool isWorking;
-    [SerializeField] private bool isWaitingForApproval;
-    [SerializeField] private bool isUnavailable;
+    public bool isAwaitingTaskState;
+    public bool isBored;
+    public bool isWorking;
+    public bool isWaitingForApproval;
+    public bool isUnavailable;
+    public InternManager.InternState lastState = InternManager.InternState.Idle;
+    public InternManager.InternState nextState;
 
     #region AwaitingTask Variables
 
@@ -66,6 +69,8 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
 
     private void Start()
     {
+        lastState = internManager.GetInternState();
+
         internManager.OnStateChanged += InternManager_OnStateChanged;
 
         StateMachine.Initialize(AwaitingTaskState);
@@ -76,20 +81,43 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
 
     private void InternManager_OnStateChanged(object sender, InternManager.OnStateChangedEventArgs e)
     {
-        switch (e.internState)                              // add bored as well
+        // add bored as well
+
+        lastState = nextState; //save current state
+        nextState = e.internState;
+        Debug.Log(e.internState + " " + nextState);
+
+        if (lastState != nextState)
         {
-            case InternManager.InternState.Idle:
+            SetEveryStateFalse();
 
-                break;
-            case InternManager.InternState.WorkingOnTask:
 
-                break;
-            case InternManager.InternState.WaitingForApproval:
+            switch (e.internState)
+            {
+                case InternManager.InternState.Idle:
 
-                break;
-            case InternManager.InternState.Unavailable:
+                    SetIsAwaitingTaskState(true);
+                    Debug.Log("Set state to Idle");
+                    break;
 
-                break;
+                case InternManager.InternState.WorkingOnTask:
+
+                    SetIsWorkingStatus(true);
+                    Debug.Log("Set state to Working");
+                    break;
+
+                case InternManager.InternState.WaitingForApproval:
+
+                    SetIsWaitingForApprovalStatus(true);
+                    Debug.Log("Set state to WaitingForApproval");
+                    break;
+
+                case InternManager.InternState.Unavailable:
+
+                    SetIsUnavailable(true);
+                    Debug.Log("Set state to Unavailable");
+                    break;
+            }
         }
     }
 
@@ -104,11 +132,6 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
     }
 
     #region Distance Checks
-
-    public void SetIsGivenWorkStatus(bool _isGivenWork)
-    {
-        isGivenWorkCheckable = _isGivenWork;
-    }
 
     public void SetIsBoredStatus(bool _isBored)
     {
@@ -129,6 +152,22 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
     {
         isUnavailableCheckable = _isUnavailable;
     }
+
+    public void SetIsAwaitingTaskState(bool _isAwaitingTaskCheckable)
+    {
+        isAwaitingTaskCheckable = _isAwaitingTaskCheckable;
+    } 
+
+    public void SetEveryStateFalse()
+    {
+        SetIsWaitingForApprovalStatus(false);
+        SetIsUnavailable(false);
+        SetIsWorkingStatus(false);
+        SetIsBoredStatus(false);
+        SetIsAwaitingTaskState(false);
+    }
+
+    
 
     #endregion
 
