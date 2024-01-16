@@ -3760,7 +3760,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Dwayne has completed his task! Now I can give him a high five '
+  m_text: Dwayne has completed the task! I give my employees a high five for finishing
+    a task. Now I need to repeat the process untill the end of my working hours at
+    17:00.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: eb91c274b082d4d4abdf849f24c33ee5, type: 2}
@@ -6508,7 +6510,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Now that I have the task selected on my hand, I can give the task to Dwayne
-    by tapping him on the shoulder.
+    by tapping him on the shoulder. Only Dwayne is on time, but the others will be
+    here soon.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: eb91c274b082d4d4abdf849f24c33ee5, type: 2}
@@ -6653,6 +6656,10 @@ PrefabInstance:
       propertyPath: gameEndUI
       value: 
       objectReference: {fileID: 599309275}
+    - target: {fileID: 8301460751939595756, guid: ed8226a513b57614cb8ccc8f91160971, type: 3}
+      propertyPath: isTutorial
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9184096246474234558, guid: ed8226a513b57614cb8ccc8f91160971, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.1477189
@@ -9095,7 +9102,7 @@ MonoBehaviour:
   timerMax: 17
   minutesStart: 0
   hoursStart: 9
-  timerSpeed: 30
+  timerSpeed: 7
 --- !u!4 &1391113952
 Transform:
   m_ObjectHideFlags: 0
@@ -9468,14 +9475,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499383158}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.958, y: 1.4752257, z: -0.355}
+  m_LocalRotation: {x: -0, y: -0.5550158, z: -0, w: 0.83183986}
+  m_LocalPosition: {x: -0.108, y: 1.337, z: -0.534}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1533339762}
   m_Father: {fileID: 1884001277}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -67.424, z: 0}
 --- !u!65 &1499383160
 BoxCollider:
   m_ObjectHideFlags: 0

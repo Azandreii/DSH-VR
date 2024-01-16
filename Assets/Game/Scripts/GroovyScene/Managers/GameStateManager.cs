@@ -30,7 +30,7 @@ public class GameStateManager : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private GameState gameState;
     [SerializeField] private bool isTutorial = false;
-    private int tutorialState;
+    private int tutorialState = 0;
     private bool hasGrabbedPhoneTutorial;
     private bool hasSelectedTaskTutorial;
     private bool spawnedGameEndUI = false;
