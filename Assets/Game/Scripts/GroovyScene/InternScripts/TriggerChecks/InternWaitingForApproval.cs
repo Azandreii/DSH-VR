@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaitingForApprovalCheck : MonoBehaviour
+public class InternWaitingForApprovalCheck : MonoBehaviour
 {
     [SerializeField] private GameObject LeftHand;
     [SerializeField] private GameObject RightHand;
     [SerializeField] private OnCollisionVR collisionVR;
-    [SerializeField] private InternManager internManager;
+    [SerializeField] private InternVisuals internVisuals;
 
 
     private void Start()
@@ -19,7 +19,7 @@ public class WaitingForApprovalCheck : MonoBehaviour
 
     private void CollisionVR_OnCollisionControler(object sender, System.EventArgs e)
     {
-        internManager.SetIsWaitingForApprovalStatus(true);
+        internVisuals.SetIsWaitingForApprovalStatus(true);
         Debug.Log("set state to WaitingForApproval");
     }
 
@@ -33,7 +33,7 @@ public class WaitingForApprovalCheck : MonoBehaviour
     {
         if (other.gameObject == LeftHand || other.gameObject == RightHand)
         {
-            internManager.SetIsWaitingForApprovalStatus(false);
+            internVisuals.SetIsWaitingForApprovalStatus(false);
             Debug.Log("Not WaitingForApproval state anymore");
         }
     } 
