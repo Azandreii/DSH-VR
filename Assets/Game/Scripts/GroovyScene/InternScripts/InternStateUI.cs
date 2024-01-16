@@ -19,9 +19,9 @@ public class InternStateUI : MonoBehaviour
     {
         switch (e.internState)
         {
-            case InternManager.InternState.Available:
+            case InternManager.InternState.Idle:
                 internStateText.color = Color.white;
-                internStateText.text = "Available";
+                internStateText.text = "Idle";
                 break;
             case InternManager.InternState.WorkingOnTask:
                 internStateText.color = Color.yellow;

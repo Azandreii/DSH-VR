@@ -14,12 +14,28 @@ using UnityEngine.UIElements;
 
 public class InternManager : MonoBehaviour, ITriggerCheckable
 {
-    [SerializeField] private bool isAwaitingTaskState;
-    [SerializeField] private bool isBored;
-    [SerializeField] private bool isWorking;
-    [SerializeField] private bool isWaitingForApproval;
-    [SerializeField] private bool isUnavailable;
 
+    #region TriggerCheckables Integration
+
+    public bool isGivenWorkCheckable { get; set; }
+    public bool isBoredCheckable { get; set; }
+    public bool isWaitingForApprovalCheckable { get; set; }
+    public bool isWorkingCheckable { get; set; }
+    public bool isUnavailableCheckable { get; set; }
+
+    #endregion
+
+    #region State Machine Variable
+
+    public InternStateMachine StateMachine { get; set; }
+    public Working WorkingState { get; set; }
+    public WaitingForApproval WaitingForApprovalState { get; set; }
+    public Bored BoredState { get; set; }
+    public AwaitingTask AwaitingTaskState { get; set; }
+    public Unavailable UnavailableState { get; set; }
+
+
+    #endregion
 
 
     public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
@@ -41,7 +57,7 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
 
     public enum InternState
     {
-        Available,
+        Idle,
         WorkingOnTask,
         WaitingForApproval,
         Unavailable,
@@ -73,6 +89,12 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
     private float communicationEfficiency = 1f;
     private float teamworkEfficiency = 1f;
     private float defaultEffieciency = 1f;
+    // State machine animations
+    [SerializeField] private bool isAwaitingTaskState;
+    [SerializeField] private bool isBored;
+    [SerializeField] private bool isWorking;
+    [SerializeField] private bool isWaitingForApproval;
+    [SerializeField] private bool isUnavailable;
 
     [Title("Set Intern Settings")]
     [SerializeField] bool setInternOnAwake = false;
@@ -86,41 +108,6 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
 
     #endregion
 
-    public bool isGivenWorkCheckable { get; set; }
-    public bool isBoredCheckable { get; set; }
-    public bool isWaitingForApprovalCheckable { get; set; }
-    public bool isWorkingCheckable { get; set; }
-    public bool isUnavailableCheckable { get; set; }
-
-    #region State Machine Variable
-
-    public InternStateMachine StateMachine { get; set; }
-    public Working WorkingState { get; set; }
-    public WaitingForApproval WaitingForApprovalState { get; set; }
-    public Bored BoredState { get; set; }
-    public AwaitingTask AwaitingTaskState { get; set; }
-    public Unavailable UnavailableState { get; set; }
-
-
-    #endregion
-
-    #region Animation Triggers
-
-    private void AnimationTriggerEvent(AnimationTriggerType triggerType)
-    {
-        StateMachine.currentInternState.AnimationTriggerEvent(triggerType);
-    }
-
-    public enum AnimationTriggerType //types of triggers for anim
-    {
-        WaitingForTask,
-        BecameBored,
-        Working,
-        WaitingForApproval,
-        Unavailable,
-    }
-
-    #endregion
 
 
     private void Awake()
@@ -177,7 +164,7 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
         if (taskSO == e.taskSO)
         {
             taskSO = null;
-            state = InternState.Available;
+            state = InternState.Idle;
         }
     }
 
@@ -194,8 +181,8 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
 
         switch (state)
         {
-            case InternState.Available:
-                //State Available
+            case InternState.Idle:
+                //State Idle
 
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { internState = state });
                 if (currentEnergy <= energyMax)
@@ -243,8 +230,8 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { internState = state });
                 if (currentEnergy <= energyMax) { AdjustEnergy(unavaiableEnergyEfficiency, energyEfficiency); }
 
-                //Set State to Available
-                else { currentEnergy = energyMax; state = InternState.Available; }
+                //Set State to Idle
+                else { currentEnergy = energyMax; state = InternState.Idle; }
                 break;
         }
         if (currentEnergy <= 0 && state != InternState.Unavailable)
@@ -258,6 +245,24 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
     {
         StateMachine.currentInternState.PhysicsUpdate();
     }
+
+    #region Animation Triggers
+
+    private void AnimationTriggerEvent(AnimationTriggerType triggerType)
+    {
+        StateMachine.currentInternState.AnimationTriggerEvent(triggerType);
+    }
+
+    public enum AnimationTriggerType //types of triggers for anim
+    {
+        WaitingForTask,
+        BecameBored,
+        Working,
+        WaitingForApproval,
+        Unavailable,
+    }
+
+    #endregion
 
     public void SetInternSO(InternSO _internSO, bool _hide = true)
     {
@@ -325,9 +330,9 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
     {
         if (state == InternState.WaitingForApproval)
         {
-            state = InternState.Available;
+            state = InternState.Idle;
 
-            //Set State to Available
+            //Set State to Idle
 
             if (taskSO == SelectedSpawnerTaskSO.Instance.GetSelectedTaskSO())
             {

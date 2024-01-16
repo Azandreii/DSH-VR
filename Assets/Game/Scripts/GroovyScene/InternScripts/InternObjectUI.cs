@@ -86,7 +86,7 @@ public class InternObjectUI : MonoBehaviour
         {
             stopButton.onClick.AddListener(() =>
             {
-                internManager.SetInternState(InternManager.InternState.Available);
+                internManager.SetInternState(InternManager.InternState.Idle);
             });
         }
 
@@ -139,7 +139,7 @@ public class InternObjectUI : MonoBehaviour
         taskAvailable = TaskManager.Instance.HasTasks();
         if (!TaskManager.Instance.HasTasks() && internManager.GetInternState() != InternManager.InternState.Unavailable)
         {
-            internManager.SetInternState(InternManager.InternState.Available);
+            internManager.SetInternState(InternManager.InternState.Idle);
         }
     }
 
@@ -186,7 +186,7 @@ public class InternObjectUI : MonoBehaviour
     {
         switch (e.internState)
         {
-            case InternManager.InternState.Available:
+            case InternManager.InternState.Idle:
                 AssignTextColor(Color.white);
                 SetTaskVisibilityUI(false);
                 break;
@@ -222,7 +222,7 @@ public class InternObjectUI : MonoBehaviour
 
     private void SetTask()
     {
-        if (internManager.GetInternState() == InternManager.InternState.Available && taskAvailable && GameManager.Instance.HasTask())
+        if (internManager.GetInternState() == InternManager.InternState.Idle && taskAvailable && GameManager.Instance.HasTask())
         {
             internManager.SetInternManagerTask(GameManager.Instance.GetTaskSO(), GameManager.Instance.GetGameObjectTaskSO());
             TaskSO _assignedTaskSO = GameManager.Instance.GetTaskSO();
@@ -246,7 +246,7 @@ public class InternObjectUI : MonoBehaviour
 
     private void StopTask()
     {
-        internManager.SetInternState(InternManager.InternState.Available);
+        internManager.SetInternState(InternManager.InternState.Idle);
         internManager.ClearTaskSO();
 
         //Set task intern state (Availabe) change here
