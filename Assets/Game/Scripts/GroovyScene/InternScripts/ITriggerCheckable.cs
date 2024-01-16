@@ -6,15 +6,13 @@ public interface ITriggerCheckable
 {
    bool isGivenWorkCheckable { get; set; }
    bool isBoredCheckable { get; set; }
-   bool isFinishedCheckable {  get; set; }
-   bool isHighfivedCheckable { get; set; }
+   bool isWaitingForApprovalCheckable {  get; set; }
    bool isWorkingCheckable { get; set; }
-   bool isGoingToWorkCheckable { get; set; }
+   bool isUnavailableCheckable {  get; set; }
 
     void SetIsGivenWorkStatus (bool isGivenWorkCheckable);
     void SetIsBoredStatus (bool isBoredCheckable);
-    void SetIsFinishedStatus (bool isFinishedCheckable);
-    void SetIsHighfivedStatus (bool isHighfivedCheckable);
+    void SetIsWaitingForApprovalStatus(bool isWaitingForApprovalCheckable);
     void SetIsWorkingStatus (bool isWorkingCheckable);
-    void SetGoingToWorkStatus (bool isGoingToWorkCheckable);
+    void SetIsUnavailable (bool isUnavailable);
 }

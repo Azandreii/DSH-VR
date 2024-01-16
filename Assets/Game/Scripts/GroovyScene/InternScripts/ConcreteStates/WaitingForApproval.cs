@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Highfiveable : InternState
+public class WaitingForApproval : InternState
 {
-    public Highfiveable(InternManager internManager, InternStateMachine internStateMachine) : base(internManager, internStateMachine)
+    public WaitingForApproval(InternManager internManager, InternStateMachine internStateMachine) : base(internManager, internStateMachine)
     {
     }
 

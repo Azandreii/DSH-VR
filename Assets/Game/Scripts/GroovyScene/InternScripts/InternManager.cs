@@ -16,10 +16,9 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
 {
     [SerializeField] private bool isAwaitingTaskState;
     [SerializeField] private bool isBored;
-    [SerializeField] private bool isMovingToWorkArea;
     [SerializeField] private bool isWorking;
-    [SerializeField] private bool isHighFiveable;
-    [SerializeField] private bool isMovingBackToMainArea;
+    [SerializeField] private bool isWaitingForApproval;
+    [SerializeField] private bool isUnavailable;
 
 
 
@@ -89,20 +88,18 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
 
     public bool isGivenWorkCheckable { get; set; }
     public bool isBoredCheckable { get; set; }
-    public bool isFinishedCheckable { get; set; }
-    public bool isHighfivedCheckable { get; set; }
+    public bool isWaitingForApprovalCheckable { get; set; }
     public bool isWorkingCheckable { get; set; }
-    public bool isGoingToWorkCheckable { get; set; }
+    public bool isUnavailableCheckable { get; set; }
 
     #region State Machine Variable
 
     public InternStateMachine StateMachine { get; set; }
     public Working WorkingState { get; set; }
-    public Highfived HighfivedState { get; set; }
-    public Highfiveable HighfiveableState { get; set; }
-    public GoingToWork GoingtoWorkeState { get; set; }
+    public WaitingForApproval WaitingForApprovalState { get; set; }
     public Bored BoredState { get; set; }
     public AwaitingTask AwaitingTaskState { get; set; }
+    public Unavailable UnavailableState { get; set; }
 
 
     #endregion
@@ -118,11 +115,9 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
     {
         WaitingForTask,
         BecameBored,
-        GivenTask,
         Working,
-        HighFiveable,
-        Highfived
-
+        WaitingForApproval,
+        Unavailable,
     }
 
     #endregion
@@ -133,11 +128,10 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
         //seting up states
         StateMachine = new InternStateMachine();
         WorkingState = new Working(this, StateMachine);
-        HighfivedState = new Highfived(this, StateMachine);
-        HighfiveableState = new Highfiveable(this, StateMachine);
-        GoingtoWorkeState = new GoingToWork(this, StateMachine);
+        WaitingForApprovalState = new WaitingForApproval(this, StateMachine);
         BoredState = new Bored(this, StateMachine);
         AwaitingTaskState = new AwaitingTask(this, StateMachine); 
+        UnavailableState = new Unavailable(this, StateMachine);
 
 
         if (setInternOnAwake)
@@ -581,14 +575,9 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
         isBored = isBored;
     }
 
-    public void SetIsFinishedStatus(bool isFinished)
+    public void SetIsWaitingForApprovalStatus(bool isWaitingForApprovalCheckable)
     {
-        isFinished = isFinished;
-    }
-
-    public void SetIsHighfivedStatus(bool isHighfived)
-    {
-        isHighfived = isHighfived;
+        isWaitingForApprovalCheckable = isWaitingForApprovalCheckable;
     }
 
     public void SetIsWorkingStatus(bool isWorking)
@@ -596,9 +585,13 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
         isWorking = isWorking;
     }
 
-    public void SetGoingToWorkStatus(bool isGoingToWork)
+    public void SetIsUnavailable(bool isUnavailable)
     {
-        isGoingToWork = isGoingToWork;
+        isUnavailable = isUnavailable;
     }
+
     #endregion
+
+    //MoveIntern
+
 }
