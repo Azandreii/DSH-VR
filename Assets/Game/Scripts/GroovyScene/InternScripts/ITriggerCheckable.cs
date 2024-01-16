@@ -10,9 +10,9 @@ public interface ITriggerCheckable
    bool isWorkingCheckable { get; set; }
    bool isUnavailableCheckable {  get; set; }
 
-    void SetIsGivenWorkStatus (bool isGivenWorkCheckable);
-    void SetIsBoredStatus (bool isBoredCheckable);
-    void SetIsWaitingForApprovalStatus(bool isWaitingForApprovalCheckable);
-    void SetIsWorkingStatus (bool isWorkingCheckable);
-    void SetIsUnavailable (bool isUnavailable);
+    void SetIsGivenWorkStatus (bool _isGivenWorkCheckable);
+    void SetIsBoredStatus (bool _isBoredCheckable);
+    void SetIsWaitingForApprovalStatus(bool _isWaitingForApprovalCheckable);
+    void SetIsWorkingStatus (bool _isWorkingCheckable);
+    void SetIsUnavailable (bool _isUnavailableCheckable);
 }

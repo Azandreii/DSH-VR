@@ -15,14 +15,14 @@ public class InternHighFivedCheck : MonoBehaviour
 
     /* private void EXAMPLE(example example) // // have to detect its been highfived, then set specific anim state trigger bool to true
      {
-         _internmanager.SetIsBoredStatus(true);
+         internManager.SetIsBoredStatus(true);
      }
     */
 
 
     /* private void EXAMPLE(example example) // have to detect ??? (smth regarding next anim), then set specific anim state trigger bool to false
     {
-        _internmanager.SetIsBoredStatus(false);
+        internManager.SetIsBoredStatus(false);
     }
    */
 

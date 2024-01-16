@@ -15,14 +15,14 @@ public class InternWorkingCheck : MonoBehaviour
 
     /* private void EXAMPLE(example example) // // have to detect it arrived to workstation, then set specific anim state trigger bool to true
      {
-         _internmanager.SetIsBoredStatus(true);
+         internManager.SetIsBoredStatus(true);
      }
     */
 
 
     /* private void EXAMPLE(example example) // have to detect its finished working, then set specific anim state trigger bool to false
     {
-        _internmanager.SetIsBoredStatus(false);
+        internManager.SetIsBoredStatus(false);
     }
    */
 

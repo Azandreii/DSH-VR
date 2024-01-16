@@ -175,8 +175,6 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
 
     private void Update()
     {
-        //state frame update
-        StateMachine.currentInternState.FrameUpdate();
 
 
         switch (state)
@@ -239,6 +237,10 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
             //Set State to Unavailable
             SetInternState(InternState.Unavailable);
         }
+
+        //state frame update
+        StateMachine.currentInternState.FrameUpdate();
+
     }
 
     private void FixedUpdate()
@@ -573,29 +575,29 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
 
     #region Distance Checks
 
-    public void SetIsGivenWorkStatus(bool isGivenWork)
+    public void SetIsGivenWorkStatus(bool _isGivenWork)
     {
-        isGivenWork = isGivenWork;
+        isGivenWorkCheckable = _isGivenWork;
     }
 
-    public void SetIsBoredStatus(bool isBored)
+    public void SetIsBoredStatus(bool _isBored)
     {
-        isBored = isBored;
+        isBoredCheckable = _isBored;
     }
 
-    public void SetIsWaitingForApprovalStatus(bool isWaitingForApprovalCheckable)
+    public void SetIsWaitingForApprovalStatus(bool _isWaitingForApprovalCheckable)
     {
-        isWaitingForApprovalCheckable = isWaitingForApprovalCheckable;
+        isWaitingForApprovalCheckable = _isWaitingForApprovalCheckable;
     }
 
-    public void SetIsWorkingStatus(bool isWorking)
+    public void SetIsWorkingStatus(bool _isWorking)
     {
-        isWorking = isWorking;
+        isWorkingCheckable = _isWorking;
     }
 
-    public void SetIsUnavailable(bool isUnavailable)
+    public void SetIsUnavailable(bool _isUnavailable)
     {
-        isUnavailable = isUnavailable;
+        isUnavailableCheckable = _isUnavailable;
     }
 
     #endregion
