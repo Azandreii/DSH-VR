@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.27869838, g: 0.3122543, b: 0.32426858, a: 1}
+  m_IndirectSpecularColor: {r: 0.52541786, g: 0.49550447, b: 0.5066541, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6658,7 +6658,7 @@ PrefabInstance:
       objectReference: {fileID: 599309275}
     - target: {fileID: 8301460751939595756, guid: ed8226a513b57614cb8ccc8f91160971, type: 3}
       propertyPath: isTutorial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9184096246474234558, guid: ed8226a513b57614cb8ccc8f91160971, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24979,6 +24979,7 @@ MonoBehaviour:
   LeftHand: {fileID: 0}
   RightHand: {fileID: 0}
   collisionVR: {fileID: 642693059898098604}
+  internManager: {fileID: 0}
 --- !u!1001 &8216354095842138821
 PrefabInstance:
   m_ObjectHideFlags: 0
