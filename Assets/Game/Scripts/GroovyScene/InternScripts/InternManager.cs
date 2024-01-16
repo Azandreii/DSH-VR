@@ -100,8 +100,6 @@ public class InternManager : MonoBehaviour
     }
 
 
-
-
     private void Start()
     {
 
@@ -204,10 +202,6 @@ public class InternManager : MonoBehaviour
 
     }
 
-  
-
-  
-
     public void SetInternSO(InternSO _internSO, bool _hide = true)
     {
         internSO = _internSO;
@@ -235,7 +229,6 @@ public class InternManager : MonoBehaviour
             taskSO = null;
         }
     }
-
     public void SetInternManagerTask(TaskSO _taskSO, GameObject _gameObjectTaskSO)
     {
         if (_taskSO.isRechargeTask)

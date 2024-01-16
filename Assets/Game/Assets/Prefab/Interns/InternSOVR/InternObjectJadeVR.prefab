@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 762651461747739244, guid: c50630d9e0a18234ebac4473db55c629, type: 3}
       propertyPath: m_Name
-      value: InternObjectBaseVR 1
+      value: InternObjectJadeVR
       objectReference: {fileID: 0}
     - target: {fileID: 762651461747739244, guid: c50630d9e0a18234ebac4473db55c629, type: 3}
       propertyPath: m_IsActive

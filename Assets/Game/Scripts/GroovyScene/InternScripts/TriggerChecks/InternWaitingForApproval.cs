@@ -23,11 +23,8 @@ public class InternWaitingForApprovalCheck : MonoBehaviour
         Debug.Log("set state to WaitingForApproval");
     }
 
-    private void OnTriggerEnter(Collider other) // have to detect the highfive collision, then set specific anim state trigger bool to true
-    {
-        //Ur an idiot for using this Andrei 
-        //Agreed - Andrei
-    }
+    //Ur an idiot for using this Andrei (OnTriggerEnter)
+    //Agreed - Andrei
 
     private void OnTriggerExit(Collider other) // have to detect its been highfived, then set specific anim state trigger bool to false
     {
@@ -37,7 +34,6 @@ public class InternWaitingForApprovalCheck : MonoBehaviour
             Debug.Log("Not WaitingForApproval state anymore");
         }
     } 
-
 
     //NOTE - TUTORIAL WAS INTENDED FOR 2D COLLISION WITH ONTRIGGERENTER2D AND ONTRIGGEREXIT2D, SO IT MIGHT BE DIFFERENT HERE
 }
