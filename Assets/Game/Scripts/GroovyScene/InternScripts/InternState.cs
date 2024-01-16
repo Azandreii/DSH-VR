@@ -5,12 +5,12 @@ using UnityEngine;
 public class InternState 
 {
 
-    protected InternManager internManager;
+    protected InternVisuals internVisuals;
     protected InternStateMachine internStateMachine;
 
-    public InternState ( InternManager internManager, InternStateMachine internStateMachine)
+    public InternState ( InternVisuals internVisuals, InternStateMachine internStateMachine)
     {
-        this.internManager = internManager;
+        this.internVisuals = internVisuals;
         this.internStateMachine = internStateMachine;
     }
 
@@ -22,6 +22,6 @@ public class InternState
 
     public virtual void PhysicsUpdate() { }
 
-    public virtual void AnimationTriggerEvent(InternManager.AnimationTriggerType triggerType) { }
+    public virtual void AnimationTriggerEvent(InternVisuals.AnimationTriggerType triggerType) { }
 
 }

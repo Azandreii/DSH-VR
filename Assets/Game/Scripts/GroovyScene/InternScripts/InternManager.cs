@@ -12,37 +12,15 @@ using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 
-public class InternManager : MonoBehaviour, ITriggerCheckable
+public class InternManager : MonoBehaviour
 {
-
-    #region TriggerCheckables Integration
-
-    public bool isGivenWorkCheckable { get; set; }
-    public bool isBoredCheckable { get; set; }
-    public bool isWaitingForApprovalCheckable { get; set; }
-    public bool isWorkingCheckable { get; set; }
-    public bool isUnavailableCheckable { get; set; }
-
-    #endregion
-
-    #region State Machine Variable
-
-    public InternStateMachine StateMachine { get; set; }
-    public Working WorkingState { get; set; }
-    public WaitingForApproval WaitingForApprovalState { get; set; }
-    public Bored BoredState { get; set; }
-    public AwaitingTask AwaitingTaskState { get; set; }
-    public Unavailable UnavailableState { get; set; }
-
-
-    #endregion
-
 
     public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
     public class OnStateChangedEventArgs : EventArgs
     {
         public InternState internState;
     }
+
     public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
     public class OnProgressChangedEventArgs : EventArgs
     {
@@ -89,12 +67,7 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
     private float communicationEfficiency = 1f;
     private float teamworkEfficiency = 1f;
     private float defaultEffieciency = 1f;
-    // State machine animations
-    [SerializeField] private bool isAwaitingTaskState;
-    [SerializeField] private bool isBored;
-    [SerializeField] private bool isWorking;
-    [SerializeField] private bool isWaitingForApproval;
-    [SerializeField] private bool isUnavailable;
+
 
     [Title("Set Intern Settings")]
     [SerializeField] bool setInternOnAwake = false;
@@ -112,13 +85,6 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
 
     private void Awake()
     {
-        //seting up states
-        StateMachine = new InternStateMachine();
-        WorkingState = new Working(this, StateMachine);
-        WaitingForApprovalState = new WaitingForApproval(this, StateMachine);
-        BoredState = new Bored(this, StateMachine);
-        AwaitingTaskState = new AwaitingTask(this, StateMachine);
-        UnavailableState = new Unavailable(this, StateMachine);
 
 
         if (setInternOnAwake)
@@ -138,8 +104,6 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
 
     private void Start()
     {
-
-        StateMachine.Initialize(AwaitingTaskState);
 
         if (setInternOnAwake)
         {
@@ -175,7 +139,6 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
 
     private void Update()
     {
-
 
         switch (state)
         {
@@ -238,33 +201,12 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
             SetInternState(InternState.Unavailable);
         }
 
-        //state frame update
-        StateMachine.currentInternState.FrameUpdate();
 
     }
 
-    private void FixedUpdate()
-    {
-        StateMachine.currentInternState.PhysicsUpdate();
-    }
+  
 
-    #region Animation Triggers
-
-    private void AnimationTriggerEvent(AnimationTriggerType triggerType)
-    {
-        StateMachine.currentInternState.AnimationTriggerEvent(triggerType);
-    }
-
-    public enum AnimationTriggerType //types of triggers for anim
-    {
-        WaitingForTask,
-        BecameBored,
-        Working,
-        WaitingForApproval,
-        Unavailable,
-    }
-
-    #endregion
+  
 
     public void SetInternSO(InternSO _internSO, bool _hide = true)
     {
@@ -572,36 +514,5 @@ public class InternManager : MonoBehaviour, ITriggerCheckable
     {
         taskSO = null;
     }
-
-    #region Distance Checks
-
-    public void SetIsGivenWorkStatus(bool _isGivenWork)
-    {
-        isGivenWorkCheckable = _isGivenWork;
-    }
-
-    public void SetIsBoredStatus(bool _isBored)
-    {
-        isBoredCheckable = _isBored;
-    }
-
-    public void SetIsWaitingForApprovalStatus(bool _isWaitingForApprovalCheckable)
-    {
-        isWaitingForApprovalCheckable = _isWaitingForApprovalCheckable;
-    }
-
-    public void SetIsWorkingStatus(bool _isWorking)
-    {
-        isWorkingCheckable = _isWorking;
-    }
-
-    public void SetIsUnavailable(bool _isUnavailable)
-    {
-        isUnavailableCheckable = _isUnavailable;
-    }
-
-    #endregion
-
-    //MoveIntern
 
 }

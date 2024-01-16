@@ -16,14 +16,14 @@ public class InternBoredCheck : MonoBehaviour
 
     /* private void EXAMPLE(example example) // // have to detect the 30s without work, then set specific anim state trigger bool to true
      {
-         internManager.SetIsBoredStatus(true);
+         internVisuals.SetIsBoredStatus(true);
      }
     */
 
 
     /* private void EXAMPLE(example example) // have to detect its been given a task, then set specific anim state trigger bool to false
     {
-        internManager.SetIsBoredStatus(false);
+        internVisuals.SetIsBoredStatus(false);
     }
    */  
 

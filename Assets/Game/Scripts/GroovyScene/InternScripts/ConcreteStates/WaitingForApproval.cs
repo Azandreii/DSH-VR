@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class WaitingForApproval : InternState
 {
-    public WaitingForApproval(InternManager internManager, InternStateMachine internStateMachine) : base(internManager, internStateMachine)
+    public WaitingForApproval(InternVisuals internVisuals, InternStateMachine internStateMachine) : base(internVisuals, internStateMachine)
     {
     }
 
-    public override void AnimationTriggerEvent(InternManager.AnimationTriggerType triggerType)
+    public override void AnimationTriggerEvent(InternVisuals.AnimationTriggerType triggerType)
     {
         base.AnimationTriggerEvent(triggerType);
     }

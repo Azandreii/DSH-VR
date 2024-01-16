@@ -8,11 +8,11 @@ public class AwaitingTask : InternState
     private Vector3 _targetPos;
     private Vector3 _direction;
 
-    public AwaitingTask(InternManager internManager, InternStateMachine internStateMachine) : base(internManager, internStateMachine)
+    public AwaitingTask(InternVisuals internVisuals, InternStateMachine internStateMachine) : base(internVisuals, internStateMachine)
     {
     }
 
-    public override void AnimationTriggerEvent(InternManager.AnimationTriggerType triggerType)
+    public override void AnimationTriggerEvent(InternVisuals.AnimationTriggerType triggerType)
     {
         base.AnimationTriggerEvent(triggerType);
     }
@@ -33,12 +33,12 @@ public class AwaitingTask : InternState
     {
         base.FrameUpdate();
 
-        _direction = (_targetPos - internManager.transform.position).normalized;
+        _direction = (_targetPos - internVisuals.transform.position).normalized;
 
         //have to mage MoveIntern Function
-       // internManager.MoveIntern(_direction * internManager.randomMovementSpeed);
+       // internVisuals.MoveIntern(_direction * internVisuals.randomMovementSpeed);
 
-        if ((internManager.transform.position - _targetPos).sqrMagnitude < 0.01f)
+        if ((internVisuals.transform.position - _targetPos).sqrMagnitude < 0.01f)
         {
             _targetPos = GetRandomPointInCircle();
         }
@@ -51,7 +51,7 @@ public class AwaitingTask : InternState
 
     private Vector3 GetRandomPointInCircle()
     {
-        return internManager.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * internManager.randomMovementRange;
+        return internVisuals.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * internVisuals.randomMovementRange;
     }
 
 }

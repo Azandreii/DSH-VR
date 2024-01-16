@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GoingToWork : InternState
 {
-    public GoingToWork(InternManager internManager, InternStateMachine internStateMachine) : base(internManager, internStateMachine)
+    public GoingToWork(InternVisuals internVisuals, InternStateMachine internStateMachine) : base(internVisuals, internStateMachine)
     {
     }
 
-    public override void AnimationTriggerEvent(InternManager.AnimationTriggerType triggerType)
+    public override void AnimationTriggerEvent(InternVisuals.AnimationTriggerType triggerType)
     {
         base.AnimationTriggerEvent(triggerType);
     }
