@@ -7,7 +7,7 @@ public class TutorialObjectVR : MonoBehaviour
 {
     [Header("Refereces")]
     [SerializeField] private InternManager tutorialInternManager;
-    [SerializeField] private GameObject tutorialObjectReference;
+    [SerializeField] private GameObject[] tutorialObjectReferences;
     [SerializeField] private ButtonVR tutorialButtonVR;
 
     [Header("Attributes")]
@@ -61,7 +61,7 @@ public class TutorialObjectVR : MonoBehaviour
     private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)
     {
         GameStateManager.Instance.SetGamestate(GameStateManager.GameState.Playing);
-        Destroy(gameObject);
+        DestroySelf();
     }
 
     private void TutorialInternManager_OnStateChanged(object sender, InternManager.OnStateChangedEventArgs e)
@@ -97,18 +97,24 @@ public class TutorialObjectVR : MonoBehaviour
         }
         if (!GameStateManager.Instance.GetIsTutorial())
         {
-            Destroy(gameObject);
+            DestroySelf();
         }
     }
 
     private void Show()
     {
-        tutorialObjectReference.SetActive(true);
+        foreach (GameObject _tutorialObject in tutorialObjectReferences)
+        {
+            _tutorialObject.SetActive(true);
+        }
     }
 
     private void Hide()
     {
-        tutorialObjectReference.SetActive(false);
+        foreach (GameObject _tutorialObject in tutorialObjectReferences)
+        {
+            _tutorialObject.SetActive(false);
+        }
     }
 
     private void AdjustTutorial()
@@ -120,6 +126,17 @@ public class TutorialObjectVR : MonoBehaviour
         else if (GameStateManager.Instance.GetTutorialState() == showOnTutorialState && !showDuringTutorial)
         {
             GameStateManager.Instance.NextTutorialState();
+        }
+    }
+
+    private void DestroySelf()
+    {
+        foreach (GameObject _tutorialObject in tutorialObjectReferences)
+        {
+            if (_tutorialObject != null)
+            {
+                Destroy(_tutorialObject);
+            }
         }
     }
 }
