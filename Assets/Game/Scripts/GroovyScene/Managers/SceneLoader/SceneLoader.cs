@@ -18,12 +18,14 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private GameObject fadeQuad;
 
     [Header("Attributes")]
+    [SerializeField] private Color fadeColor;
+    [SerializeField] private Renderer rend;
     [SerializeField] private bool fadeIn;
     [SerializeField] private bool fadeOut;
+    [SerializeField] private float fadeDuration = 1f;
     private LevelScenes goToLevelScene = LevelScenes.MainMenu;
     private bool isChanging;
-
-    [SerializeField] private float timeToFade;
+    private float timer;
 
     public enum LevelScenes
     {
@@ -53,9 +55,10 @@ public class SceneLoader : MonoBehaviour
         {
             isChanging = true;
         }
+        timer = 0;
     }
 
-    public void SetScene(LevelScenes _level)
+    private void SetScene(LevelScenes _level)
     {
         switch (_level)
         {
@@ -84,23 +87,37 @@ public class SceneLoader : MonoBehaviour
 
     private void Update()
     {
-        if (fadeIn && fadeQuad.alpha < 1)
+        if (fadeOut)
         {
-            fadeQuad.alpha += timeToFade * Time.deltaTime;
-            if (fadeQuad.alpha >= 1)
+            Color _newColor = fadeColor;
+            _newColor.a = Mathf.Lerp(1, 0, timer / fadeDuration);
+
+            rend.material.SetColor("_BaseColor", _newColor);
+
+            timer += Time.deltaTime;
+
+            if (timer / fadeDuration >= 1)
+            {
+                fadeOut = false;
+                isChanging = false;
+                timer = 0;
+            }
+        }
+            if (fadeIn)
+        {
+            Color _newColor = fadeColor;
+            _newColor.a = Mathf.Lerp(0, 1, timer / fadeDuration);
+
+            rend.material.SetColor("_BaseColor", _newColor);
+
+            timer += Time.deltaTime;
+            
+            if (timer / fadeDuration >= 1)
             {
                 fadeIn = false;
                 isChanging = false;
                 SetScene(goToLevelScene);
-            }
-        }
-        if (fadeOut && fadeQuad.alpha >= 0)
-        {
-            fadeQuad.alpha -= timeToFade * Time.deltaTime;
-            if (fadeQuad.alpha <= 0)
-            {
-                fadeOut = false;
-                isChanging = false;
+                timer = 0;
             }
         }
     }
