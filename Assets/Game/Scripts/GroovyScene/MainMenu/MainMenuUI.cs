@@ -37,41 +37,62 @@ public class MainMenuUI : MonoBehaviour
 
     private void ButtonDUO_OnClick(object sender, ButtonVR.OnClickEventArgs e)
     {
-        Debug.Log("Transfer to level");
+        if (e.clickState == ButtonVR.ClickState.ClickDown)
+        {
+            SceneLoader.Instance.ChangeScene(SceneLoader.LevelScenes.LevelDUO);
+        }
     }
 
     private void ButtonUMCG_OnClick(object sender, ButtonVR.OnClickEventArgs e)
     {
-        Debug.Log("Transfer to level");
+        if (e.clickState == ButtonVR.ClickState.ClickDown)
+        {
+            SceneLoader.Instance.ChangeScene(SceneLoader.LevelScenes.LevelUMCG);
+        }
     }
 
     private void ButtonPolice_OnClick(object sender, ButtonVR.OnClickEventArgs e)
     {
-        Debug.Log("Transfer to level");
+        if (e.clickState == ButtonVR.ClickState.ClickDown)
+        {
+            SceneLoader.Instance.ChangeScene(SceneLoader.LevelScenes.LevelPolice);
+        }
     }
 
     private void ButtonDSH_OnClick(object sender, ButtonVR.OnClickEventArgs e)
     {
-        Debug.Log("Transfer to level");
+        if (e.clickState == ButtonVR.ClickState.ClickDown)
+        {
+            SceneLoader.Instance.ChangeScene(SceneLoader.LevelScenes.LevelDSH);
+        }
     }
 
     private void ButtonQuit_OnClick(object sender, ButtonVR.OnClickEventArgs e)
     {
-        Application.Quit();
-        Debug.Log("Quit");
+        if (e.clickState == ButtonVR.ClickState.ClickDown)
+        {
+            Application.Quit();
+            Debug.Log("Quit");
+        }
     }
 
     private void ButtonReturnMainMenu_OnClick(object sender, ButtonVR.OnClickEventArgs e)
     {
-        containerMainMenu.SetActive(true);
-        containerPartnerSelect.SetActive(false);
-        background.gameObject.SetActive(true);
+        if (e.clickState == ButtonVR.ClickState.ClickDown)
+        {
+            containerMainMenu.SetActive(true);
+            containerPartnerSelect.SetActive(false);
+            background.gameObject.SetActive(true);
+        }
     }
 
     private void ButtonPartnerSelect_OnClick(object sender, ButtonVR.OnClickEventArgs e)
     {
-        containerMainMenu.SetActive(false);
-        containerPartnerSelect.SetActive(true);
-        background.gameObject.SetActive(true);
+        if (e.clickState == ButtonVR.ClickState.ClickDown)
+        {
+            containerMainMenu.SetActive(false);
+            containerPartnerSelect.SetActive(true);
+            background.gameObject.SetActive(true);
+        }
     }
 }
