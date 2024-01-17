@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 
@@ -48,6 +49,11 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
     public bool isUnavailable;
     public InternManager.InternState lastState = InternManager.InternState.Idle;
     public InternManager.InternState nextState;
+    //public InternManager.InternState initialState;
+    //public InternManager.InternState finalState;
+    public Animator animator;
+    public float timer = 0f;
+    [SerializeField] private AnimationTriggerType animationVisualState;
 
     #region AwaitingTask Variables
 
@@ -90,35 +96,73 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
         if (lastState != nextState)
         {
             SetEveryStateFalse();
+            SetEveryBoolFalse();
 
 
             switch (e.internState)
             {
                 case InternManager.InternState.Idle:
 
+                    timer = 0;
+                    animationVisualState = AnimationTriggerType.AwaitingTaskState;
                     SetIsAwaitingTaskState(true);
                     Debug.Log("Set state to Idle");
                     break;
 
                 case InternManager.InternState.WorkingOnTask:
 
+                    animationVisualState = AnimationTriggerType.Working;
                     SetIsWorkingStatus(true);
+                    animator.SetBool("Working", true);
                     Debug.Log("Set state to Working");
                     break;
 
                 case InternManager.InternState.WaitingForApproval:
 
+                    animationVisualState = AnimationTriggerType.WaitingForApproval;
                     SetIsWaitingForApprovalStatus(true);
+                    animator.SetBool("HighFiveable", true);
                     Debug.Log("Set state to WaitingForApproval");
                     break;
 
                 case InternManager.InternState.Unavailable:
 
+                    animationVisualState = AnimationTriggerType.Unavailable;
                     SetIsUnavailable(true);
+                    animator.SetBool("Working", true);
                     Debug.Log("Set state to Unavailable");
                     break;
             }
+
+            
+
         }
+    }
+
+    private void Update()
+    {
+            if (timer >= 30f && internManager.GetInternState() == InternManager.InternState.Idle) // and check if bored parameter is still false  
+            {
+                timer = 0f;
+                SetEveryStateFalse();
+                animationVisualState = AnimationTriggerType.BecameBored;
+                SetIsBoredStatus(true);
+                SetEveryBoolFalse();
+                animator.SetBool("BecameBored", true);
+                Debug.Log("Set state to Bored");
+            }
+
+        if (internManager.GetInternState() == InternManager.InternState.Unavailable && InternManager.currente )
+        {
+            animator.ResetTrigger(
+        }
+
+
+        if (timer <= 30.0f && animationVisualState == AnimationTriggerType.AwaitingTaskState && GameStateManager.Instance.IsGamePlaying())
+            {
+                timer += Time.deltaTime;
+            }
+
     }
 
     private void FixedUpdate()
@@ -130,8 +174,6 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
     {
         StateMachine.currentInternState.AnimationTriggerEvent(triggerType);
     }
-
-    #region Distance Checks
 
     public void SetIsBoredStatus(bool _isBored)
     {
@@ -167,9 +209,17 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
         SetIsAwaitingTaskState(false);
     }
 
-    
-
-    #endregion
+    public void SetEveryBoolFalse()
+    {
+        animator.SetBool("GivenTask", false);
+        animator.SetBool("WaitingForTask", false);
+        animator.SetBool("BecameBored", false);
+        animator.SetBool("HighFiveable", false);
+        animator.SetBool("HighFived", false);
+        animator.SetBool("Working", false);
+        animator.SetBool("Walking", false);
+        animator.SetBool("Unavailable", false);
+    }
 
     //MoveIntern
 

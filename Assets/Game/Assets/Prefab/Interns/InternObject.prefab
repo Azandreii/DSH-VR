@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 6730660681519136640}
   - component: {fileID: 1174713867617353478}
   - component: {fileID: -4766101117000203846}
+  - component: {fileID: 4866104113266240206}
   m_Layer: 0
   m_Name: InternObject
   m_TagString: Untagged
@@ -128,8 +129,30 @@ MonoBehaviour:
   isUnavailable: 0
   lastState: 0
   nextState: 0
+  animator: {fileID: 4866104113266240206}
   randomMovementRange: 5
   randomMovementSpeed: 1
+--- !u!95 &4866104113266240206
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762651461747739244}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 745a7164b0f709a498d4b27a9f588fdc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1620113708257801203
 GameObject:
   m_ObjectHideFlags: 0
