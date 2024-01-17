@@ -90,7 +90,7 @@ public class SceneLoader : MonoBehaviour
         if (fadeOut)
         {
             Color _newColor = fadeColor;
-            _newColor.a = Mathf.Lerp(1, 0, timer / fadeDuration);
+            _newColor.a = Mathf.SmoothStep(1, 0, timer / fadeDuration);
 
             rend.material.SetColor("_BaseColor", _newColor);
 
@@ -106,7 +106,7 @@ public class SceneLoader : MonoBehaviour
             if (fadeIn)
         {
             Color _newColor = fadeColor;
-            _newColor.a = Mathf.Lerp(0, 1, timer / fadeDuration);
+            _newColor.a = Mathf.SmoothStep(0, 1, timer / fadeDuration);
 
             rend.material.SetColor("_BaseColor", _newColor);
 
