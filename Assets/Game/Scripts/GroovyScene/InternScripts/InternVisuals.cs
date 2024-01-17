@@ -152,10 +152,10 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                 Debug.Log("Set state to Bored");
             }
 
-        if (internManager.GetInternState() == InternManager.InternState.Unavailable && InternManager.currente )
+       /* if (internManager.GetInternState() == InternManager.InternState.Unavailable && InternManager.current )
         {
             animator.ResetTrigger(
-        }
+        } */
 
 
         if (timer <= 30.0f && animationVisualState == AnimationTriggerType.AwaitingTaskState && GameStateManager.Instance.IsGamePlaying())
