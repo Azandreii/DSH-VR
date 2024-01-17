@@ -6270,6 +6270,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8d08eeb19f8be1b479c8c59c608c7afe, type: 2}
+    - target: {fileID: 848273286623950380, guid: 00f586532bc04b946bbbbb768bcdaab5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 103e600c72092a64dab227df8e4e342e, type: 2}
     - target: {fileID: 2355057018107041295, guid: 00f586532bc04b946bbbbb768bcdaab5, type: 3}
       propertyPath: m_Name
       value: FrontDesk
@@ -9325,6 +9329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlantTall
       objectReference: {fileID: 0}
+    - target: {fileID: 8166322873791335438, guid: b61e74fd6d74b4a44b26a37a36e645d9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 45061ac016bfe7b4699fb494c777d2a3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
