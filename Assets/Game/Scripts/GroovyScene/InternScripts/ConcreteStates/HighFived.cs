@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Highfived : InternState
+public class HighFived : InternState
 {
-    public Highfived(InternVisuals internVisuals, InternStateMachine internStateMachine) : base(internVisuals, internStateMachine)
+    public HighFived(InternVisuals internVisuals, InternStateMachine internStateMachine) : base(internVisuals, internStateMachine)
     {
     }
 
@@ -32,4 +32,5 @@ public class Highfived : InternState
     {
         base.PhysicsUpdate();
     }
+
 }

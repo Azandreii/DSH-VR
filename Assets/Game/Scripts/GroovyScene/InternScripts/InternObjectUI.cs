@@ -237,8 +237,11 @@ public class InternObjectUI : MonoBehaviour
     {
         if (internManager.GetInternState() == InternManager.InternState.WaitingForApproval)
         {
-            GameManager.Instance.AddTaskCompleted(internManager.GetTaskSO(), internManager.GetGameObjectTaskSO());
+            internManager.SetHighFivedTrigger();
             internManager.PlayerApproved();
+            GameManager.Instance.AddTaskCompleted(internManager.GetTaskSO(), internManager.GetGameObjectTaskSO());
+            Debug.Log("Approve Task");
+            
 
             //Set task intern state (Availabe) change here
         }

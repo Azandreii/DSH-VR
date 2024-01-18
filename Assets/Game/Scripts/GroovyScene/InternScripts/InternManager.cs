@@ -67,6 +67,7 @@ public class InternManager : MonoBehaviour
     private float communicationEfficiency = 1f;
     private float teamworkEfficiency = 1f;
     private float defaultEffieciency = 1f;
+    [SerializeField] private Animator anim;
 
 
     [Title("Set Intern Settings")]
@@ -267,7 +268,12 @@ public class InternManager : MonoBehaviour
     {
         if (state == InternState.WaitingForApproval)
         {
+            Debug.Log("Before Trigger");
+            anim.SetBool("HighFived", true);
+
+            Debug.Log("After Trigger");
             state = InternState.Idle;
+
 
             //Set State to Idle
 
@@ -276,6 +282,11 @@ public class InternManager : MonoBehaviour
                 taskSO = null;
             }
         }
+    }
+
+    public void SetHighFivedTrigger()
+    {
+        anim.SetBool("HighFived", true);
     }
 
     public void AdjustEnergy(float _value, float _energyEfficiency, bool _withTimeDelta = true)

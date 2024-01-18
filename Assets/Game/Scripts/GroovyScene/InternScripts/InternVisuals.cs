@@ -14,6 +14,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
     public bool isWaitingForApprovalCheckable { get; set; }
     public bool isWorkingCheckable { get; set; }
     public bool isUnavailableCheckable { get; set; }
+    public bool isHighFivedCheckable { get; set; }
 
     #endregion
 
@@ -25,6 +26,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
     public Bored BoredState { get; set; }
     public AwaitingTask AwaitingTaskState { get; set; }
     public Unavailable UnavailableState { get; set; }
+    public HighFived HighFivedState { get; set; }
 
 
     #endregion
@@ -35,6 +37,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
         BecameBored,
         Working,
         WaitingForApproval,
+        HighFived,
         Unavailable,
     }
 
@@ -47,6 +50,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
     public bool isWorking;
     public bool isWaitingForApproval;
     public bool isUnavailable;
+    public bool isHighFived;
     public InternManager.InternState lastState = InternManager.InternState.Idle;
     public InternManager.InternState nextState;
     //public InternManager.InternState initialState;
@@ -71,6 +75,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
         BoredState = new Bored(this, StateMachine);
         AwaitingTaskState = new AwaitingTask(this, StateMachine);
         UnavailableState = new Unavailable(this, StateMachine);
+        HighFivedState = new HighFived(this, StateMachine);
     }
 
     private void Start()
@@ -132,6 +137,14 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                     animator.SetBool("Working", true);
                     Debug.Log("Set state to Unavailable");
                     break;
+
+                /* case InternManager.InternState.HighFived:
+                    animationVisualState = AnimationTriggerType.HighFived;
+                    SetIsHighFived(true);
+                    anim.SetBool("HighFived", true);
+                        Debug.Log("Set state to HighFived");
+                    break; */
+
             }
 
             
@@ -154,7 +167,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
 
        /* if (internManager.GetInternState() == InternManager.InternState.Unavailable && InternManager.current )
         {
-            animator.ResetTrigger(
+            anim.ResetTrigger(
         } */
 
 
@@ -200,6 +213,12 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
         isAwaitingTaskCheckable = _isAwaitingTaskCheckable;
     } 
 
+    public void SetIsHighFived (bool _isHighFivedCheckable)
+    {
+        isHighFived = _isHighFivedCheckable;
+    }
+
+
     public void SetEveryStateFalse()
     {
         SetIsWaitingForApprovalStatus(false);
@@ -207,6 +226,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
         SetIsWorkingStatus(false);
         SetIsBoredStatus(false);
         SetIsAwaitingTaskState(false);
+        SetIsHighFived(false);
     }
 
     public void SetEveryBoolFalse()
@@ -215,7 +235,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
         animator.SetBool("WaitingForTask", false);
         animator.SetBool("BecameBored", false);
         animator.SetBool("HighFiveable", false);
-        animator.SetBool("HighFived", false);
+        //animator.SetBool("HighFived", false);
         animator.SetBool("Working", false);
         animator.SetBool("Walking", false);
         animator.SetBool("Unavailable", false);
