@@ -46,7 +46,10 @@ public class PhoneManager : MonoBehaviour
         phoneMenuToTaskUI.OnClick += PhoneMenuTaskUI_OnClick;
         phoneMenuToInternInformation.OnClick += PhoneMenuInternInformation_OnClick;
         phoneMenuToLevelSelect.OnClick += PhoneMenuLevelSelect_OnClick;
-        InternSpawnerObject.Instance.OnInternObjectCreated += InternSpawnerObject_OnInternCreated;
+        if (InternSpawnerObject.Instance != null)
+        {
+            InternSpawnerObject.Instance.OnInternObjectCreated += InternSpawnerObject_OnInternCreated;
+        }
     }
 
     private void InternSpawnerObject_OnInternCreated(object sender, InternSpawnerObject.OnInternObjectCreatedEventArgs e)
