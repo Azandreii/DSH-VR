@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 5676950960950309845}
   - component: {fileID: 8981538795342516227}
   m_Layer: 0
-  m_Name: 'InternObjectJeffreyVR '
+  m_Name: InternObjectJeffreyVR OLD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
