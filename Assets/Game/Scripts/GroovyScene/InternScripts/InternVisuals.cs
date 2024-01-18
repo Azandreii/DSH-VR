@@ -7,6 +7,13 @@ using UnityEngine;
 
 public class InternVisuals : MonoBehaviour, ITriggerCheckable
 {
+    private const string WALKING = "Walking";
+    private const string WORKING = "Working";
+    private const string HIGHFIVEABLE = "HighFiveable";
+    private const string UNAVAILABLE = "Unavailable";
+    private const string HIGHFIVED = "HighFived";
+    private const string BORED = "BecameBored";
+
     #region TriggerCheckables Integration
 
     public bool isAwaitingTaskCheckable { get; set; }
@@ -111,6 +118,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                     timer = 0;
                     animationVisualState = AnimationTriggerType.AwaitingTaskState;
                     SetIsAwaitingTaskState(true);
+                    animator.SetBool(WORKING, false);
                     Debug.Log("Set state to Idle");
                     break;
 
@@ -118,7 +126,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
 
                     animationVisualState = AnimationTriggerType.Working;
                     SetIsWorkingStatus(true);
-                    animator.SetBool("Working", true);
+                    animator.SetBool(WORKING, true);
                     Debug.Log("Set state to Working");
                     break;
 
@@ -126,7 +134,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
 
                     animationVisualState = AnimationTriggerType.WaitingForApproval;
                     SetIsWaitingForApprovalStatus(true);
-                    animator.SetBool("HighFiveable", true);
+                    animator.SetBool(HIGHFIVEABLE, true);
                     Debug.Log("Set state to WaitingForApproval");
                     break;
 
@@ -134,7 +142,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
 
                     animationVisualState = AnimationTriggerType.Unavailable;
                     SetIsUnavailable(true);
-                    animator.SetBool("Working", true);
+                    animator.SetBool(UNAVAILABLE, true);
                     Debug.Log("Set state to Unavailable");
                     break;
 
@@ -146,9 +154,6 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                     break; */
 
             }
-
-            
-
         }
     }
 
@@ -161,21 +166,19 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                 animationVisualState = AnimationTriggerType.BecameBored;
                 SetIsBoredStatus(true);
                 SetEveryBoolFalse();
-                animator.SetBool("BecameBored", true);
+                animator.SetBool(BORED, true);
                 Debug.Log("Set state to Bored");
             }
 
-       /* if (internManager.GetInternState() == InternManager.InternState.Unavailable && InternManager.current )
-        {
-            anim.ResetTrigger(
-        } */
-
+        /* if (internManager.GetInternState() == InternManager.InternState.Unavailable && InternManager.current )
+         {
+             anim.ResetTrigger(
+         } */
 
         if (timer <= 30.0f && animationVisualState == AnimationTriggerType.AwaitingTaskState && GameStateManager.Instance.IsGamePlaying())
-            {
-                timer += Time.deltaTime;
-            }
-
+        {
+            timer += Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -183,6 +186,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
         StateMachine.currentInternState.PhysicsUpdate();
     }
 
+    //Not being used Andrei
     private void AnimationTriggerEvent(AnimationTriggerType triggerType)
     {
         StateMachine.currentInternState.AnimationTriggerEvent(triggerType);
@@ -231,16 +235,18 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
 
     public void SetEveryBoolFalse()
     {
-        animator.SetBool("GivenTask", false);
-        animator.SetBool("WaitingForTask", false);
-        animator.SetBool("BecameBored", false);
-        animator.SetBool("HighFiveable", false);
-        //animator.SetBool("HighFived", false);
-        animator.SetBool("Working", false);
-        animator.SetBool("Walking", false);
-        animator.SetBool("Unavailable", false);
+        animator.SetBool(BORED, false);
+        animator.SetBool(HIGHFIVEABLE, false);
+        animator.SetBool(HIGHFIVED, false);
+        animator.SetBool(WORKING, false);
+        animator.SetBool(WALKING, false);
+        animator.SetBool(UNAVAILABLE, false);
     }
 
+    public void PlayHighfive()
+    {
+        animator.SetBool(HIGHFIVED, true);
+    }
     //MoveIntern
 
 

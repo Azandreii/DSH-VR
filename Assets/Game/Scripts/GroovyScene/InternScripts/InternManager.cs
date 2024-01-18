@@ -42,6 +42,7 @@ public class InternManager : MonoBehaviour
     }
 
     [Header("References")]
+    [SerializeField] private InternVisuals internVisuals;
     [SerializeField] private InternObjectUI internObjectUI;
     private InternSO internSO;
     private GameObject gameObjectInternSO;
@@ -86,8 +87,6 @@ public class InternManager : MonoBehaviour
 
     private void Awake()
     {
-
-
         if (setInternOnAwake)
         {
             SetInternSO(setInternSO);
@@ -97,7 +96,6 @@ public class InternManager : MonoBehaviour
             }
             internObjectUI.GetInternTaskObject().gameObject.SetActive(false);
         }
-
     }
 
 
@@ -138,7 +136,6 @@ public class InternManager : MonoBehaviour
 
     private void Update()
     {
-
         switch (state)
         {
             case InternState.Idle:
@@ -199,8 +196,6 @@ public class InternManager : MonoBehaviour
             //Set State to Unavailable
             SetInternState(InternState.Unavailable);
         }
-
-
     }
 
     public void SetInternSO(InternSO _internSO, bool _hide = true)
@@ -268,10 +263,8 @@ public class InternManager : MonoBehaviour
     {
         if (state == InternState.WaitingForApproval)
         {
-            Debug.Log("Before Trigger");
-            anim.SetBool("HighFived", true);
+            internVisuals.PlayHighfive();
 
-            Debug.Log("After Trigger");
             state = InternState.Idle;
 
 
