@@ -39,7 +39,7 @@ public class MainMenuUI : MonoBehaviour
     {
         if (e.clickState == ButtonVR.ClickState.ClickDown)
         {
-            Debug.Log("Transfer to level");
+            SceneLoader.Instance.ChangeScene(SceneLoader.LevelScenes.LevelDUO);
         }
     }
 
@@ -47,7 +47,7 @@ public class MainMenuUI : MonoBehaviour
     {
         if (e.clickState == ButtonVR.ClickState.ClickDown)
         {
-            Debug.Log("Transfer to level");
+            SceneLoader.Instance.ChangeScene(SceneLoader.LevelScenes.LevelUMCG);
         }
     }
 
@@ -55,7 +55,7 @@ public class MainMenuUI : MonoBehaviour
     {
         if (e.clickState == ButtonVR.ClickState.ClickDown)
         {
-            Debug.Log("Transfer to level");
+            SceneLoader.Instance.ChangeScene(SceneLoader.LevelScenes.LevelPolice);
         }
     }
 
@@ -63,7 +63,7 @@ public class MainMenuUI : MonoBehaviour
     {
         if (e.clickState == ButtonVR.ClickState.ClickDown)
         {
-            Debug.Log("Transfer to level");
+            SceneLoader.Instance.ChangeScene(SceneLoader.LevelScenes.LevelDSH);
         }
     }
 

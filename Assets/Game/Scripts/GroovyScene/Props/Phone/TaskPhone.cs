@@ -30,16 +30,6 @@ public class TaskPhone : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
-    {
-        TimeClockManager.Instance.OnDayFinished += TimeClockManager_OnDayFinished;
-    }
-
-    private void TimeClockManager_OnDayFinished(object sender, EventArgs e)
-    {
-        phoneCanvas.SetActive(false);
-    }
-
     private void Update()
     {
         if (timeLerp)

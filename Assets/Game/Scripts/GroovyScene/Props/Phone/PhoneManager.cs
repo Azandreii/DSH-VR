@@ -59,6 +59,7 @@ public class PhoneManager : MonoBehaviour
         if (e.clickState == ButtonVR.ClickState.ClickDown)
         {
             //Scene change logic here
+            SceneLoader.Instance.ChangeScene(SceneLoader.LevelScenes.MainMenu);
         }
     }
 
