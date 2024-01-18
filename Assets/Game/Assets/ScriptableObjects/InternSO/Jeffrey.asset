@@ -20,7 +20,7 @@ MonoBehaviour:
   spawnHour: 9
   spawnMinute: 25
   workTimeHours: 4
-  generalEfficiency: 0.33
+  generalEfficiency: 0.11
   selectedTech: 0
   selectedArt: 0
   selectedDesign: 0

@@ -63,11 +63,8 @@ public class TaskPhone : MonoBehaviour
 
     public void IsNotInPants()
     {
-        if (!GameStateManager.Instance.IsGameOver())
-        {
-            inPants = false;
-            phoneCanvas.SetActive(true);
-        }
+        inPants = false;
+        phoneCanvas.SetActive(true);
     }
 
     public void IsInPants() 
