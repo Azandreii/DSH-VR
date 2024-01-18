@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Vienna
   m_EditorClassIdentifier: 
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
-  internObjectVR: {fileID: 6520634700010457635, guid: b7f58e54cbb9ff243a164d7afd5c1d73, type: 3}
+  internObjectVR: {fileID: 0}
   internName: Vienna
   startEnergy: 180
   maxEnergy: 300
