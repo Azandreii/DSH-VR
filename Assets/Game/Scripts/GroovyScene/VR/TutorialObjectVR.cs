@@ -18,16 +18,13 @@ public class TutorialObjectVR : MonoBehaviour
     private void Awake()
     {
         Hide();
-        if (GameStateManager.Instance.GetIsTutorial())
-        {
-            GameStateManager.OnGamestateTutorial += GameStateManager_OnGamestateTutorial;
-        }
     }
 
     private void Start()
     {
         if (GameStateManager.Instance.GetIsTutorial())
         {
+            GameStateManager.OnGamestateTutorial += GameStateManager_OnGamestateTutorial;
             GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
             tutorialInternManager.OnStateChanged += TutorialInternManager_OnStateChanged;
             if (tutorialButtonVR != null)

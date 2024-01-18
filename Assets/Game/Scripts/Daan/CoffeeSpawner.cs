@@ -10,7 +10,11 @@ public class CoffeeSpawner : MonoBehaviour
     //Coffee Object
     [SerializeField]private GameObject coffeeObject;
 
+    //Create coffee
     [SerializeField] private OnCollisionVR boxCollision;
+
+    //Active coffee
+    private GameObject activeCoffee;
 
     private void Start()
     {
@@ -19,6 +23,12 @@ public class CoffeeSpawner : MonoBehaviour
 
     private void ControllerCollision_OnCollisionControler(object sender, System.EventArgs e)
     {
-        Instantiate(coffeeObject, coffeeSpawnPoint);
+        if (activeCoffee != null)
+        {
+            Destroy(activeCoffee);
+        }
+
+        GameObject coffeeMug = Instantiate(coffeeObject, coffeeSpawnPoint);
+        activeCoffee = coffeeMug;
     }
 }
