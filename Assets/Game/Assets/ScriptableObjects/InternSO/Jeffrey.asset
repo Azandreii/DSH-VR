@@ -32,7 +32,7 @@ MonoBehaviour:
   energyEfficiency: 1.7
   MaxEnEfficiency: 10
   availableEfficiency: 27
-  workingEfficiency: -140
+  workingEfficiency: -80
   awaitApprovalEfficiency: -12
   unavailableEfficiency: 7
   selectedSpecialties:
