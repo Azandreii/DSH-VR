@@ -47,6 +47,7 @@ public class TaskSO : ScriptableObject
     {
         if (isRechargeTask)
         {
+            CoffeeSpawner.Instance.MugUsed();
             return taskRechargeTime;
         }
         switch (taskDifficulty)

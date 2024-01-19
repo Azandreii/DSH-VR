@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CoffeeSpawner : MonoBehaviour
 {
+    //Singelton Reference
+    public static CoffeeSpawner Instance;
+
     //Reference to coffee spawn point 
     [SerializeField] private Transform coffeeSpawnPoint;
 
@@ -16,8 +19,15 @@ public class CoffeeSpawner : MonoBehaviour
     //Active coffee
     private GameObject activeCoffee;
 
+    private void Awake()
+    {
+        //Set Singelton Reference in awake, so you can call the object in start and later
+        Instance = this;
+    }
+
     private void Start()
     {
+        //C# Event checking the controler collision
         boxCollision.OnCollisionControler += ControllerCollision_OnCollisionControler;
     }
 
@@ -30,5 +40,10 @@ public class CoffeeSpawner : MonoBehaviour
 
         GameObject coffeeMug = Instantiate(coffeeObject, coffeeSpawnPoint);
         activeCoffee = coffeeMug;
+    }
+
+    public void MugUsed()
+    {
+        Destroy(activeCoffee);
     }
 }
