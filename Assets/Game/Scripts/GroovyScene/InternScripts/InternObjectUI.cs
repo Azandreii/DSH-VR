@@ -230,7 +230,15 @@ public class InternObjectUI : MonoBehaviour
         {
             internManager.SetInternManagerTask(GameManager.Instance.GetTaskSO(), GameManager.Instance.GetGameObjectTaskSO());
             TaskSO _assignedTaskSO = GameManager.Instance.GetTaskSO();
-            internTask.text = _assignedTaskSO.taskName;
+            if (_assignedTaskSO != null)
+            {
+                internTask.text = _assignedTaskSO.taskName;
+            }
+            else
+            {
+                Debug.LogWarning("No task has been set, because player did not have a task");
+            }
+
             GameManager.Instance.SetTaskSO(null);
 
             //Set task intern state (WorkingOnTask) change here

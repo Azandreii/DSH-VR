@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dwayne
   m_EditorClassIdentifier: 
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
-  internObjectVR: {fileID: 4202950879300307175, guid: 1cc52595d4aeabf45814e9af802d85b3, type: 3}
+  internObjectVR: {fileID: 5863172427892786464, guid: 7a4ab57465d3b7e43ad4856eb422ec85, type: 3}
   internName: Dwayne
   startEnergy: 45
   maxEnergy: 300

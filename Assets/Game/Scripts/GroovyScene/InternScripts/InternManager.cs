@@ -102,31 +102,28 @@ public class InternManager : MonoBehaviour
 
     private void Start()
     {
-
         if (setInternOnAwake)
         {
+            Debug.Log(InternSpawnerObject.Instance);
+            PhoneManager.Instance.SetInternSO(setInternSO);
             if (InternSpawner.Instance != null)
             {
                 InternSpawner.Instance.AddInternToActiveInternList(setInternSO);
-                PhoneManager.Instance.SetInternSO(setInternSO);
             }
             if (InternSpawnerObject.Instance != null)
             {
                 InternSpawnerObject.Instance.AddInternToActiveInternList(setInternSO, this);
-                PhoneManager.Instance.SetInternSO(setInternSO);
             }
         }
         GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
-
-
     }
 
     private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)
     {
         if (taskSO == e.taskSO)
         {
+            state = InternState.Idle;
             taskSO = null;
-            //state = InternState.Idle;
         }
     }
 
@@ -516,5 +513,4 @@ public class InternManager : MonoBehaviour
     {
         taskSO = null;
     }
-
 }

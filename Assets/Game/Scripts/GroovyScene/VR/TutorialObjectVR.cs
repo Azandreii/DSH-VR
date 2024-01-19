@@ -27,7 +27,10 @@ public class TutorialObjectVR : MonoBehaviour
         {
             GameStateManager.OnGamestateTutorial += GameStateManager_OnGamestateTutorial;
             GameManager.Instance.OnTaskCompleted += GameManager_OnTaskCompleted;
-            tutorialInternManager.OnStateChanged += TutorialInternManager_OnStateChanged;
+            if (tutorialInternManager != null)
+            {
+                tutorialInternManager.OnStateChanged += TutorialInternManager_OnStateChanged;
+            }
             if (tutorialButtonVR != null)
             {
                 tutorialButtonVR.OnClick += ButtonVR_OnClick;
@@ -52,7 +55,10 @@ public class TutorialObjectVR : MonoBehaviour
     {
         GameStateManager.OnGamestateTutorial -= GameStateManager_OnGamestateTutorial;
         GameManager.Instance.OnTaskCompleted -= GameManager_OnTaskCompleted;
-        tutorialInternManager.OnStateChanged -= TutorialInternManager_OnStateChanged;
+        if (tutorialInternManager != null)
+        {
+            tutorialInternManager.OnStateChanged -= TutorialInternManager_OnStateChanged;
+        }
         if (tutorialButtonVR != null)
         {
             tutorialButtonVR.OnClick -= ButtonVR_OnClick;

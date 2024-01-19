@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Jade
   m_EditorClassIdentifier: 
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
-  internObjectVR: {fileID: 0}
+  internObjectVR: {fileID: 4229461212969436633, guid: 0caaa80ad25f205478de07b74acc388c, type: 3}
   internName: Jade
   startEnergy: 30
   maxEnergy: 150

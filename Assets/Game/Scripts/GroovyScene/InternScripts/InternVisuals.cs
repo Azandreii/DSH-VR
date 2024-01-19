@@ -11,7 +11,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
     private const string WORKING = "Working";
     private const string HIGHFIVEABLE = "HighFiveable";
     private const string UNAVAILABLE = "Unavailable";
-    private const string HIGHFIVED = "HighFived";
+    private const string HIGHFIVED = "HighFived"; 
     private const string BORED = "BecameBored";
 
     #region TriggerCheckables Integration
@@ -256,6 +256,4 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
         animator.SetBool(HIGHFIVED, true);
     }
     //MoveIntern
-
-
 }

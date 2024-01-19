@@ -3399,14 +3399,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ea364adc13ba7408b166f6596ca3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  internVisuals: {fileID: 0}
   internObjectUI: {fileID: 9219102807813922008}
   energyMax: 300
   currentEnergy: 200
   progressMax: 3
   state: 0
   anim: {fileID: 1720889459075120039}
-  setInternOnAwake: 1
-  setInternSO: {fileID: 11400000, guid: 2678e170c63f5c744b3f2fd470a33e2f, type: 2}
+  setInternOnAwake: 0
+  setInternSO: {fileID: 0}
   randomMovementRange: 5
   randomMovementSpeed: 1
 --- !u!114 &6376997146353261163
