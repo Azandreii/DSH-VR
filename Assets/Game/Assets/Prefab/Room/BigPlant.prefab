@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5191879da3ebe0044816d143110b8741, type: 2}
     - target: {fileID: 919132149155446097, guid: 0ef1cfe40455d8541869fd810135ebe8, type: 3}
       propertyPath: m_Name
-      value: BigPlant 1
+      value: BigPlant
       objectReference: {fileID: 0}
     - target: {fileID: 1442450553484104045, guid: 0ef1cfe40455d8541869fd810135ebe8, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -160,5 +160,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.41949654, y: 0.8181497, z: 0.4251328}
+  m_Center: {x: 0.0016765594, y: 0.38753098, z: 0.0047815144}

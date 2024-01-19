@@ -31,6 +31,10 @@ public class InternStateUI : MonoBehaviour
                 internStateText.color = Color.cyan;
                 internStateText.text = "Finished";
                 break;
+            case InternManager.InternState.HighFived:
+                internStateText.color = Color.cyan;
+                internStateText.text = "Highfived";
+                break;
             case InternManager.InternState.Unavailable:
                 internStateText.color = Color.red;
                 internStateText.text = "Unavailable";

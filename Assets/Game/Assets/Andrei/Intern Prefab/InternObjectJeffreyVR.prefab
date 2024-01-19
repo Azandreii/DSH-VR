@@ -690,6 +690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ea364adc13ba7408b166f6596ca3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  internVisuals: {fileID: 3945240015517546779}
   internObjectUI: {fileID: 2784005593325471170}
   energyMax: 300
   currentEnergy: 200

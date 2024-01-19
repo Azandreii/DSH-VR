@@ -198,6 +198,10 @@ public class InternObjectUI : MonoBehaviour
                 AssignTextColor(Color.white);
                 SetTaskVisibilityUI(true);
                 break;
+            case InternManager.InternState.HighFived:
+                AssignTextColor(Color.white);
+                SetTaskVisibilityUI(true);
+                break;
             case InternManager.InternState.Unavailable:
                 AssignTextColor(Color.red);
                 SetTaskVisibilityUI(false);
@@ -237,7 +241,6 @@ public class InternObjectUI : MonoBehaviour
     {
         if (internManager.GetInternState() == InternManager.InternState.WaitingForApproval)
         {
-            internManager.SetHighFivedTrigger();
             internManager.PlayerApproved();
             GameManager.Instance.AddTaskCompleted(internManager.GetTaskSO(), internManager.GetGameObjectTaskSO());
             Debug.Log("Approve Task");

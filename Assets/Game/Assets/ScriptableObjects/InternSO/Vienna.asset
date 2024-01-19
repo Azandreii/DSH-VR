@@ -27,9 +27,9 @@ MonoBehaviour:
   selectedEconomy: 0
   selectedCommunication: 0
   selectedTeamwork: 0
-  processEfficiency: 1.8
+  processEfficiency: 0.28
   MaxPrEfficiency: 10
-  energyEfficiency: 2.1
+  energyEfficiency: 0.6
   MaxEnEfficiency: 10
   availableEfficiency: -4
   workingEfficiency: -16

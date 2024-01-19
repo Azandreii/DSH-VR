@@ -39,6 +39,7 @@ public class InternManager : MonoBehaviour
         WorkingOnTask,
         WaitingForApproval,
         Unavailable,
+        HighFived,
     }
 
     [Header("References")]
@@ -125,7 +126,7 @@ public class InternManager : MonoBehaviour
         if (taskSO == e.taskSO)
         {
             taskSO = null;
-            state = InternState.Idle;
+            //state = InternState.Idle;
         }
     }
 
@@ -189,6 +190,9 @@ public class InternManager : MonoBehaviour
 
                 //Set State to Idle
                 else { currentEnergy = energyMax; state = InternState.Idle; }
+                break;
+            case InternState.HighFived:
+                OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { internState = state });
                 break;
         }
         if (currentEnergy <= 0 && state != InternState.Unavailable)
@@ -265,21 +269,22 @@ public class InternManager : MonoBehaviour
         {
             internVisuals.PlayHighfive();
 
-            state = InternState.Idle;
+            state = InternState.HighFived;
+        }
+    }
 
-
+    public void FinishHighFive()
+    {
+        if (state == InternState.HighFived)
+        {
             //Set State to Idle
+            state = InternState.Idle;
 
             if (taskSO == SelectedSpawnerTaskSO.Instance.GetSelectedTaskSO())
             {
                 taskSO = null;
             }
         }
-    }
-
-    public void SetHighFivedTrigger()
-    {
-        anim.SetBool("HighFived", true);
     }
 
     public void AdjustEnergy(float _value, float _energyEfficiency, bool _withTimeDelta = true)

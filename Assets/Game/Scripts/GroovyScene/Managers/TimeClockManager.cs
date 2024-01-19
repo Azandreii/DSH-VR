@@ -122,7 +122,7 @@ public class TimeClockManager : MonoBehaviour
 
     private float MinutesZeroReference(float _minutes)
     {
-        int _setMinutesToZero = 1;
+        int _setMinutesToZero = 45;
         int _minutesMultiplier = 6;
         float _minutesNormalized = (_minutes * _minutesMultiplier) + (_setMinutesToZero * _minutesMultiplier);
         return _minutesNormalized;
@@ -130,7 +130,7 @@ public class TimeClockManager : MonoBehaviour
 
     private float HourZeroReference(float _hours)
     {
-        int _setHoursToZero = 6;
+        int _setHoursToZero = 3;
         int _hoursMultiplier = 30;
         float _hoursNormalized = (_hours * _hoursMultiplier) - (_setHoursToZero * _hoursMultiplier);
         return _hoursNormalized;

@@ -108,13 +108,14 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
         if (lastState != nextState)
         {
             SetEveryStateFalse();
-            SetEveryBoolFalse();
+            //SetEveryBoolFalse();
 
 
             switch (e.internState)
             {
                 case InternManager.InternState.Idle:
 
+                    SetEveryBoolFalse();
                     timer = 0;
                     animationVisualState = AnimationTriggerType.AwaitingTaskState;
                     SetIsAwaitingTaskState(true);
@@ -146,6 +147,12 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                     Debug.Log("Set state to Unavailable");
                     break;
 
+                case InternManager.InternState.HighFived:
+                    animationVisualState = AnimationTriggerType.HighFived;
+                    SetIsHighFived(true);
+                    animator.SetBool(HIGHFIVED, true);
+                    Debug.Log("Set state to HighFived");
+                    break;
                 /* case InternManager.InternState.HighFived:
                     animationVisualState = AnimationTriggerType.HighFived;
                     SetIsHighFived(true);
@@ -235,6 +242,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
 
     public void SetEveryBoolFalse()
     {
+        Debug.Log("Reseting all animator bools to false");
         animator.SetBool(BORED, false);
         animator.SetBool(HIGHFIVEABLE, false);
         animator.SetBool(HIGHFIVED, false);
