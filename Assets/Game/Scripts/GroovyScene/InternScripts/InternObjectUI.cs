@@ -247,7 +247,7 @@ public class InternObjectUI : MonoBehaviour
 
     private void ApproveTask()
     {
-        if (internManager.GetInternState() == InternManager.InternState.WaitingForApproval)
+        if (internManager.GetInternState() == InternManager.InternState.WaitingForApproval && !internManager.GetTaskSO().isRechargeTask)
         {
             internManager.PlayerApproved();
             GameManager.Instance.AddTaskCompleted(internManager.GetTaskSO(), internManager.GetGameObjectTaskSO());
