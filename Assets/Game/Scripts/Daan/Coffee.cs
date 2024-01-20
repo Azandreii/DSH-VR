@@ -8,7 +8,7 @@ public class Coffee : MonoBehaviour
 
     public void SetCoffeeTask()
     {
-        GameManager.Instance.SetTaskSO(coffeeTask, this.gameObject);
+        GameManager.Instance.SetTaskSO(coffeeTask, gameObject);
     }
     public void RemoveCoffeeTask()
     {

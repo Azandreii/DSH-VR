@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using Sirenix.OdinInspector.Editor.Drawers;
 using System;
 using System.Collections;
@@ -58,6 +59,20 @@ public class GameManager : MonoBehaviour
         });
         Destroy(_gameObjectTaskSO);
         TasksCompleted++;
+        if (selectedTaskSO == _taskSO && selectedTaskSO != null)
+        {
+            selectedTaskSO = null;
+        }
+    }
+
+    public void RechargeTaskCompleted(TaskSO _taskSO, GameObject _gameObjectTaskSO)
+    {
+        OnTaskCompleted?.Invoke(this, new OnTaskCompletedEventArgs
+        {
+            totalTasks = TasksCompleted,
+            taskSO = _taskSO,
+        });
+        Destroy(_gameObjectTaskSO);
         if (selectedTaskSO == _taskSO && selectedTaskSO != null)
         {
             selectedTaskSO = null;

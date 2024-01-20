@@ -228,8 +228,9 @@ public class InternObjectUI : MonoBehaviour
     {
         if (internManager.GetInternState() == InternManager.InternState.Idle && taskAvailable && GameManager.Instance.HasTask())
         {
-            internManager.SetInternManagerTask(GameManager.Instance.GetTaskSO(), GameManager.Instance.GetGameObjectTaskSO());
             TaskSO _assignedTaskSO = GameManager.Instance.GetTaskSO();
+            internManager.SetInternManagerTask(_assignedTaskSO, GameManager.Instance.GetGameObjectTaskSO());
+            Debug.Log(_assignedTaskSO);
             if (_assignedTaskSO != null)
             {
                 internTask.text = _assignedTaskSO.taskName;
@@ -251,10 +252,13 @@ public class InternObjectUI : MonoBehaviour
         {
             internManager.PlayerApproved();
             GameManager.Instance.AddTaskCompleted(internManager.GetTaskSO(), internManager.GetGameObjectTaskSO());
-            Debug.Log("Approve Task");
-            
-
-            //Set task intern state (Availabe) change here
+            Debug.Log("Work Approve Task");
+        }
+        else if (internManager.GetInternState() == InternManager.InternState.WaitingForApproval && internManager.GetTaskSO().isRechargeTask)
+        {
+            internManager.PlayerApproved();
+            GameManager.Instance.RechargeTaskCompleted(internManager.GetTaskSO(), internManager.GetGameObjectTaskSO());
+            Debug.Log("Recharge Approve Task");
         }
     }
 

@@ -69,6 +69,7 @@ public class InternManager : MonoBehaviour
     private float communicationEfficiency = 1f;
     private float teamworkEfficiency = 1f;
     private float defaultEffieciency = 1f;
+    private bool isHighFived = false;
     [SerializeField] private Animator anim;
 
 
@@ -120,9 +121,19 @@ public class InternManager : MonoBehaviour
 
     private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)
     {
-        if (taskSO == e.taskSO)
+        if (e.taskSO.isRechargeTask && isHighFived)
         {
             state = InternState.Idle;
+            isHighFived = false;
+            taskSO = null;
+        }
+        else if (taskSO == e.taskSO)
+        {
+            if (!isHighFived)
+            {
+                state = InternState.Idle;
+            }
+            isHighFived = false;
             taskSO = null;
         }
     }
@@ -230,27 +241,12 @@ public class InternManager : MonoBehaviour
     {
         if (_taskSO.isRechargeTask)
         {
-            taskSO = _taskSO;
-            DifficultySwitch(_taskSO);
-            if (_gameObjectTaskSO != null)
-            {
-                gameObjectInternSO = _gameObjectTaskSO;
-            }
-            else
-            {
-                Debug.LogWarning("No GameObject attached to taskSO to destroy");
-            }
-
             SetWorkingEfficiency(_taskSO.taskRechargeAmount);
-            this.state = InternState.WorkingOnTask;
         }
-        else
-        {
-            taskSO = _taskSO;
-            DifficultySwitch(_taskSO);
-            gameObjectInternSO = _gameObjectTaskSO;
-            this.state = InternState.WorkingOnTask;
-        }
+        taskSO = _taskSO;
+        DifficultySwitch(_taskSO);
+        gameObjectInternSO = _gameObjectTaskSO;
+        this.state = InternState.WorkingOnTask;
 
         //Set State to WorkingOnTask
     }
@@ -264,6 +260,8 @@ public class InternManager : MonoBehaviour
     {
         if (state == InternState.WaitingForApproval)
         {
+            isHighFived = true;
+
             internVisuals.PlayHighfive();
 
             state = InternState.HighFived;
