@@ -501,11 +501,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ea364adc13ba7408b166f6596ca3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  internVisuals: {fileID: 5676950960950309845}
   internObjectUI: {fileID: 4797292083064073354}
   energyMax: 300
   currentEnergy: 300.26544
   progressMax: 3
   state: 0
+  anim: {fileID: 0}
   setInternOnAwake: 0
   setInternSO: {fileID: 0}
   randomMovementRange: 5
@@ -528,6 +530,7 @@ MonoBehaviour:
   isWorking: 0
   isWaitingForApproval: 0
   isUnavailable: 0
+  isHighFived: 0
   lastState: 0
   nextState: 0
   animator: {fileID: 8981538795342516227}

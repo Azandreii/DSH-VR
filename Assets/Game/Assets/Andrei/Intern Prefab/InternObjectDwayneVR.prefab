@@ -1139,8 +1139,8 @@ MonoBehaviour:
   progressMax: 3
   state: 0
   anim: {fileID: 1069571355569154249}
-  setInternOnAwake: 1
-  setInternSO: {fileID: 11400000, guid: 80b95553107f64441bc00530f812492b, type: 2}
+  setInternOnAwake: 0
+  setInternSO: {fileID: 0}
   randomMovementRange: 5
   randomMovementSpeed: 1
 --- !u!114 &3193124303944284905
