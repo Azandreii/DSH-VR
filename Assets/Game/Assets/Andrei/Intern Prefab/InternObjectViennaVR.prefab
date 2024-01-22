@@ -5989,7 +5989,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlondModel 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 74143262754371214, guid: 7857882eeb390f64c9165d8e5c40e34c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7056087313917929634, guid: 7857882eeb390f64c9165d8e5c40e34c, type: 3}

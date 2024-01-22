@@ -3445,7 +3445,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4229461212969436633}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 9715770602322de47abc8b0e8b316625, type: 3}
+  m_Avatar: {fileID: 9000000, guid: f15c5beb55a82604f8e6fa566b72fb93, type: 3}
   m_Controller: {fileID: 9100000, guid: 745a7164b0f709a498d4b27a9f588fdc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -5989,7 +5989,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4593717400306443616, guid: f5922ac7437c59b43a63850cb118419f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1027854008726634981, guid: f5922ac7437c59b43a63850cb118419f, type: 3}
