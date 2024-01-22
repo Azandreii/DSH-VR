@@ -8,11 +8,13 @@ public class SceneLoader : MonoBehaviour
 {
     const string MAIN_MENU = "MainMenu";
     const string LEVEL_DSH = "GroovyScene";
-    const string LEVEL_POLICE = "Needs to be created";
-    const string LEVEL_UMCG = "Needs to be created";
-    const string LEVEL_DUO = "Needs to be created";
+    const string LEVEL_POLICE = "GroovyScene";
+    const string LEVEL_UMCG = "GroovyScene";
+    const string LEVEL_DUO = "GroovyScene";
 
     public static SceneLoader Instance;
+
+    public EventHandler OnFadeIn;
 
     [Header("References")]
     [SerializeField] private GameObject fadeQuad;
@@ -128,6 +130,7 @@ public class SceneLoader : MonoBehaviour
         {
             isChanging = true;
             fadeIn = true;
+            OnFadeIn?.Invoke(this, EventArgs.Empty);
         }
     }
 

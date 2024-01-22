@@ -10,6 +10,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IPointerEnterHandler
 {
+    public static event EventHandler OnClickSound;
+
     public event EventHandler<OnClickEventArgs> OnClick;
     public class OnClickEventArgs : EventArgs
     {
@@ -67,6 +69,7 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     
     public void OnPointerDown(PointerEventData eventData)
     {
+        OnClickSound?.Invoke(this, EventArgs.Empty);
         if (!OnlyPlayingState())
         {
             return;

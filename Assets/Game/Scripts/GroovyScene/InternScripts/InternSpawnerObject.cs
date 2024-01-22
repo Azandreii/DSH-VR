@@ -26,8 +26,6 @@ public class InternSpawnerObject : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private float internObjectTimerMax = 5f;
     private int internObjectCount;
-    private int currentSpawnMinute = 1;
-    private int previousSpawnMinute = 0;
 
     private void Awake()
     {
@@ -53,8 +51,6 @@ public class InternSpawnerObject : MonoBehaviour
     private void TimeClockManager_OnTimeChanged(object sender, TimeClockManager.OnTimeChangedEventArgs e)
     {
         int _minutesInt = Mathf.RoundToInt(e.minutes);
-        previousSpawnMinute = currentSpawnMinute;
-        currentSpawnMinute = _minutesInt;
         for (int i = 0; i < possibleInterns.Count; i++)
         {
             if (e.hours == possibleInterns[i].spawnHour && _minutesInt == possibleInterns[i].spawnMinute)

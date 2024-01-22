@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b1bbfcc9a68084eba7c5e1e555c603, type: 3}
+  m_Name: AudioListSO
+  m_EditorClassIdentifier: 
+  taskCompleted: {fileID: 11400000, guid: d00358c7f54cc5a4e911e9f2ac18f6c3, type: 2}
+  taskRecieved: {fileID: 11400000, guid: a66f51ac706513a489877066be3ac591, type: 2}
+  internEnter: {fileID: 11400000, guid: baef23a0c90139c428a7946b9193e88d, type: 2}
+  gameEnd: {fileID: 11400000, guid: 9c9aa6aa5c312f6478d31a9d45c03b2d, type: 2}
+  buttonPressed: {fileID: 11400000, guid: cf9828a58f8153f4ab3b5c6c8e4d4996, type: 2}
+  fadeSound: {fileID: 11400000, guid: 292796c71f86f604cadadf8b73c19067, type: 2}

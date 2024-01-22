@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
         public TaskSO taskSO;
     }
 
-    private List<Transform> internList;
     private int TasksCompleted = 0;
     private bool isPaused = false;
     private TaskSO selectedTaskSO;
