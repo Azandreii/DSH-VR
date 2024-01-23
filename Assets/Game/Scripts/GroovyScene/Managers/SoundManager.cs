@@ -66,7 +66,7 @@ public class SoundManager : MonoBehaviour
 
     private void TaskManager_OnTaskAdded(object sender, TaskManager.OnTaskAddedEventArgs e)
     {
-        PlaySound(soundList.taskRecieved, mainCamera.transform.position);
+        PlaySound(soundList.taskRecieved, mainCamera.transform.position, 0.5f);
     }
 
     private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)

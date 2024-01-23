@@ -243,6 +243,10 @@ public class InternManager : MonoBehaviour
         {
             SetWorkingEfficiency(_taskSO.taskRechargeAmount);
         }
+        if (GameStateManager.Instance.GetIsTutorial())
+        {
+            GameStateManager.Instance.NextTutorialState();
+        }
         taskSO = _taskSO;
         DifficultySwitch(_taskSO);
         gameObjectInternSO = _gameObjectTaskSO;

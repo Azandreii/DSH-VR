@@ -112,7 +112,11 @@ public class TutorialObjectVR : MonoBehaviour
     {
         foreach (GameObject _tutorialObject in tutorialObjectReferences)
         {
-            _tutorialObject.SetActive(true);
+            if (_tutorialObject != null)
+            {
+
+                _tutorialObject.SetActive(true);
+            }
         }
     }
 
@@ -120,7 +124,10 @@ public class TutorialObjectVR : MonoBehaviour
     {
         foreach (GameObject _tutorialObject in tutorialObjectReferences)
         {
-            _tutorialObject.SetActive(false);
+            if (_tutorialObject != null)
+            {
+                _tutorialObject.SetActive(false);
+            }
         }
     }
 
