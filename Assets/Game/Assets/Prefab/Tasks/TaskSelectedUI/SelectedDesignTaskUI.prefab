@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SelectedDesignTaskUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4887639411327726978, guid: d353b998dd10dab499aaee10e1e9d270, type: 3}
+      propertyPath: m_SortingLayer
+      value: 32709
+      objectReference: {fileID: 0}
     - target: {fileID: 5105536895140569322, guid: d353b998dd10dab499aaee10e1e9d270, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -94,15 +98,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6440807471825055556, guid: d353b998dd10dab499aaee10e1e9d270, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.007843138
       objectReference: {fileID: 0}
     - target: {fileID: 6440807471825055556, guid: d353b998dd10dab499aaee10e1e9d270, type: 3}
       propertyPath: m_Color.g
-      value: 0.49591938
+      value: 0.67058825
       objectReference: {fileID: 0}
     - target: {fileID: 6440807471825055556, guid: d353b998dd10dab499aaee10e1e9d270, type: 3}
       propertyPath: m_Color.r
-      value: 0.6509434
+      value: 0.8784314
       objectReference: {fileID: 0}
     - target: {fileID: 8003193375056211841, guid: d353b998dd10dab499aaee10e1e9d270, type: 3}
       propertyPath: m_AnchorMax.x
@@ -161,7 +165,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 5c016bb4ed2d05e4e80ea0779cf771e1, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7343170864721712380, guid: d353b998dd10dab499aaee10e1e9d270, type: 3}
+    - {fileID: 4928637928956810704, guid: d353b998dd10dab499aaee10e1e9d270, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d353b998dd10dab499aaee10e1e9d270, type: 3}
