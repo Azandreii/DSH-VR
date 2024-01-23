@@ -15,7 +15,7 @@ MonoBehaviour:
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
   internObjectVR: {fileID: 1482233735787574708, guid: 8b0c18c9e26b6fd49a1bbb2650d4b7dd, type: 3}
   internName: Dwayne
-  startEnergy: 45
+  startEnergy: 240
   maxEnergy: 300
   spawnHour: 13
   spawnMinute: 0

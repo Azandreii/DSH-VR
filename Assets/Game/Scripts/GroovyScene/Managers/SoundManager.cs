@@ -31,6 +31,19 @@ public class SoundManager : MonoBehaviour
         SceneLoader.Instance.OnFadeIn += SceneLoader_OnFadeIn;
     }
 
+    private void OnDestroy()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnTaskCompleted -= GameManager_OnTaskCompleted;
+            TaskManager.Instance.OnTaskAdded -= TaskManager_OnTaskAdded;
+            InternSpawnerObject.Instance.OnInternObjectCreated -= InternSpawnerObject_OnInternObjectCreated;
+            TimeClockManager.Instance.OnDayFinished -= TimeClockManager_OnDayFinished;
+            ButtonVR.OnClickSound -= ButtonVR_OnClickSound;
+        }
+        SceneLoader.Instance.OnFadeIn -= SceneLoader_OnFadeIn;
+    }
+
     private void SceneLoader_OnFadeIn(object sender, System.EventArgs e)
     {
         PlaySound(soundList.fadeSound, mainCamera.transform.position);
@@ -53,7 +66,7 @@ public class SoundManager : MonoBehaviour
 
     private void TaskManager_OnTaskAdded(object sender, TaskManager.OnTaskAddedEventArgs e)
     {
-        PlaySound(soundList.taskRecieved, mainCamera.transform.position);
+        PlaySound(soundList.taskRecieved, mainCamera.transform.position, 0.5f);
     }
 
     private void GameManager_OnTaskCompleted(object sender, GameManager.OnTaskCompletedEventArgs e)

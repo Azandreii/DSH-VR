@@ -27,7 +27,7 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     }
 
     //[Header("References")]
-    private Image buttonImage;
+    [SerializeField] private Image buttonImage;
 
     private bool hasBeenClicked;
     private bool isCurrentlySelected;
@@ -40,10 +40,15 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     [SerializeField] bool onlyPlayingState = true;
     [SerializeField] private Color hoverButtonColor = Color.grey;
     [SerializeField] private Color selectButtonColor = Color.black;
+    
 
     private void Awake()
     {
-        buttonImage = GetComponent<Image>();
+        
+        if (buttonImage == null ) 
+        {
+            buttonImage = GetComponent<Image>();
+        }
         buttonColor = buttonImage.color;
     }
 
