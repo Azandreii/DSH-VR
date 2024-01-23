@@ -50,7 +50,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
 
     [Header("References")]
     [SerializeField] private InternManager internManager;
-    [SerializeField] private GameObject workTablet;
+    //[SerializeField] private GameObject workTablet;
 
     // State machine animations
     public bool isAwaitingTaskState;
@@ -86,7 +86,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
         HighFivedState = new HighFived(this, StateMachine);
 
         //setting work tablet visual to false
-        workTablet.SetActive(false);
+       // workTablet.SetActive(false);
     }
 
     private void Start()
@@ -133,7 +133,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                     SetIsWorkingStatus(true);
                     animator.SetBool(WORKING, true);
                     Debug.Log("Set state to Working");
-                    workTablet.SetActive(true);
+                    //workTablet.SetActive(true);
                     break;
 
                 case InternManager.InternState.WaitingForApproval:
@@ -142,7 +142,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                     SetIsWaitingForApprovalStatus(true);
                     animator.SetBool(HIGHFIVEABLE, true);
                     Debug.Log("Set state to WaitingForApproval");
-                    workTablet.SetActive(false);
+                    //workTablet.SetActive(false);
                     break;
 
                 case InternManager.InternState.Unavailable:
