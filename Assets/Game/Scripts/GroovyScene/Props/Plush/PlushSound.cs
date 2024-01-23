@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlushSound : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private AudioClip boopClip;
+    [SerializeField] private AudioSO boopClip;
     [SerializeField] private Transform soundPoint;
     [SerializeField] private OnCollisionVR noseCollision;
 
