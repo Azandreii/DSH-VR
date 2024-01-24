@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class InternSpawner : MonoBehaviour

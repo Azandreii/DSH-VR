@@ -125,6 +125,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                     SetIsAwaitingTaskState(true);
                     animator.SetBool(WORKING, false);
                     Debug.Log("Set state to Idle");
+                   // workTablet.SetActive(false);
                     break;
 
                 case InternManager.InternState.WorkingOnTask:
@@ -133,7 +134,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                     SetIsWorkingStatus(true);
                     animator.SetBool(WORKING, true);
                     Debug.Log("Set state to Working");
-                    //workTablet.SetActive(true);
+                  //  workTablet.SetActive(true);
                     break;
 
                 case InternManager.InternState.WaitingForApproval:
@@ -142,7 +143,7 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                     SetIsWaitingForApprovalStatus(true);
                     animator.SetBool(HIGHFIVEABLE, true);
                     Debug.Log("Set state to WaitingForApproval");
-                    //workTablet.SetActive(false);
+                  //  workTablet.SetActive(false);
                     break;
 
                 case InternManager.InternState.Unavailable:
@@ -151,12 +152,14 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                     SetIsUnavailable(true);
                     animator.SetBool(UNAVAILABLE, true);
                     Debug.Log("Set state to Unavailable");
+                  //  workTablet.SetActive(false);
                     break;
 
                 case InternManager.InternState.HighFived:
                     animationVisualState = AnimationTriggerType.HighFived;
                     SetIsHighFived(true);
                     animator.SetBool(HIGHFIVED, true);
+                   // workTablet.SetActive(false);
                     Debug.Log("Set state to HighFived");
                     break;
                 /* case InternManager.InternState.HighFived:
@@ -180,7 +183,8 @@ public class InternVisuals : MonoBehaviour, ITriggerCheckable
                 SetIsBoredStatus(true);
                 SetEveryBoolFalse();
                 animator.SetBool(BORED, true);
-                Debug.Log("Set state to Bored");
+         //   workTablet.SetActive(false);
+            Debug.Log("Set state to Bored");
             }
 
         /* if (internManager.GetInternState() == InternManager.InternState.Unavailable && InternManager.current )
