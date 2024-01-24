@@ -39,7 +39,6 @@ public class OnCollisionVR : MonoBehaviour
             if (_collision.gameObject == _controlerVR)
             {
                 OnCollisionControler?.Invoke(this, EventArgs.Empty);
-                Debug.Log("Collision found between object and controler");
             }
         }
     }
@@ -60,7 +59,6 @@ public class OnCollisionVR : MonoBehaviour
             controlersListVR.Add(InputManagerVR.Instance.GetLeftControler());
             controlersListVR.Add(InputManagerVR.Instance.GetRightControler());
             hasControlers = true;
-            Debug.Log("Controlers set to collision");
         }
     }
 }
