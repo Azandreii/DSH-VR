@@ -34,7 +34,6 @@ public class PhoneInternObjectUI : MonoBehaviour
 
     public void SetInternSO(InternSO _internSO)
     {
-        Debug.Log("SetInternSO I InternSpecialties");
         internSO = _internSO;
         internName.text = _internSO.internName.ToString();
         GetInternSpecialties();
