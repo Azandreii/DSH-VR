@@ -4892,6 +4892,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2944388867220837109, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2967537494989695843, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -4950,6 +4954,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3616307720104829135, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
       propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3633240348976669356, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3633969828320455104, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
@@ -5023,6 +5031,10 @@ PrefabInstance:
     - target: {fileID: 4497083397107940242, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
       propertyPath: m_Center.z
       value: 0.013681617
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516353580818452093, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4679080315101632959, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -5327,6 +5339,10 @@ PrefabInstance:
     - target: {fileID: 8595920232759964810, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.983
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630128625861659670, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8729416567132601252, guid: acdc41984e044944a8ff2c0c27978b38, type: 3}
       propertyPath: m_StaticEditorFlags
