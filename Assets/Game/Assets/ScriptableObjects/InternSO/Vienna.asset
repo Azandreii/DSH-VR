@@ -17,9 +17,9 @@ MonoBehaviour:
   internName: Vienna
   startEnergy: 180
   maxEnergy: 300
-  spawnHour: 11
-  spawnMinute: 30
-  workTimeHours: 4
+  spawnHour: 10
+  spawnMinute: 10
+  workTimeHours: 6
   generalEfficiency: 0.3
   selectedTech: 0
   selectedArt: 1
@@ -34,7 +34,7 @@ MonoBehaviour:
   availableEfficiency: -4
   workingEfficiency: -16
   awaitApprovalEfficiency: -1
-  unavailableEfficiency: 45
+  unavailableEfficiency: 120
   selectedSpecialties:
   - selectedArt
   - selectedOrganisation

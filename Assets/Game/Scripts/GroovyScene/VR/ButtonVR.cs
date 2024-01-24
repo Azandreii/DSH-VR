@@ -26,7 +26,7 @@ public class ButtonVR : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         ClickEnter,
     }
 
-    //[Header("References")]
+    [Header("References")]
     [SerializeField] private Image buttonImage;
 
     private bool hasBeenClicked;

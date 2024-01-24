@@ -13,15 +13,20 @@ MonoBehaviour:
   m_Name: JadeTest
   m_EditorClassIdentifier: 
   internObjectUI: {fileID: 6822377549108313515, guid: df04e00a94137c447944e35303115e96, type: 3}
+  internObjectVR: {fileID: 0}
   internName: JadeTest
   startEnergy: 30
   maxEnergy: 150
+  spawnHour: 9
+  spawnMinute: 10
+  workTimeHours: 7
+  generalEfficiency: 1
   selectedTech: 0
   selectedArt: 0
   selectedDesign: 0
   selectedEconomy: 0
-  selectedOrganisation: 0
-  selectedResearch: 0
+  selectedCommunication: 0
+  selectedTeamwork: 0
   processEfficiency: 0.85
   MaxPrEfficiency: 10
   energyEfficiency: 0.3
@@ -35,5 +40,5 @@ MonoBehaviour:
   artEfficiency: 2
   designEfficiency: 2
   economyEfficiency: 2
-  organisationEfficiency: 2
-  researchEfficiency: 2
+  communicationEfficiency: 2
+  teamworkEfficiency: 2

@@ -17,9 +17,9 @@ MonoBehaviour:
   internName: Jade
   startEnergy: 30
   maxEnergy: 150
-  spawnHour: 10
-  spawnMinute: 15
-  workTimeHours: 4
+  spawnHour: 9
+  spawnMinute: 45
+  workTimeHours: 6
   generalEfficiency: 0.45
   selectedTech: 1
   selectedArt: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
   availableEfficiency: 14
   workingEfficiency: -10
   awaitApprovalEfficiency: -8
-  unavailableEfficiency: 12
+  unavailableEfficiency: 60
   selectedSpecialties:
   - selectedTech
   - selectedOrganisation

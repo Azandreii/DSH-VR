@@ -19,7 +19,7 @@ MonoBehaviour:
   maxEnergy: 300
   spawnHour: 9
   spawnMinute: 25
-  workTimeHours: 4
+  workTimeHours: 6
   generalEfficiency: 0.66
   selectedTech: 0
   selectedArt: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
   availableEfficiency: 27
   workingEfficiency: -80
   awaitApprovalEfficiency: -12
-  unavailableEfficiency: 7
+  unavailableEfficiency: 45
   selectedSpecialties:
   - selectedEconomy
   - selectedResearch

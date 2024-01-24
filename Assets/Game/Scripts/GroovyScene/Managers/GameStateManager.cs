@@ -32,7 +32,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private bool isTutorial = false;
     private int tutorialState = 0;
     private bool hasGrabbedPhoneTutorial;
-    private bool hasSelectedTaskTutorial;
+    private bool hasSelectedTaskTutorial = false;
     private bool spawnedGameEndUI = false;
     [ButtonGroup]
     private void NextTutorialPhase()
@@ -67,7 +67,7 @@ public class GameStateManager : MonoBehaviour
 
     private void GameManager_OnSelectTask(object sender, EventArgs e)
     {
-        if (gameState == GameState.Tutorial && !hasSelectedTaskTutorial)
+        if (GetIsTutorial())
         {
             NextTutorialState();
             hasSelectedTaskTutorial = true;
